@@ -198,17 +198,17 @@ export class MusicBeeRemoteViewProvider implements vscode.WebviewViewProvider, v
     this.postState(this.service.getState());
   }
 
-  private getConfiguredTheme(): "default" | "dracula" {
+  private getConfiguredTheme(): string {
     const configuredTheme = vscode.workspace
       .getConfiguration("musicBeeRemote")
       .get<string>("theme", "default")
       .toLowerCase();
 
-    if (configuredTheme === "dracula") {
-      return "dracula";
+    if (!configuredTheme) {
+      return "default";
+    } else {
+      return configuredTheme;
     }
-
-    return "default";
   }
 
   private getHtml(webview: vscode.Webview): string {

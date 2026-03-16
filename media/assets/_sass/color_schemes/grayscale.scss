@@ -1,0 +1,26 @@
+$mbrvsc-grayscale-foreground: #e6e6e6 !default;
+$mbrvsc-grayscale-muted: #a9a9a9 !default;
+$mbrvsc-grayscale-background: #1f1f1f !default;
+$mbrvsc-grayscale-accent: #8f8f8f !default;
+$mbrvsc-grayscale-button-foreground: #f2f2f2 !default;
+$mbrvsc-grayscale-button-secondary-foreground: #dbdbdb !default;
+$mbrvsc-grayscale-border: #4f4f4f !default;
+$mbrvsc-grayscale-favorite-selected: #cfcfcf !default;
+$mbrvsc-grayscale-progressBar: #9d9d9d !default;
+
+body[data-mbr-theme="grayscale"] {
+	--mbrvsc-color-foreground: #{$mbrvsc-grayscale-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-grayscale-muted};
+	--mbrvsc-color-background: #{$mbrvsc-grayscale-background};
+	--mbrvsc-color-accent: #{$mbrvsc-grayscale-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-grayscale-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-grayscale-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-grayscale-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-grayscale-favorite-selected};
+	--mbrvsc-color-progressBar: #{$mbrvsc-grayscale-progressBar};
+
+	.album-art img,
+	#btnMute {
+		filter: grayscale(100%);
+	}
+}

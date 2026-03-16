@@ -1,5 +1,8 @@
 @use '../_sass/color_schemes/default';
 @use '../_sass/color_schemes/dracula';
+@use '../_sass/color_schemes/hotdog';
+@use '../_sass/color_schemes/grayscale';
+@use '../_sass/color_schemes/cyberpunk2077';
 
 :root {
   color-scheme: light dark;
@@ -206,14 +209,67 @@ body {
 }
 
 #volume {
+  --mbrvsc-volume-percent: 75%;
+
+  -webkit-appearance: none;
+  appearance: none;
   width: 80px;
+  height: 6px;
   border: none;
-  background: transparent;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--mbrvsc-color-progressBar) 0%,
+    var(--mbrvsc-color-progressBar) var(--mbrvsc-volume-percent),
+    color-mix(in srgb, var(--mbrvsc-color-muted) 25%, transparent)
+      var(--mbrvsc-volume-percent),
+    color-mix(in srgb, var(--mbrvsc-color-muted) 25%, transparent) 100%
+  );
   outline: none;
   color: var(--mbrvsc-color-muted);
+  cursor: pointer;
 
   &:focus {
     outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 999px;
+    background: transparent;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--mbrvsc-color-border);
+    border-radius: 50%;
+    background: var(--mbrvsc-color-accent);
+    margin-top: -3px;
+  }
+
+  &::-moz-range-track {
+    height: 6px;
+    border: none;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--mbrvsc-color-muted) 25%, transparent);
+  }
+
+  &::-moz-range-progress {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--mbrvsc-color-progressBar);
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--mbrvsc-color-border);
+    border-radius: 50%;
+    background: var(--mbrvsc-color-accent);
+    cursor: pointer;
   }
 }
 

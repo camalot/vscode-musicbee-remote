@@ -52,6 +52,15 @@
     applyFillsForRating(committedRating);
   }
 
+  /**
+   * @param {HTMLInputElement} volumeEl
+   */
+  function updateVolumeFill(volumeEl) {
+    var volume = Number(volumeEl.value);
+    var percent = Math.max(0, Math.min(100, Number.isNaN(volume) ? 0 : volume));
+    volumeEl.style.setProperty("--mbrvsc-volume-percent", percent + "%");
+  }
+
   function render(state) {
     var track  = (state.nowPlaying && state.nowPlaying.track)    || {};
     var pos    = (state.nowPlaying && state.nowPlaying.position) || {};
@@ -99,9 +108,10 @@
     var muteBtn = document.getElementById("btnMute");
     if (muteBtn) { muteBtn.textContent = isMuted ? "\uD83D\uDD07" : "\uD83D\uDD0A"; }
 
-    var volumeEl = document.getElementById("volume");
+    var volumeEl = /** @type {HTMLInputElement | null} */ (document.getElementById("volume"));
     if (volumeEl) {
       volumeEl.value = String(status.volume || 0);
+      updateVolumeFill(volumeEl);
     }
 
     var currentRating = (state.nowPlaying && state.nowPlaying.trackRating) || "0";
@@ -143,10 +153,13 @@
     vscode.postMessage({ type: "control", action: control });
   });
 
-  var volumeEl = document.getElementById("volume");
+  var volumeEl = /** @type {HTMLInputElement | null} */ (document.getElementById("volume"));
   if (volumeEl) {
-    volumeEl.addEventListener("input", function () {
-      var value = Number(volumeEl.value);
+    var activeVolumeEl = volumeEl;
+    updateVolumeFill(activeVolumeEl);
+    activeVolumeEl.addEventListener("input", function () {
+      var value = Number(activeVolumeEl.value);
+      updateVolumeFill(activeVolumeEl);
       vscode.postMessage({ type: "control", action: "volume", value: value });
     });
   }

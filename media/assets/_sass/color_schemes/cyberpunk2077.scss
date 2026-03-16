@@ -1,0 +1,21 @@
+$mbrvsc-cyberpunk2077-foreground: #fdfeff !default;
+$mbrvsc-cyberpunk2077-muted: #4d8bee !default;
+$mbrvsc-cyberpunk2077-background: #030d22 !default;
+$mbrvsc-cyberpunk2077-accent: #ff2592 !default;
+$mbrvsc-cyberpunk2077-button-foreground: #ffffff !default;
+$mbrvsc-cyberpunk2077-button-secondary-foreground: #47a1fa !default;
+$mbrvsc-cyberpunk2077-border: #171033 !default;
+$mbrvsc-cyberpunk2077-favorite-selected: #ffd400 !default;
+$mbrvsc-cyberpunk2077-progressBar: #fa0dea !default;
+
+body[data-mbr-theme="cyberpunk2077"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-cyberpunk2077-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-cyberpunk2077-muted};
+  --mbrvsc-color-background: #{$mbrvsc-cyberpunk2077-background};
+  --mbrvsc-color-accent: #{$mbrvsc-cyberpunk2077-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-cyberpunk2077-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-cyberpunk2077-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-cyberpunk2077-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-cyberpunk2077-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-cyberpunk2077-progressBar};
+}

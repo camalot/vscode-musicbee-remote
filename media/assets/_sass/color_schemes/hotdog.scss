@@ -1,0 +1,21 @@
+$mbrvsc-hotdog-foreground: #3d2200 !default;
+$mbrvsc-hotdog-muted: #7a4a16 !default;
+$mbrvsc-hotdog-background: #fff6db !default;
+$mbrvsc-hotdog-accent: #e64a19 !default;
+$mbrvsc-hotdog-button-foreground: #c62828 !default;
+$mbrvsc-hotdog-button-secondary-foreground: #3d2200 !default;
+$mbrvsc-hotdog-border: #d7b17a !default;
+$mbrvsc-hotdog-favorite-selected: #c62828 !default;
+$mbrvsc-hotdog-progressBar: #f57c00 !default;
+
+body[data-mbr-theme="hotdog"] {
+	--mbrvsc-color-foreground: #{$mbrvsc-hotdog-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-hotdog-muted};
+	--mbrvsc-color-background: #{$mbrvsc-hotdog-background};
+	--mbrvsc-color-accent: #{$mbrvsc-hotdog-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-hotdog-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-hotdog-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-hotdog-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-hotdog-favorite-selected};
+	--mbrvsc-color-progressBar: #{$mbrvsc-hotdog-progressBar};
+}

@@ -163,7 +163,7 @@
       "properties": {
         "musicBeeRemote.theme": {
           "type": "string",
-          "enum": ["default", "dracula"],
+          "enum": ["default", "dracula", "hotdog", "grayscale", "cyberpunk2077"],
           "default": "default",
           "description": "Available themes for the MusicBee Remote extension."
 

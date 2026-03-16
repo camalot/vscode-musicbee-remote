@@ -2,9 +2,9 @@
 
 A Visual Studio Code extension to control MusicBee remotely.
 
-![Now Playing View](https://raw.githubusercontent.com/camalot/vscode-musicbee-remote/develop/docs/images/v0.png)
-![Now Playing Dracula View](https://raw.githubusercontent.com/camalot/vscode-musicbee-remote/develop/docs/images/v0-theme.png)
-![Now Playing Mini View](https://raw.githubusercontent.com/camalot/vscode-musicbee-remote/develop/docs/images/v0-mini.png)
+![Now Playing View](https://raw.githubusercontent.com/camalot/vscode-musicbee-remote/develop/docs/assets/images/themes/nowplaying-theme-default.png)
+![Now Playing Mini View](https://raw.githubusercontent.com/camalot/vscode-musicbee-remote/develop/docs/assets/images/themes/nowplaying-theme-default-mini.png)
+![Now Playing Dracula View](https://raw.githubusercontent.com/camalot/vscode-musicbee-remote/develop/docs/assets/images/themes/nowplaying-theme-dracula.png)
 
 ## Features
 
