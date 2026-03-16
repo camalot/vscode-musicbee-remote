@@ -1,0 +1,28 @@
+@use "sass:color";
+@use "_sass/color_schemes/tron" as tron-vars;
+
+$mbrvsc-tron-foreground: tron-vars.$tron-foreground !default;
+$mbrvsc-tron-muted: tron-vars.$tron-muted !default;
+$mbrvsc-tron-background: tron-vars.$tron-background !default;
+$mbrvsc-tron-accent: tron-vars.$tron-accent !default;
+$mbrvsc-tron-button-foreground: tron-vars.$tron-ice !default;
+$mbrvsc-tron-button-secondary-foreground: tron-vars.$tron-neon-cyan !default;
+$mbrvsc-tron-border: tron-vars.$tron-border !default;
+$mbrvsc-tron-favorite-selected: tron-vars.$tron-amber !default;
+$mbrvsc-tron-progressBar: tron-vars.$tron-neon-cyan !default;
+$mbrvsc-tron-volumeBar: $mbrvsc-tron-progressBar !default;
+$mbrvsc-tron-volumeThumb: color.adjust($mbrvsc-tron-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="tron"] {
+	--mbrvsc-color-foreground: #{$mbrvsc-tron-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-tron-muted};
+	--mbrvsc-color-background: #{$mbrvsc-tron-background};
+	--mbrvsc-color-accent: #{$mbrvsc-tron-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-tron-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-tron-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-tron-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-tron-favorite-selected};
+	--mbrvsc-color-progressBar: #{$mbrvsc-tron-progressBar};
+	--mbrvsc-color-volumeBar: #{$mbrvsc-tron-volumeBar};
+	--mbrvsc-color-volumeThumb: #{$mbrvsc-tron-volumeThumb};
+}

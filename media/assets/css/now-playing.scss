@@ -3,6 +3,8 @@
 @use '../_sass/color_schemes/hotdog';
 @use '../_sass/color_schemes/grayscale';
 @use '../_sass/color_schemes/cyberpunk2077';
+@use '../_sass/color_schemes/tron';
+@use '../_sass/color_schemes/matrix';
 
 :root {
   color-scheme: light dark;
@@ -210,6 +212,8 @@ body {
 
 #volume {
   --mbrvsc-volume-percent: 75%;
+  --mbrvsc-volume-active: var(--mbrvsc-color-volumeBar);
+  --mbrvsc-volume-thumb: var(--mbrvsc-color-volumeThumb);
 
   -webkit-appearance: none;
   appearance: none;
@@ -219,8 +223,8 @@ body {
   border-radius: 999px;
   background: linear-gradient(
     to right,
-    var(--mbrvsc-color-progressBar) 0%,
-    var(--mbrvsc-color-progressBar) var(--mbrvsc-volume-percent),
+    var(--mbrvsc-volume-active) 0%,
+    var(--mbrvsc-volume-active) var(--mbrvsc-volume-percent),
     color-mix(in srgb, var(--mbrvsc-color-muted) 25%, transparent)
       var(--mbrvsc-volume-percent),
     color-mix(in srgb, var(--mbrvsc-color-muted) 25%, transparent) 100%
@@ -246,7 +250,7 @@ body {
     height: 12px;
     border: 1px solid var(--mbrvsc-color-border);
     border-radius: 50%;
-    background: var(--mbrvsc-color-accent);
+    background: var(--mbrvsc-volume-thumb);
     margin-top: -3px;
   }
 
@@ -260,7 +264,7 @@ body {
   &::-moz-range-progress {
     height: 6px;
     border-radius: 999px;
-    background: var(--mbrvsc-color-progressBar);
+    background: var(--mbrvsc-volume-active);
   }
 
   &::-moz-range-thumb {
@@ -268,8 +272,24 @@ body {
     height: 12px;
     border: 1px solid var(--mbrvsc-color-border);
     border-radius: 50%;
-    background: var(--mbrvsc-color-accent);
+    background: var(--mbrvsc-volume-thumb);
     cursor: pointer;
+  }
+}
+
+body.is-muted {
+  #volume {
+    --mbrvsc-volume-active: color-mix(
+      in srgb,
+      var(--mbrvsc-color-volumeBar) 40%,
+      var(--mbrvsc-color-muted)
+    );
+    --mbrvsc-volume-thumb: color-mix(
+      in srgb,
+      var(--mbrvsc-color-volumeThumb) 40%,
+      var(--mbrvsc-color-muted)
+    );
+    opacity: 0.8;
   }
 }
 

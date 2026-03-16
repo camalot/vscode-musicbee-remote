@@ -9,6 +9,7 @@ $mbrvsc-color-button-secondary-foreground: var(
 $mbrvsc-color-border: var(--vscode-widget-border, transparent) !default;
 $mbrvsc-color-favorite-selected: #ff0000 !default;
 $mbrvsc-color-progressBar: var(--vscode-progressBar-background) !default;
+$mbrvsc-color-volumeBar: $mbrvsc-color-progressBar !default;
 
 :root {
 	--mbrvsc-color-foreground: #{$mbrvsc-color-foreground};
@@ -20,4 +21,10 @@ $mbrvsc-color-progressBar: var(--vscode-progressBar-background) !default;
 	--mbrvsc-color-border: #{$mbrvsc-color-border};
 	--mbrvsc-color-favorite-selected: #{$mbrvsc-color-favorite-selected};
   --mbrvsc-color-progressBar: #{$mbrvsc-color-progressBar};
+	--mbrvsc-color-volumeBar: #{$mbrvsc-color-volumeBar};
+	--mbrvsc-color-volumeThumb: color-mix(
+		in srgb,
+		var(--mbrvsc-color-volumeBar) 82%,
+		black
+	);
 }

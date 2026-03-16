@@ -1,12 +1,17 @@
-$mbrvsc-hotdog-foreground: #3d2200 !default;
-$mbrvsc-hotdog-muted: #7a4a16 !default;
-$mbrvsc-hotdog-background: #fff6db !default;
-$mbrvsc-hotdog-accent: #e64a19 !default;
-$mbrvsc-hotdog-button-foreground: #c62828 !default;
-$mbrvsc-hotdog-button-secondary-foreground: #3d2200 !default;
-$mbrvsc-hotdog-border: #d7b17a !default;
-$mbrvsc-hotdog-favorite-selected: #c62828 !default;
-$mbrvsc-hotdog-progressBar: #f57c00 !default;
+@use "sass:color";
+@use "_sass/color_schemes/hotdog" as hotdog-vars;
+
+$mbrvsc-hotdog-foreground: hotdog-vars.$hotdog-foreground !default;
+$mbrvsc-hotdog-muted: hotdog-vars.$hotdog-muted !default;
+$mbrvsc-hotdog-background: hotdog-vars.$hotdog-background !default;
+$mbrvsc-hotdog-accent: hotdog-vars.$hotdog-accent !default;
+$mbrvsc-hotdog-button-foreground: hotdog-vars.$hotdog-button !default;
+$mbrvsc-hotdog-button-secondary-foreground: hotdog-vars.$hotdog-foreground !default;
+$mbrvsc-hotdog-border: hotdog-vars.$hotdog-border !default;
+$mbrvsc-hotdog-favorite-selected: hotdog-vars.$hotdog-button !default;
+$mbrvsc-hotdog-progressBar: hotdog-vars.$hotdog-progress !default;
+$mbrvsc-hotdog-volumeBar: hotdog-vars.$hotdog-volume !default;
+$mbrvsc-hotdog-volumeThumb: color.adjust($mbrvsc-hotdog-volumeBar, $lightness: -8%) !default;
 
 body[data-mbr-theme="hotdog"] {
 	--mbrvsc-color-foreground: #{$mbrvsc-hotdog-foreground};
@@ -18,4 +23,6 @@ body[data-mbr-theme="hotdog"] {
 	--mbrvsc-color-border: #{$mbrvsc-hotdog-border};
 	--mbrvsc-color-favorite-selected: #{$mbrvsc-hotdog-favorite-selected};
 	--mbrvsc-color-progressBar: #{$mbrvsc-hotdog-progressBar};
+	--mbrvsc-color-volumeBar: #{$mbrvsc-hotdog-volumeBar};
+	--mbrvsc-color-volumeThumb: #{$mbrvsc-hotdog-volumeThumb};
 }

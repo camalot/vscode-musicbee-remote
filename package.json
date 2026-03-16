@@ -53,8 +53,8 @@
     "pretest": "npm run compile:tests && npm run compile:webpack && npm run lint",
     "lint": "eslint src",
     "compile": "npm run compile:scss && npm run compile:webpack",
-    "compile:scss": "sass media/assets/css:media/assets/css --no-source-map",
-    "compile:scss:watch": "sass media/assets/css:media/assets/css --no-source-map --watch",
+    "compile:scss": "sass --load-path=docs media/assets/css:media/assets/css --no-source-map",
+    "compile:scss:watch": "sass --load-path=docs media/assets/css:media/assets/css --no-source-map --watch",
     "compile:webpack": "webpack",
     "compile:prod": "npm run check:types && npm run lint && npm run compile:scss && npm run compile:webpack",
     "compile:tests": "tsc -p . --outDir out",
@@ -163,7 +163,7 @@
       "properties": {
         "musicBeeRemote.theme": {
           "type": "string",
-          "enum": ["default", "dracula", "hotdog", "grayscale", "cyberpunk2077"],
+          "enum": ["default", "dracula", "hotdog", "grayscale", "cyberpunk2077", "tron", "matrix"],
           "default": "default",
           "description": "Available themes for the MusicBee Remote extension."
 

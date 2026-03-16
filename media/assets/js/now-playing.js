@@ -105,6 +105,7 @@
     if (playBtn) { playBtn.textContent = isPlaying ? "\u23F8" : "\u25B6"; }
 
     var isMuted = status.mute === true;
+    document.body.classList.toggle("is-muted", isMuted);
     var muteBtn = document.getElementById("btnMute");
     if (muteBtn) { muteBtn.textContent = isMuted ? "\uD83D\uDD07" : "\uD83D\uDD0A"; }
 

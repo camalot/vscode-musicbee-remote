@@ -47,7 +47,7 @@ body = """
   {% if remote.github.owner and remote.github.repo -%}
     https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
   {%- else -%}
-    https://github.com/camalot/vscode-workspace-tasks
+    https://github.com/camalot/vscode-musicbee-remote
   {%- endif -%}
 {%- endmacro -%}
 """
@@ -116,7 +116,7 @@ filter_commits = false
 fail_on_unmatched_commit = false
 # An array of link parsers for extracting external references, and turning them into URLs, using regex.
 link_parsers = [
-  { pattern = "#(\\d+)", href = "https://github.com/camalot/vscode-workspace-tasks/issues/$1"},
+  { pattern = "#(\\d+)", href = "https://github.com/camalot/vscode-musicbee-remote/issues/$1"},
 ]
 # Include only the tags that belong to the current branch.
 use_branch_tags = false

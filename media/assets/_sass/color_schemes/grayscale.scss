@@ -1,12 +1,17 @@
-$mbrvsc-grayscale-foreground: #e6e6e6 !default;
-$mbrvsc-grayscale-muted: #a9a9a9 !default;
-$mbrvsc-grayscale-background: #1f1f1f !default;
-$mbrvsc-grayscale-accent: #8f8f8f !default;
-$mbrvsc-grayscale-button-foreground: #f2f2f2 !default;
-$mbrvsc-grayscale-button-secondary-foreground: #dbdbdb !default;
-$mbrvsc-grayscale-border: #4f4f4f !default;
-$mbrvsc-grayscale-favorite-selected: #cfcfcf !default;
-$mbrvsc-grayscale-progressBar: #9d9d9d !default;
+@use "sass:color";
+@use "_sass/color_schemes/grayscale" as grayscale-vars;
+
+$mbrvsc-grayscale-foreground: grayscale-vars.$grayscale-foreground !default;
+$mbrvsc-grayscale-muted: grayscale-vars.$grayscale-muted !default;
+$mbrvsc-grayscale-background: grayscale-vars.$grayscale-background !default;
+$mbrvsc-grayscale-accent: grayscale-vars.$grayscale-accent !default;
+$mbrvsc-grayscale-button-foreground: color.adjust(grayscale-vars.$grayscale-foreground, $lightness: 5%) !default;
+$mbrvsc-grayscale-button-secondary-foreground: color.adjust(grayscale-vars.$grayscale-foreground, $lightness: -4%) !default;
+$mbrvsc-grayscale-border: grayscale-vars.$grayscale-border !default;
+$mbrvsc-grayscale-favorite-selected: grayscale-vars.$grayscale-highlight !default;
+$mbrvsc-grayscale-progressBar: color.adjust(grayscale-vars.$grayscale-accent, $lightness: 5%) !default;
+$mbrvsc-grayscale-volumeBar: $mbrvsc-grayscale-progressBar !default;
+$mbrvsc-grayscale-volumeThumb: color.adjust($mbrvsc-grayscale-volumeBar, $lightness: -8%) !default;
 
 body[data-mbr-theme="grayscale"] {
 	--mbrvsc-color-foreground: #{$mbrvsc-grayscale-foreground};
@@ -18,6 +23,8 @@ body[data-mbr-theme="grayscale"] {
 	--mbrvsc-color-border: #{$mbrvsc-grayscale-border};
 	--mbrvsc-color-favorite-selected: #{$mbrvsc-grayscale-favorite-selected};
 	--mbrvsc-color-progressBar: #{$mbrvsc-grayscale-progressBar};
+	--mbrvsc-color-volumeBar: #{$mbrvsc-grayscale-volumeBar};
+	--mbrvsc-color-volumeThumb: #{$mbrvsc-grayscale-volumeThumb};
 
 	.album-art img,
 	#btnMute {

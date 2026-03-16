@@ -78,29 +78,6 @@ function install_act() {
   fi
 }
 
-function install_sample_tasks() {
-  # clone https://github.com/camalot/sample-workspace-tasks.git to use when running project for testing.
-  SAMPLE_WORKSPACE_TASKS_REPO="https://github.com/camalot/sample-workspace-tasks.git"
-  SAMPLE_WORKSPACE_TASKS_DIR="sample/sample-workspace-tasks"
-
-  echo -e "${COLOR_BLUE}=================================================================${COLOR_RESET}"
-  echo -e "${COLOR_BLUE}Installing sample workspace tasks...${COLOR_RESET}"
-
-  mkdir -p "$(dirname "$SAMPLE_WORKSPACE_TASKS_DIR")"
-
-  if [ ! -d "$SAMPLE_WORKSPACE_TASKS_DIR" ]; then
-    echo -e "${COLOR_BLUE}Cloning sample workspace tasks...${COLOR_RESET}"
-    # Bypass local SSH config to avoid "Bad owner or permissions on /home/vscode/.ssh/config" errors
-    # on WSL setups where ~/.ssh is symlinked to a Windows drive mount.
-    env GIT_SSH_COMMAND="ssh -F /dev/null" git clone "$SAMPLE_WORKSPACE_TASKS_REPO" "$SAMPLE_WORKSPACE_TASKS_DIR"
-    echo -e "${COLOR_GREEN}Sample workspace tasks installed successfully at $SAMPLE_WORKSPACE_TASKS_DIR.${COLOR_RESET}"
-  else
-    echo -e "${COLOR_GREEN}Sample workspace tasks already present at $SAMPLE_WORKSPACE_TASKS_DIR${COLOR_RESET}"
-  fi
-  echo -e "${COLOR_GREEN}=================================================================${COLOR_RESET}"
-  echo ""
-}
-
 function jekyll_bundle_prep() {
   local current_dir
   current_dir=$(pwd)
@@ -214,8 +191,7 @@ install_act
 jekyll_bundle_prep
 install_antigen_bundles
 install_ohmyposh
-install_sample_tasks
-update_packages
+#update_packages
 
 echo ""
 echo -e "${COLOR_GREEN}=================================================================${COLOR_RESET}"

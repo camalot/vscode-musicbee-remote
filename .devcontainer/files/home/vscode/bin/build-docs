@@ -1,13 +1,35 @@
 #!/usr/bin/env bash
 
+# Resolve the workspace root: prefer git (works anywhere inside the repo),
+# then scan /workspaces/* (standard VS Code devcontainer mount), then
+# fall back to the legacy /workspace path used during the Docker image build.
+function get_workspace_root() {
+  local git_root
+  git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [ -n "$git_root" ]; then
+    echo "$git_root"
+    return
+  fi
+  # Scan /workspaces/* — devcontainer mounts land here
+  if [ -d "/workspaces" ]; then
+    local ws
+    ws=$(find /workspaces -maxdepth 1 -mindepth 1 -type d 2>/dev/null | head -1)
+    [ -n "$ws" ] && { echo "$ws"; return; }
+  fi
+  # Legacy / fallback path
+  echo "/workspace"
+}
+
 function build() {
   local WATCH=$1
   # save the current working directory
   local OLDPWD
   OLDPWD=$(pwd)
 
-  # set the working directory to /workspaces/vscode-workspace-tasks/docs
-  cd /workspaces/vscode-workspace-tasks/docs || exit
+  # set the working directory to <workspace>/docs
+  local WORKSPACE_ROOT
+  WORKSPACE_ROOT=$(get_workspace_root)
+  cd "$WORKSPACE_ROOT/docs" || exit
 
   bundle install
 
@@ -26,7 +48,9 @@ function serve() {
   local OLDPWD
   OLDPWD=$(pwd)
 
-  cd /workspaces/vscode-workspace-tasks/docs || exit
+  local WORKSPACE_ROOT
+  WORKSPACE_ROOT=$(get_workspace_root)
+  cd "$WORKSPACE_ROOT/docs" || exit
   bundle exec jekyll serve --destination ../_site --config _config.yml,_config-local.yml --skip-initial-build "$WATCH"
   cd "$OLDPWD" || exit
 }

@@ -1,0 +1,28 @@
+@use "sass:color";
+@use "_sass/color_schemes/matrix" as matrix-vars;
+
+$mbrvsc-matrix-foreground: matrix-vars.$matrix-foreground !default;
+$mbrvsc-matrix-muted: matrix-vars.$matrix-muted !default;
+$mbrvsc-matrix-background: matrix-vars.$matrix-background !default;
+$mbrvsc-matrix-accent: matrix-vars.$matrix-accent !default;
+$mbrvsc-matrix-button-foreground: matrix-vars.$matrix-green-bright !default;
+$mbrvsc-matrix-button-secondary-foreground: matrix-vars.$matrix-green !default;
+$mbrvsc-matrix-border: matrix-vars.$matrix-border !default;
+$mbrvsc-matrix-favorite-selected: matrix-vars.$matrix-green-bright !default;
+$mbrvsc-matrix-progressBar: matrix-vars.$matrix-green-bright !default;
+$mbrvsc-matrix-volumeBar: $mbrvsc-matrix-progressBar !default;
+$mbrvsc-matrix-volumeThumb: color.adjust($mbrvsc-matrix-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="matrix"] {
+	--mbrvsc-color-foreground: #{$mbrvsc-matrix-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-matrix-muted};
+	--mbrvsc-color-background: #{$mbrvsc-matrix-background};
+	--mbrvsc-color-accent: #{$mbrvsc-matrix-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-matrix-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-matrix-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-matrix-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-matrix-favorite-selected};
+	--mbrvsc-color-progressBar: #{$mbrvsc-matrix-progressBar};
+	--mbrvsc-color-volumeBar: #{$mbrvsc-matrix-volumeBar};
+	--mbrvsc-color-volumeThumb: #{$mbrvsc-matrix-volumeThumb};
+}

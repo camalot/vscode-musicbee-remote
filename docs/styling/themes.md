@@ -1,6 +1,7 @@
 ---
 layout: default
-title: "Themes"
+title: "🎨 Themes"
+nav_order: 2
 ---
 
 <!-- markdownlint-disable-next-line MD025 MD022 -->
@@ -18,6 +19,8 @@ title: "Themes"
 
 ### Default
 
+This theme will use the theme colors defined for your Visual Studio Code theme.
+
 ![Now Playing - Default Theme](../assets/images/themes/nowplaying-theme-default.png)
 ![Now Playing - Default Theme - Mini](../assets/images/themes/nowplaying-theme-default-mini.png)
 
@@ -28,8 +31,8 @@ title: "Themes"
 
 ### Hotdog
 
-![Now Playing - Hotdog Theme](../assets/images/themes/nowplaying-theme-hotdog.png)
-![Now Playing - Hotdog Theme - Mini](../assets/images/themes/nowplaying-theme-hotdog-mini.png)
+![Now Playing - Chicago Hotdog Theme](../assets/images/themes/nowplaying-theme-hotdog.png)
+![Now Playing - Chicago Hotdog Theme - Mini](../assets/images/themes/nowplaying-theme-hotdog-mini.png)
 
 ### Grayscale
 

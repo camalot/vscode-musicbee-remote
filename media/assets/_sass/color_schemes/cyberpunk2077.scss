@@ -1,12 +1,17 @@
-$mbrvsc-cyberpunk2077-foreground: #fdfeff !default;
-$mbrvsc-cyberpunk2077-muted: #4d8bee !default;
-$mbrvsc-cyberpunk2077-background: #030d22 !default;
-$mbrvsc-cyberpunk2077-accent: #ff2592 !default;
-$mbrvsc-cyberpunk2077-button-foreground: #ffffff !default;
-$mbrvsc-cyberpunk2077-button-secondary-foreground: #47a1fa !default;
-$mbrvsc-cyberpunk2077-border: #171033 !default;
-$mbrvsc-cyberpunk2077-favorite-selected: #ffd400 !default;
-$mbrvsc-cyberpunk2077-progressBar: #fa0dea !default;
+@use "sass:color";
+@use "_sass/color_schemes/cyberpunk2077" as cyberpunk2077-vars;
+
+$mbrvsc-cyberpunk2077-foreground: cyberpunk2077-vars.$cyberpunk2077-foreground !default;
+$mbrvsc-cyberpunk2077-muted: cyberpunk2077-vars.$cyberpunk2077-muted !default;
+$mbrvsc-cyberpunk2077-background: cyberpunk2077-vars.$cyberpunk2077-background !default;
+$mbrvsc-cyberpunk2077-accent: cyberpunk2077-vars.$cyberpunk2077-accent !default;
+$mbrvsc-cyberpunk2077-button-foreground: cyberpunk2077-vars.$cyberpunk2077-foreground !default;
+$mbrvsc-cyberpunk2077-button-secondary-foreground: cyberpunk2077-vars.$cyberpunk2077-button-secondary !default;
+$mbrvsc-cyberpunk2077-border: cyberpunk2077-vars.$cyberpunk2077-border !default;
+$mbrvsc-cyberpunk2077-favorite-selected: cyberpunk2077-vars.$cyberpunk2077-favorite !default;
+$mbrvsc-cyberpunk2077-progressBar: cyberpunk2077-vars.$cyberpunk2077-progress !default;
+$mbrvsc-cyberpunk2077-volumeBar: $mbrvsc-cyberpunk2077-progressBar !default;
+$mbrvsc-cyberpunk2077-volumeThumb: color.adjust($mbrvsc-cyberpunk2077-volumeBar, $lightness: -8%) !default;
 
 body[data-mbr-theme="cyberpunk2077"] {
   --mbrvsc-color-foreground: #{$mbrvsc-cyberpunk2077-foreground};
@@ -18,4 +23,6 @@ body[data-mbr-theme="cyberpunk2077"] {
   --mbrvsc-color-border: #{$mbrvsc-cyberpunk2077-border};
   --mbrvsc-color-favorite-selected: #{$mbrvsc-cyberpunk2077-favorite-selected};
   --mbrvsc-color-progressBar: #{$mbrvsc-cyberpunk2077-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-cyberpunk2077-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-cyberpunk2077-volumeThumb};
 }
