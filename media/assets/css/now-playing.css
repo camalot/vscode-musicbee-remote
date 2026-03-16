@@ -222,6 +222,7 @@ body {
   opacity: 1;
   overflow: hidden;
   width: 0%;
+  transition: width 100ms ease;
 }
 
 
