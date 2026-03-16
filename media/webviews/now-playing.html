@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src {{cspSource}} data:; style-src {{cspSource}}; script-src 'nonce-{{nonce}}';"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MusicBee Remote</title>
+  <link rel="stylesheet" href="{{cssUri}}" />
+</head>
+<body>
+  <div class="cover" id="cover" data-no-art="{{noArtUri}}">No album art</div>
+  <div class="track-title" id="title">Nothing playing</div>
+  <div class="track-sub" id="artist">&mdash;</div>
+  <div class="track-sub" id="album"></div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress"></div>
+  </div>
+  <div class="progress-labels">
+    <span id="posCurrent">0:00</span>
+    <span id="posTotal">0:00</span>
+  </div>
+  <div class="controls">
+    <button id="btnMute" class="secondary" data-control="mute">&#128266;</button>
+    <button class="secondary" data-control="previous">&#9664;&#9664;</button>
+    <button id="btnPlayPause" data-control="playPause">&#9654;</button>
+    <button class="secondary" data-control="next">&#9654;&#9654;</button>
+  </div>
+  <script nonce="{{nonce}}" src="{{scriptUri}}"></script>
+</body>
+</html>

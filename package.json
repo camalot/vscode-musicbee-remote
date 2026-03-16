@@ -1,0 +1,122 @@
+{
+  "name": "musicbee-remote",
+  "displayName": "MusicBee Remote",
+  "description": "A VS Code explorer panel for remotely controlling MusicBee and browsing MusicBee Remote content.",
+  "version": "0.0.1",
+  "publisher": "Darth Minos",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.105.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "musicBeeRemote.explorer",
+          "name": "MusicBee Remote",
+          "type": "webview",
+          "icon": "media/musicbee.svg"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "musicBeeRemote.openPanel",
+        "title": "MusicBee Remote: Open Panel"
+      },
+      {
+        "command": "musicBeeRemote.connect",
+        "title": "MusicBee Remote: Connect",
+        "icon": "$(plug)"
+      },
+      {
+        "command": "musicBeeRemote.disconnect",
+        "title": "MusicBee Remote: Disconnect",
+        "icon": "$(debug-disconnect)"
+      },
+      {
+        "command": "musicBeeRemote.refresh",
+        "title": "MusicBee Remote: Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "musicBeeRemote.previous",
+        "title": "MusicBee Remote: Previous Track"
+      },
+      {
+        "command": "musicBeeRemote.playPause",
+        "title": "MusicBee Remote: Play / Pause"
+      },
+      {
+        "command": "musicBeeRemote.next",
+        "title": "MusicBee Remote: Next Track"
+      },
+      {
+        "command": "musicBeeRemote.openSettings",
+        "title": "MusicBee Remote: Open Settings",
+        "icon": "$(settings-gear)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "musicBeeRemote.connect",
+          "when": "view == musicBeeRemote.explorer && !musicBeeRemote.connected",
+          "group": "navigation"
+        },
+        {
+          "command": "musicBeeRemote.disconnect",
+          "when": "view == musicBeeRemote.explorer && musicBeeRemote.connected",
+          "group": "navigation"
+        },
+        {
+          "command": "musicBeeRemote.refresh",
+          "when": "view == musicBeeRemote.explorer",
+          "group": "navigation"
+        },
+        {
+          "command": "musicBeeRemote.openSettings",
+          "when": "view == musicBeeRemote.explorer",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "MusicBee Remote",
+      "properties": {
+        "musicBeeRemote.host": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Hostname or IP address of the MusicBee Remote plugin server."
+        },
+        "musicBeeRemote.port": {
+          "type": "number",
+          "default": 3000,
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "TCP port exposed by the MusicBee Remote plugin."
+        },
+        "musicBeeRemote.clientName": {
+          "type": "string",
+          "default": "VS Code",
+          "description": "Client name announced during the MusicBee Remote handshake."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.8.2"
+  }
+}
