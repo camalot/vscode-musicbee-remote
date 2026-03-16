@@ -45,6 +45,16 @@ export class MusicBeeRemoteViewProvider implements vscode.WebviewViewProvider, v
         }
       })
     );
+
+    this.disposables.push(
+      vscode.workspace.onDidChangeConfiguration((event) => {
+        if (!event.affectsConfiguration("musicBeeRemote.theme")) {
+          return;
+        }
+
+        this.refreshWebviewTheme();
+      })
+    );
   }
 
   public dispose(): void {
@@ -179,8 +189,31 @@ export class MusicBeeRemoteViewProvider implements vscode.WebviewViewProvider, v
     void this.webviewView?.webview.postMessage({ type: "retryCountdown", seconds });
   }
 
+  private refreshWebviewTheme(): void {
+    if (!this.webviewView) {
+      return;
+    }
+
+    this.webviewView.webview.html = this.getHtml(this.webviewView.webview);
+    this.postState(this.service.getState());
+  }
+
+  private getConfiguredTheme(): "default" | "dracula" {
+    const configuredTheme = vscode.workspace
+      .getConfiguration("musicBeeRemote")
+      .get<string>("theme", "default")
+      .toLowerCase();
+
+    if (configuredTheme === "dracula") {
+      return "dracula";
+    }
+
+    return "default";
+  }
+
   private getHtml(webview: vscode.Webview): string {
     const nonce = getNonce();
+    const theme = this.getConfiguredTheme();
     const mediaUri = vscode.Uri.joinPath(this.extensionUri, "media");
     const cssUri = webview.asWebviewUri(
       vscode.Uri.joinPath(mediaUri, "assets", "css", "now-playing.css")
@@ -198,6 +231,7 @@ export class MusicBeeRemoteViewProvider implements vscode.WebviewViewProvider, v
       .replace(/\{\{nonce\}\}/g, nonce)
       .replace(/\{\{cssUri\}\}/g, cssUri.toString())
       .replace(/\{\{scriptUri\}\}/g, scriptUri.toString())
+      .replace(/\{\{theme\}\}/g, theme)
       .replace(/\{\{noArtUri\}\}/g, noArtUri.toString());
   }
 }

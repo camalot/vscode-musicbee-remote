@@ -3,17 +3,88 @@
   "displayName": "MusicBee Remote",
   "description": "A VS Code explorer panel for remotely controlling MusicBee and browsing MusicBee Remote content.",
   "version": "0.0.1",
-  "publisher": "Darth Minos",
-  "license": "MIT",
+  "icon": "media/musicbee.png",
+  "publisher": "darthminos",
+  "author": {
+    "name": "darthminos",
+    "email": "camalot@gmail.com"
+  },
+  "license": "Apache-2.0",
+  "documentation": "https://camalot.github.io/vscode-musicbee-remote/",
+  "homepage": "https://github.com/camalot/vscode-musicbee-remote",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/camalot/vscode-musicbee-remote.git"
+  },
+  "bugs": {
+    "url": "https://github.com/camalot/vscode-musicbee-remote/issues",
+    "new": "https://github.com/camalot/vscode-musicbee-remote/issues/new/choose"
+  },
+  "sponsor": {
+    "url": "https://github.com/sponsors/camalot",
+    "github": "https://github.com/sponsors/camalot",
+    "buymeacoffee": "https://www.buymeacoffee.com/darthminos"
+  },
+  "urls": {
+    "vscmarketplace": "https://marketplace.visualstudio.com/items?itemName=darthminos.musicbee-remote",
+    "openvsx": "https://open-vsx.org/extension/darthminos/musicbee-remote",
+    "changelog": "https://github.com/camalot/vscode-musicbee-remote/blob/develop/CHANGELOG.md"
+  },
   "engines": {
     "vscode": "^1.105.1"
+  },
+  "galleryBanner": {
+    "color": "#333333",
+    "theme": "dark"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
+  "keywords": [
+    "musicbee",
+    "media player",
+    "music",
+    "musicbee remote",
+    "audio"
   ],
-  "main": "./out/extension.js",
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "scripts": {
+    "pretest": "npm run compile:tests && npm run compile:webpack && npm run lint",
+    "lint": "eslint src",
+    "compile": "npm run compile:scss && npm run compile:webpack",
+    "compile:scss": "sass media/assets/css:media/assets/css --no-source-map",
+    "compile:scss:watch": "sass media/assets/css:media/assets/css --no-source-map --watch",
+    "compile:webpack": "webpack",
+    "compile:prod": "npm run check:types && npm run lint && npm run compile:scss && npm run compile:webpack",
+    "compile:tests": "tsc -p . --outDir out",
+    "docs:build": "~/bin/build-docs --build",
+    "docs:serve": "~/bin/build-docs --serve",
+    "docs:serve:watch": "~/bin/build-docs --serve",
+    "docs:build:serve": "~/bin/build-docs --build --serve",
+    "watch": "npm run watch:webpack",
+    "watch:tsc": "tsc --noEmit --watch",
+    "watch:tests": "tsc -p . -w --outDir out",
+    "watch:webpack": "webpack --watch",
+    "vscode:prepublish": "npm run compile:prod && npm run package:webpack",
+    "vscode:headless:test": "xvfb-run -a vscode-test",
+    "vscode:headless:test:coverage": "xvfb-run -a vscode-test --coverage --coverage-output ./coverage --coverage-reporter lcov --verbose",
+    "vscode:test": "vscode-test",
+    "vscode:test:coverage": "vscode-test --coverage --coverage-output ./coverage --coverage-reporter lcov --verbose",
+    "package": "npm run package:vsix",
+    "package:prerelease": "npm run package:webpack && npm run package:vsix:prerelease",
+    "package:webpack": "webpack --mode production --devtool hidden-source-map",
+    "package:vsix": "npx @vscode/vsce package",
+    "package:vsix:prerelease": "npx @vscode/vsce package --pre-release",
+    "test": "npm run vscode:test",
+    "test:coverage": "npm run pretest && npm run vscode:test:coverage",
+    "test:ui": "npm run compile:tests && node .vscode-uitest.mjs",
+    "format": "prettier --write .",
+    "check": "npm run check:types && npm run check:format",
+    "check:types": "tsc --noEmit",
+    "check:format": "prettier --check .",
+    "changelog:build": "npx git-cliff --bump --output CHANGELOG.md"
+  },
   "contributes": {
     "views": {
       "explorer": [
@@ -90,6 +161,13 @@
     "configuration": {
       "title": "MusicBee Remote",
       "properties": {
+        "musicBeeRemote.theme": {
+          "type": "string",
+          "enum": ["default", "dracula"],
+          "default": "default",
+          "description": "Available themes for the MusicBee Remote extension."
+
+        },
         "musicBeeRemote.host": {
           "type": "string",
           "default": "127.0.0.1",
@@ -110,10 +188,6 @@
       }
     }
   },
-  "scripts": {
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
-  },
   "devDependencies": {
     "@types/micromatch": "^4.0.10",
     "@types/mocha": "^10.0.10",
@@ -131,6 +205,7 @@
     "mocha-junit-reporter": "^2.2.1",
     "nyc": "^17.1.0",
     "prettier": "^3.8.1",
+    "sass": "^1.81.0",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.0",

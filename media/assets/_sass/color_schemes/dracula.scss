@@ -1,0 +1,21 @@
+$mbrvsc-dracula-foreground: #f8f8f2 !default;
+$mbrvsc-dracula-muted: #6272a4 !default;
+$mbrvsc-dracula-background: #282a36 !default;
+$mbrvsc-dracula-accent: #bd93f9 !default;
+$mbrvsc-dracula-button-foreground: #f8f8f2 !default;
+$mbrvsc-dracula-button-secondary-foreground: #f8f8f2 !default;
+$mbrvsc-dracula-border: #44475a !default;
+$mbrvsc-dracula-favorite-selected: #ff5555 !default;
+$mbrvsc-dracula-progressBar: #8be9fd !default;
+
+body[data-mbr-theme="dracula"] {
+	--mbrvsc-color-foreground: #{$mbrvsc-dracula-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-dracula-muted};
+	--mbrvsc-color-background: #{$mbrvsc-dracula-background};
+	--mbrvsc-color-accent: #{$mbrvsc-dracula-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-dracula-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-dracula-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-dracula-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-dracula-favorite-selected};
+	--mbrvsc-color-progressBar: #{$mbrvsc-dracula-progressBar};
+}

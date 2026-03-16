@@ -1,0 +1,23 @@
+$mbrvsc-color-foreground: var(--vscode-foreground) !default;
+$mbrvsc-color-muted: var(--vscode-descriptionForeground) !default;
+$mbrvsc-color-background: var(--vscode-sideBar-background) !default;
+$mbrvsc-color-accent: var(--vscode-button-background) !default;
+$mbrvsc-color-button-foreground: var(--vscode-button-foreground) !default;
+$mbrvsc-color-button-secondary-foreground: var(
+	--vscode-button-secondaryForeground
+) !default;
+$mbrvsc-color-border: var(--vscode-widget-border, transparent) !default;
+$mbrvsc-color-favorite-selected: #ff0000 !default;
+$mbrvsc-color-progressBar: var(--vscode-progressBar-background) !default;
+
+:root {
+	--mbrvsc-color-foreground: #{$mbrvsc-color-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-color-muted};
+	--mbrvsc-color-background: #{$mbrvsc-color-background};
+	--mbrvsc-color-accent: #{$mbrvsc-color-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-color-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-color-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-color-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-color-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-color-progressBar};
+}

@@ -7,14 +7,16 @@
   <title>MusicBee Remote</title>
   <link rel="stylesheet" href="{{cssUri}}" />
 </head>
-<body>
+<body data-mbr-theme="{{theme}}">
   <div class="cover" id="cover" data-no-art="{{noArtUri}}">
     <button id="btnFavorite" class="secondary favorite" data-control="favorite">&#10084;</button>
     <div class="album-art" id="albumArt"></div>
   </div>
-  <div class="track-title" id="title">Nothing playing</div>
-  <div class="track-sub" id="artist">&mdash;</div>
-  <div class="track-sub" id="album"></div>
+  <div class="track-meta">
+    <div class="track-title" id="title">Nothing playing</div>
+    <div class="track-sub" id="artist">&mdash;</div>
+    <div class="track-sub" id="album"></div>
+  </div>
 
   <div class="progress-track">
     <div class="progress-fill" id="progress"></div>
@@ -32,7 +34,7 @@
       </div>
 
       <div class="group right">
-        
+
       </div>
     </div>
 

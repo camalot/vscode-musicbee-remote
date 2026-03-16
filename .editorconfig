@@ -1,0 +1,29 @@
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_size = 2
+
+[*.ps1]
+charset = unset
+
+[*.md]
+indent_size = unset
+
+[*.{yaml,yml}]
+indent_style = space
+
+[*.{sh,bash,zsh,ps1}]
+indent_style = space
+
+[*.{jinja,jinja2}]
+indent_style = space
+
+[*.txt]
+indent_size = unset
+indent_style = unset
+charset = unset
