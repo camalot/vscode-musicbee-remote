@@ -240,6 +240,14 @@ export class MusicBeeSocketClient {
     return this.requestItem<NowPlayingDetails>(PROTOCOL.nowPlayingDetails);
   }
 
+  public async getRating(): Promise<string> {
+    return this.requestItem<string>(PROTOCOL.nowPlayingRating);
+  }
+
+  public async getLfmRating(): Promise<string> {
+    return this.requestItem<string>(PROTOCOL.nowPlayingLfmRating);
+  }
+
   public async getNowPlayingList(): Promise<NowPlayingDto[]> {
     return this.getAllPages<NowPlayingDto>(PROTOCOL.nowPlayingList);
   }
@@ -433,4 +441,3 @@ export class MusicBeeSocketClient {
     }
   }
 }
-

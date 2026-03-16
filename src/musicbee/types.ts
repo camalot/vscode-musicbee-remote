@@ -160,6 +160,8 @@ export interface MusicBeeRemoteState {
       playState: string;
     };
     details?: NowPlayingDetails;
+    trackRating: string;
+    lfmRating: string;
     position: PositionPayload;
     queue: NowPlayingDto[];
   };
@@ -171,4 +173,3 @@ export interface MusicBeeRemoteState {
     outputs: OutputResponse;
   };
 }
-

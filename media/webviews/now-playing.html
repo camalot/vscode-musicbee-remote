@@ -8,10 +8,14 @@
   <link rel="stylesheet" href="{{cssUri}}" />
 </head>
 <body>
-  <div class="cover" id="cover" data-no-art="{{noArtUri}}">No album art</div>
+  <div class="cover" id="cover" data-no-art="{{noArtUri}}">
+    <button id="btnFavorite" class="secondary favorite" data-control="favorite">&#10084;</button>
+    <div class="album-art" id="albumArt"></div>
+  </div>
   <div class="track-title" id="title">Nothing playing</div>
   <div class="track-sub" id="artist">&mdash;</div>
   <div class="track-sub" id="album"></div>
+
   <div class="progress-track">
     <div class="progress-fill" id="progress"></div>
   </div>
@@ -20,10 +24,54 @@
     <span id="posTotal">0:00</span>
   </div>
   <div class="controls">
-    <button id="btnMute" class="secondary" data-control="mute">&#128266;</button>
-    <button class="secondary" data-control="previous">&#9664;&#9664;</button>
-    <button id="btnPlayPause" data-control="playPause">&#9654;</button>
-    <button class="secondary" data-control="next">&#9654;&#9654;</button>
+    <div class="control-row primary-controls">
+      <div class="group center">
+        <button class="secondary big" data-control="previous">&#9664;&#9664;</button>
+        <button id="btnPlayPause" class="big primary" data-control="playPause">&#9654;</button>
+        <button class="secondary big" data-control="next">&#9654;&#9654;</button>
+      </div>
+
+      <div class="group right">
+        
+      </div>
+    </div>
+
+    <div class="control-row secondary-controls">
+      <div class="group left">
+        <button id="btnMute" class="secondary" data-control="mute">&#128266;</button>
+        <input id="volume" type="range" min="0" max="100" value="75" />
+      </div>
+
+      <div class="group right">
+        <div class="rating" id="rating">
+          <span class="star" data-index="0">
+            <span class="star-bg">★</span>
+            <span class="star-fill">★</span>
+          </span>
+          <span class="star" data-index="1">
+            <span class="star-bg">★</span>
+            <span class="star-fill">★</span>
+          </span>
+          <span class="star" data-index="2">
+            <span class="star-bg">★</span>
+            <span class="star-fill">★</span>
+          </span>
+          <span class="star" data-index="3">
+            <span class="star-bg">★</span>
+            <span class="star-fill">★</span>
+          </span>
+          <span class="star" data-index="4">
+            <span class="star-bg">★</span>
+            <span class="star-fill">★</span>
+          </span>
+        </div>
+      </div>
+
+      <!--div class="group right" style="display: none;">
+        <button id="btnRepeat" class="secondary" data-control="repeat">&#128257;</button>
+        <button id="btnShuffle" class="secondary" data-control="shuffle">&#128256;</button>
+      </div-->
+    </div>
   </div>
   <script nonce="{{nonce}}" src="{{scriptUri}}"></script>
 </body>

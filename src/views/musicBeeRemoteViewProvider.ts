@@ -8,7 +8,7 @@ type WebviewMessage =
   | { type: "connect" }
   | { type: "disconnect" }
   | { type: "refresh" }
-  | { type: "control"; action: "previous" | "playPause" | "next" | "mute" }
+  | { type: "control"; action: "previous" | "playPause" | "next" | "mute" | "favorite" | "volume" | "rating"; value?: number }
   | { type: "openSettings" };
 
 const RETRY_INTERVAL_SECONDS = 10;
@@ -98,10 +98,37 @@ export class MusicBeeRemoteViewProvider implements vscode.WebviewViewProvider, v
         case "control":
           // log will appear in MusicBee Remote output channel
           void this.service.log?.(`[ui] control message received: ${message.action}`);
-          if (message.action === "mute")     { await this.service.toggleMute(); return; }
-          if (message.action === "previous") { await this.service.previousTrack(); return; }
-          if (message.action === "playPause") { await this.service.playPause(); return; }
-          await this.service.nextTrack();
+          if (message.action === "mute") {
+            await this.service.toggleMute();
+            return;
+          }
+          if (message.action === "previous") {
+            await this.service.previousTrack();
+            return;
+          }
+          if (message.action === "playPause") {
+            await this.service.playPause();
+            return;
+          }
+          if (message.action === "next") {
+            await this.service.nextTrack();
+            return;
+          }
+          if (message.action === "volume" && typeof message.value === "number") {
+            this.service.log?.(`[ui] set volume ${message.value}`);
+            await this.service.setVolume(message.value);
+            return;
+          }
+          if (message.action === "rating" && typeof message.value === "number") {
+            this.service.log?.(`[ui] set rating ${message.value}`);
+            await this.service.setRating(message.value);
+            return;
+          }
+          if (message.action === "favorite") {
+            this.service.log?.(`[ui] toggle favorite`);
+            await this.service.toggleFavorite();
+            return;
+          }
           return;
       }
     } catch (error) {

@@ -115,8 +115,26 @@
     "watch": "tsc -watch -p ./"
   },
   "devDependencies": {
-    "@types/node": "^22.13.14",
-    "@types/vscode": "^1.85.0",
-    "typescript": "^5.8.2"
+    "@types/micromatch": "^4.0.10",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "25.x",
+    "@types/vscode": "^1.105.1",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.7.1",
+    "codecov": "^3.8.3",
+    "eslint": "^9.39.2",
+    "git-cliff": "^2.12.0",
+    "mocha": "^11.7.5",
+    "mocha-junit-reporter": "^2.2.1",
+    "nyc": "^17.1.0",
+    "prettier": "^3.8.1",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.0",
+    "webpack": "^5.105.2",
+    "webpack-cli": "^6.0.1"
   }
 }

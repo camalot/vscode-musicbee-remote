@@ -26,6 +26,8 @@ export class MusicBeeRemoteService implements vscode.Disposable {
 
   private progressTimer?: NodeJS.Timeout;
 
+  private ratingTimer?: NodeJS.Timeout;
+
   private coverRetryTimer?: NodeJS.Timeout;
 
   private coverRetryCount = 0;
@@ -84,6 +86,7 @@ export class MusicBeeRemoteService implements vscode.Disposable {
       this.state.connectionStatus = "connected";
       this.state.errorMessage = undefined;
       this.startProgressTimer();
+      this.startRatingTimer();
       this.startCoverRetry();
       this.emitState();
       this.log("Connected to MusicBee Remote.");
@@ -102,6 +105,7 @@ export class MusicBeeRemoteService implements vscode.Disposable {
       this.progressTimer = undefined;
     }
 
+    this.stopRatingTimer();
     this.stopCoverRetry();
 
     if (this.client) {
@@ -124,6 +128,8 @@ export class MusicBeeRemoteService implements vscode.Disposable {
       this.safeApply(() => client.getPosition(), (value) => this.applyPosition(value)),
       this.safeApply(() => client.getCover(), (value) => this.applyCover(value)),
       this.safeApply(() => client.getTrackDetails(), (value) => this.applyTrackDetails(value)),
+      this.safeApply(() => client.getRating(), (value) => { this.state.nowPlaying.trackRating = String(value ?? ""); }),
+      this.safeApply(() => client.getLfmRating(), (value) => { this.state.nowPlaying.lfmRating = String(value ?? ""); }),
       this.safeApply(() => client.getNowPlayingList(), (value) => {
         this.state.nowPlaying.queue = value;
       }),
@@ -165,6 +171,30 @@ export class MusicBeeRemoteService implements vscode.Disposable {
 
   public async nextTrack(): Promise<void> {
     await this.sendCommand(PROTOCOL.playerNext);
+  }
+
+  public async setVolume(volume: number): Promise<void> {
+    const client = this.requireClient();
+    await client.sendBroadcastCommand(PROTOCOL.playerVolume, String(volume));
+    this.state.nowPlaying.status.volume = volume;
+    this.emitState();
+  }
+
+  public async setRating(rating: number): Promise<void> {
+    const client = this.requireClient();
+    await client.sendBroadcastCommand(PROTOCOL.nowPlayingRating, String(rating));
+    this.state.nowPlaying.trackRating = String(rating);
+    this.emitState();
+  }
+
+  public async toggleFavorite(): Promise<void> {
+    const client = this.requireClient();
+    const isFavorite = this.state.nowPlaying.lfmRating.toLowerCase() === "love";
+    const nextValue = isFavorite ? "None" : "Love";
+    this.log(`[favorite] toggling lfmRating from "${this.state.nowPlaying.lfmRating}" to "${nextValue}"`);
+    await client.sendBroadcastCommand(PROTOCOL.nowPlayingLfmRating, nextValue);
+    this.state.nowPlaying.lfmRating = nextValue;
+    this.emitState();
   }
 
   public async toggleMute(): Promise<void> {
@@ -237,6 +267,14 @@ export class MusicBeeRemoteService implements vscode.Disposable {
         this.applyTrackDetails(message.data as NowPlayingDetails);
         break;
 
+      case PROTOCOL.nowPlayingRating:
+        this.state.nowPlaying.trackRating = String(message.data ?? "");
+        break;
+
+      case PROTOCOL.nowPlayingLfmRating:
+        this.state.nowPlaying.lfmRating = String(message.data ?? "");
+        break;
+
       case PROTOCOL.nowPlayingListChanged:
         await this.safeApply(
           () => this.requireClient().getNowPlayingList(),
@@ -267,6 +305,8 @@ export class MusicBeeRemoteService implements vscode.Disposable {
       clearInterval(this.progressTimer);
       this.progressTimer = undefined;
     }
+
+    this.stopRatingTimer();
 
     const message = error?.message ?? "Disconnected from MusicBee Remote.";
     this.log(`Lost connection: ${message}`);
@@ -440,6 +480,45 @@ export class MusicBeeRemoteService implements vscode.Disposable {
     }, 1000);
   }
 
+  private startRatingTimer(): void {
+    if (this.ratingTimer) {
+      clearInterval(this.ratingTimer);
+    }
+
+    // Poll now playing details (including rating) periodically so changes made
+    // directly in MusicBee show up in the UI.
+    this.ratingTimer = setInterval(async () => {
+      if (this.state.connectionStatus !== "connected") {
+        return;
+      }
+
+      try {
+        await this.refreshTrackDetails();
+      } catch {
+        // ignore; refreshTrackDetails handles errors internally
+      }
+    }, 10_000);
+  }
+
+  private stopRatingTimer(): void {
+    if (this.ratingTimer) {
+      clearInterval(this.ratingTimer);
+      this.ratingTimer = undefined;
+    }
+  }
+
+  private async refreshTrackDetails(): Promise<void> {
+    if (!this.client) {
+      return;
+    }
+
+    // Only poll track details (genre, disc info, etc.).
+    // Rating and LFM rating are handled exclusively via broadcast events — polling
+    // them via a dedicated connection causes MusicBee to re-broadcast the value,
+    // which can overwrite a just-set rating with stale data.
+    await this.safeApply(() => this.client!.getTrackDetails(), (value) => this.applyTrackDetails(value));
+  }
+
   private async sendCommand(context: typeof PROTOCOL.playerPrevious | typeof PROTOCOL.playerPlayPause | typeof PROTOCOL.playerNext): Promise<void> {
     const client = this.requireClient();
     await client.sendBroadcastCommand(context);
@@ -513,6 +592,8 @@ export class MusicBeeRemoteService implements vscode.Disposable {
           volume: 0,
           playState: ""
         },
+        trackRating: "",
+        lfmRating: "",
         position: {
           current: 0,
           total: 0

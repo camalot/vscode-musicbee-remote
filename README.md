@@ -2,6 +2,8 @@
 
 A Visual Studio Code extension to control MusicBee remotely.
 
+![Now Playing View](https://github.com/camalot/vscode-musicbee-remote/blob/develop/docs/images/v0.png)
+
 ## Features
 
 - View the currently playing track
