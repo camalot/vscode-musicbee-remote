@@ -1,7 +1,8 @@
 ---
 layout: default
 title: "🎨 Themes"
-nav_order: 2
+parent: "🎨 Styling"
+nav_order: 1
 ---
 
 <!-- markdownlint-disable-next-line MD025 MD022 -->

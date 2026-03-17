@@ -4,7 +4,7 @@
 
 1. Open Visual Studio Code
 2. Go to the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
-3. Search for **"Workspace Tasks"**
+3. Search for **"MusicBee Remote"**
 4. Click **Install**
 
 [→ Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=darthminos.musicbee-remote){: .btn .btn-success }
