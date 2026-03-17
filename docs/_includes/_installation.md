@@ -1,6 +1,6 @@
 
 <!-- markdownlint-disable MD041 -->
-## From Visual Studio Code Marketplace
+### From Visual Studio Code Marketplace
 
 1. Open Visual Studio Code
 2. Go to the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
@@ -9,7 +9,7 @@
 
 [→ Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=darthminos.musicbee-remote){: .btn .btn-success }
 
-## From Open VSX Registry
+### From Open VSX Registry
 
 For editors that use the Open VSX Registry (e.g., Cursor, VSCodium):
 
@@ -20,7 +20,7 @@ For editors that use the Open VSX Registry (e.g., Cursor, VSCodium):
 
 [→ Open VSX Registry](https://open-vsx.org/extension/darthminos/musicbee-remote){: .btn .btn-success }
 
-## From Command Line
+### From Command Line
 
 Choose the command based on your editor
 

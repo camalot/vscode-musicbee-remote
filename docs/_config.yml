@@ -33,18 +33,6 @@ nav_sort: case_insensitive
 
 color_scheme: dracula
 
-# Footer links
-footer_content: >
-  <a href="https://marketplace.visualstudio.com/items?itemName=darthminos.musicbee-remote">
-    Visual Studio Marketplace
-  </a> &bull;
-  <a href="https://open-vsx.org/extension/darthminos/musicbee-remote">
-    Open VSX Registry
-  </a> &bull;
-  <a href="https://github.com/camalot/vscode-musicbee-remote/issues">
-    Report an Issue
-  </a>
-
 # Aux links (top nav)
 aux_links:
   "Marketplace":

@@ -18,26 +18,7 @@ parent: "🎨 Styling"
 
 ---
 
-## Creating Custom Themes
+## Creating a Custom Theme
 
-To create a custom theme for the MusicBee Remote extension, you need to define a set of colors and styles in a JSON file. This file will specify the appearance of various UI elements in the extension.
-
-### Steps to Create a Custom Theme
-
-1. **Create a JSON File**: Start by creating a new JSON file in your workspace.
-2. **Define Colors and Styles**: Specify the colors and styles for different UI components. For example:
-
-   ```json
-   {
-     "background": "#1e1e1e",
-     "foreground": "#d4d4d4",
-     "button": {
-       "background": "#007acc",
-       "foreground": "#ffffff"
-     }
-   }
-   ```
-
-3. **Save and Apply**: Save the JSON file and apply it through the MusicBee Remote extension settings.
-
-By following these steps, you can fully customize the look and feel of the MusicBee Remote extension to match your personal aesthetic or your existing Visual Studio Code theme.
+{: .important }
+Creating custom temes is not currently supported, but is on the roadmap for a future release. If you have any ideas or suggestions for how custom themes should work, please open an issue or contribute to the discussion in the [GitHub repository](https://github.com/camalot/vscode-musicbee-remote).

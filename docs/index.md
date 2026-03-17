@@ -9,4 +9,46 @@ Welcome to the MusicBee Remote extension documentation! This extension allows yo
 
 ---
 
+## 📖 Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+## 🚀 Features
+
+{% include _features.md %}
+
+---
+
+## ⬇️ Installation
+
 {% include _installation.md %}
+
+---
+
+## 📸 Screenshots
+
+{% include _screenshots.md %}
+
+---
+
+## 📦 Contributors
+
+{% include _contributors.md %}
+
+---
+
+## 📄 License
+
+{% include LICENSE %}
+
+---
+
+<!-- markdownlint-disable MD036 -->
+
+**Made with ❤️ for the Visual Studio Code community**
+
+<!-- markdownlint-enable MD036 -->
