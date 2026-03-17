@@ -27,7 +27,7 @@ A Visual Studio Code extension to control MusicBee remotely.
 3. Search for **"MusicBee Remote"**
 4. Click **Install**
 
-[→ Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=darthminos.musicbee-remote){: .btn .btn-success }
+[→ Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=darthminos.musicbee-remote)
 
 ### From Open VSX Registry
 
@@ -38,7 +38,7 @@ For editors that use the Open VSX Registry (e.g., Cursor, VSCodium):
 3. Search for **"MusicBee Remote"**
 4. Click **Install**
 
-[→ Open VSX Registry](https://open-vsx.org/extension/darthminos/musicbee-remote){: .btn .btn-success }
+[→ Open VSX Registry](https://open-vsx.org/extension/darthminos/musicbee-remote)
 
 ### From Command Line
 
