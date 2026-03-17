@@ -15,6 +15,17 @@ $tron-muted:       color.adjust($tron-neon-cyan, $lightness: -12%);
 $tron-accent:      $tron-amber;
 $tron-border:      color.adjust($tron-deep-teal, $lightness: 8%);
 
+$tron-current-line:  $tron-surface;
+$tron-selection:     color.adjust($tron-surface, $lightness: 8%);
+$tron-comment:       $tron-muted;
+$tron-cyan:          $tron-neon-cyan;
+$tron-green:         color.mix($tron-neon-cyan, $tron-deep-teal, 70%);
+$tron-orange:        $tron-amber;
+$tron-pink:          color.mix($tron-amber, $tron-ice, 42%);
+$tron-purple:        color.mix($tron-neon-cyan, $tron-amber, 55%);
+$tron-red:           color.adjust($tron-amber, $lightness: -14%);
+$tron-yellow:        color.adjust($tron-amber, $lightness: 8%);
+
 // Backgrounds
 $body-background-color:       $tron-background;
 $sidebar-color:               color.adjust($tron-background, $lightness: 2%);

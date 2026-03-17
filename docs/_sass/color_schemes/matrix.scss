@@ -14,6 +14,16 @@ $matrix-muted:        color.adjust($matrix-green, $lightness: 6%);
 $matrix-accent:       color.adjust($matrix-green-bright, $lightness: -4%);
 $matrix-border:       color.adjust($matrix-green-dark, $lightness: 10%);
 
+$matrix-current-line:  $matrix-surface;
+$matrix-selection:     color.adjust($matrix-surface, $lightness: 8%);
+$matrix-comment:       $matrix-muted;
+$matrix-cyan:          color.adjust($matrix-green-bright, $lightness: 4%);
+$matrix-orange:        color.adjust($matrix-green-bright, $lightness: -18%);
+$matrix-pink:          color.adjust($matrix-green-bright, $lightness: -8%);
+$matrix-purple:        color.adjust($matrix-green, $lightness: 18%);
+$matrix-red:           color.adjust($matrix-green-dark, $lightness: 12%);
+$matrix-yellow:        color.adjust($matrix-green-bright, $lightness: 12%);
+
 // Backgrounds
 $body-background-color:       $matrix-background;
 $sidebar-color:               color.adjust($matrix-background, $lightness: 3%);

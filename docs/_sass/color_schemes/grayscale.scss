@@ -9,6 +9,17 @@ $grayscale-accent:     #8f8f8f;
 $grayscale-border:     #4f4f4f;
 $grayscale-highlight:  #cfcfcf;
 
+$grayscale-current-line:  $grayscale-surface;
+$grayscale-selection:     color.adjust($grayscale-surface, $lightness: 6%);
+$grayscale-comment:       $grayscale-muted;
+$grayscale-cyan:          $grayscale-highlight;
+$grayscale-green:         color.adjust($grayscale-highlight, $lightness: -10%);
+$grayscale-orange:        color.adjust($grayscale-highlight, $lightness: -18%);
+$grayscale-pink:          color.adjust($grayscale-highlight, $lightness: -4%);
+$grayscale-purple:        $grayscale-accent;
+$grayscale-red:           color.adjust($grayscale-accent, $lightness: -18%);
+$grayscale-yellow:        color.adjust($grayscale-highlight, $lightness: 8%);
+
 // Backgrounds
 $body-background-color:       $grayscale-background;
 $sidebar-color:               color.adjust($grayscale-background, $lightness: 2%);

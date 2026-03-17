@@ -1,9 +1,21 @@
 @use "sass:color";
 
 // Hotdog color palette
-$hotdog-foreground: #3d2200;
+$hotdog-background:    #fff6db;
+$hotdog-current-line:  color.adjust($hotdog-background, $lightness: -6%);
+$hotdog-selection:     color.adjust($hotdog-background, $lightness: -14%);
+$hotdog-foreground:    #3d2200;
+$hotdog-comment:       #7a4a16;
+$hotdog-cyan:          #1fa346;
+$hotdog-green:         #1fa346;
+$hotdog-orange:        #f57c00;
+$hotdog-pink:          #e64a19;
+$hotdog-purple:        #d84315;
+$hotdog-red:           #c62828;
+$hotdog-yellow:        #d4a017;
+
+
 $hotdog-muted: #7a4a16;
-$hotdog-background: #fff6db;
 $hotdog-accent: #e64a19;
 $hotdog-button: #c62828;
 $hotdog-border: #d7b17a;

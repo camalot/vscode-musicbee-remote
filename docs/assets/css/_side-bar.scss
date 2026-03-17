@@ -19,6 +19,11 @@
   background-image: linear-gradient(90deg, $theme-nav-link-hover-bg 0%, rgba($link-color, 0.05) 100%);
 }
 
+.site-title:hover,
+.site-title:focus {
+  background-image: linear-gradient(90deg, $theme-nav-link-hover-bg 0%, rgba($link-color, 0.05) 100%);
+}
+
 .site-nav {
   padding-top: 0;
 }
@@ -67,6 +72,14 @@
   color: $body-text-color;
   background-color: $search-background-color;
   border-color: $border-color;
+}
+
+.search-input:focus,
+.search-input:focus-visible {
+  border-color: $theme-search-focus-border-color !important;
+  outline: 2px solid $theme-search-focus-border-color !important;
+  outline-offset: -1px;
+  box-shadow: none;
 }
 
 .search-results {

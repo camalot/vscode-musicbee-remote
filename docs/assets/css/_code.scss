@@ -96,3 +96,9 @@ pre.highlight {
 .highlight pre {
   background-color: transparent !important;
 }
+
+// Inline code: override upstream hardcoded background
+:not(pre, figure) > code {
+  background-color: $code-background-color !important;
+  border-color: $theme-code-border-color !important;
+}

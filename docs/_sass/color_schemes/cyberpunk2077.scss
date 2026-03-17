@@ -10,6 +10,17 @@ $cyberpunk2077-border: #171033;
 $cyberpunk2077-favorite: #ffd400;
 $cyberpunk2077-progress: #fa0dea;
 
+$cyberpunk2077-current-line:  color.adjust($cyberpunk2077-background, $lightness: 5%);
+$cyberpunk2077-selection:     color.mix($cyberpunk2077-accent, $cyberpunk2077-background, 24%);
+$cyberpunk2077-comment:       $cyberpunk2077-muted;
+$cyberpunk2077-cyan:          $cyberpunk2077-button-secondary;
+$cyberpunk2077-green:         color.mix($cyberpunk2077-button-secondary, $cyberpunk2077-favorite, 55%);
+$cyberpunk2077-orange:        color.mix($cyberpunk2077-favorite, $cyberpunk2077-accent, 70%);
+$cyberpunk2077-pink:          $cyberpunk2077-accent;
+$cyberpunk2077-purple:        color.mix($cyberpunk2077-accent, $cyberpunk2077-button-secondary, 65%);
+$cyberpunk2077-red:           color.mix($cyberpunk2077-accent, $cyberpunk2077-background, 78%);
+$cyberpunk2077-yellow:        $cyberpunk2077-favorite;
+
 // Derived shades for UI hierarchy
 $cyberpunk2077-surface: color.adjust($cyberpunk2077-background, $lightness: 5%);
 
