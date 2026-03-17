@@ -1,6 +1,6 @@
 ---
 name: 🐛 Bug Report
-description: Report a bug or unexpected behavior in Workspace Tasks
+description: Report a bug or unexpected behavior in MusicBee Remote
 title: '[Bug]: '
 labels: ['bug', 'needs-triage']
 body:
@@ -24,7 +24,7 @@ body:
       label: Steps to Reproduce
       description: Please provide detailed steps to reproduce the issue
       placeholder: |
-        1. Open workspace with...
+        1. Open file...
         2. Click on...
         3. See error...
     validations:
@@ -49,28 +49,18 @@ body:
       required: true
 
   - type: dropdown
-    id: task-type
+    id: component
     attributes:
-      label: Task Type
-      description: Which task type is affected? (if applicable)
+      label: Component
+      description: Which component is affected? (if applicable)
+      default: Other/General
       options:
-        - npm/yarn/pnpm
-        - Gulp
-        - Grunt
-        - Make
-        - Ant
-        - Gradle
-        - MSBuild
-        - Composer
-        - Pipenv
-        - Just
-        - Docker/Docker Compose
-        - GitHub Actions
-        - Shell Scripts
-        - Visual Studio Code Tasks
-        - Workspace Tasks (.workspace-tasks.json)
-        - Favorites
-        - Queues
+        - Now Playing
+        - UX/UI
+        - Theme/Appearance
+        - Configuration
+        - Performance
+        - Documentation
         - Other/General
         - Not applicable
     validations:
@@ -82,7 +72,7 @@ body:
       label: Error Messages / Logs
       description: |
         Please copy and paste any relevant error messages or log output.
-        You can find logs in the Output panel (View → Output → Workspace Tasks).
+        You can find logs in the Output panel (View → Output → MusicBee Remote).
       render: shell
     validations:
       required: false
@@ -99,27 +89,15 @@ body:
           <!-- Copy and paste the info from Help → About here -->
 
           <!-- End of Help Info -->
-        - **Workspace Tasks Extension Version**:
+        - **MusicBee Remote Extension Version**:
+        - **MusicBee Version**:
+        - **MusicBee Remote Version**: v1.4.1
+        - **MusicBee Remote Configuration**:
+          <!-- If you have any custom configuration, please paste it here -->
+          <!-- End of Configuration -->
       render: markdown
     validations:
       required: true
-
-  - type: textarea
-    id: workspace-structure
-    attributes:
-      label: Workspace Structure
-      description: |
-        If relevant, provide a simplified view of your workspace structure
-        (e.g., relevant file names, directory structure)
-      placeholder: |
-        project-root/
-        ├── package.json
-        ├── gulpfile.js
-        └── .vscode/
-            └── tasks.json
-      render: shell
-    validations:
-      required: false
 
   - type: textarea
     id: additional

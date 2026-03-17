@@ -1,6 +1,6 @@
 ---
 name: ✨ Feature Request
-description: Suggest a new feature or enhancement for Workspace Tasks
+description: Suggest a new feature or enhancement for MusicBee Remote
 title: '[Feature]: '
 labels: ['enhancement', 'needs-triage']
 body:
@@ -42,15 +42,11 @@ body:
       label: Feature Area
       description: Which area of the extension does this feature relate to?
       options:
-        - Task Discovery
-        - Task Execution
-        - Favorites
-        - Queues
+        - Now Playing
         - UI/UX
+        - Theme/Appearance
         - Configuration
-        - Task Types/Providers
         - Performance
-        - Integration (GitHub Actions, Docker, etc.)
         - Documentation
         - Other
     validations:
