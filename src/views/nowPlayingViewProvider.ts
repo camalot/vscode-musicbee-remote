@@ -221,8 +221,35 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
     const scriptUri = webview.asWebviewUri(
       vscode.Uri.joinPath(mediaUri, "assets", "js", "now-playing.js")
     );
+    const playTrackUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "play-track.svg")
+    );
+    const pauseTrackUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "pause-track.svg")
+    );
+    const nextTrackUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "next-track.svg")
+    );
+    const previousTrackUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "previous-track.svg")
+    );
     const noArtUri = webview.asWebviewUri(
       vscode.Uri.joinPath(mediaUri, "assets", "images", "no-art.png")
+    );
+    const volume0Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "volume-0.svg")
+    );
+    const volume1Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "volume-1.svg")
+    );
+    const volume2Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "volume-2.svg")
+    );
+    const volume3Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "volume-3.svg")
+    );
+    const volume4Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "volume-4.svg")
     );
     const htmlPath = vscode.Uri.joinPath(mediaUri, "webviews", "now-playing.html").fsPath;
     const html = fs.readFileSync(htmlPath, "utf8");
@@ -231,7 +258,16 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
       .replace(/\{\{nonce\}\}/g, nonce)
       .replace(/\{\{cssUri\}\}/g, cssUri.toString())
       .replace(/\{\{scriptUri\}\}/g, scriptUri.toString())
+      .replace(/\{\{playTrackUri\}\}/g, playTrackUri.toString())
+      .replace(/\{\{pauseTrackUri\}\}/g, pauseTrackUri.toString())
+      .replace(/\{\{nextTrackUri\}\}/g, nextTrackUri.toString())
+      .replace(/\{\{previousTrackUri\}\}/g, previousTrackUri.toString())
       .replace(/\{\{theme\}\}/g, theme)
+        .replace(/\{\{volume0Uri\}\}/g, volume0Uri.toString())
+        .replace(/\{\{volume1Uri\}\}/g, volume1Uri.toString())
+        .replace(/\{\{volume2Uri\}\}/g, volume2Uri.toString())
+        .replace(/\{\{volume3Uri\}\}/g, volume3Uri.toString())
+        .replace(/\{\{volume4Uri\}\}/g, volume4Uri.toString())
       .replace(/\{\{noArtUri\}\}/g, noArtUri.toString());
   }
 }

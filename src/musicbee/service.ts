@@ -149,6 +149,13 @@ export class MusicBeeRemoteService implements vscode.Disposable {
 
     this.state.lastUpdated = new Date().toISOString();
     this.emitState();
+
+    // If the cover is still missing after all concurrent requests settled (e.g. due
+    // to a race between refresh() and refreshSupplementalNowPlaying() leaving
+    // coverDataUrl cleared with no retry running), start a retry to fetch it.
+    if (!this.state.nowPlaying.track.coverDataUrl && this.state.connectionStatus === "connected") {
+      this.startCoverRetry();
+    }
   }
 
   public async setActiveView(view: BrowseViewId): Promise<void> {
@@ -376,6 +383,14 @@ export class MusicBeeRemoteService implements vscode.Disposable {
   }
 
   private applyNowPlayingTrack(track: NowPlayingTrack): void {
+    const previousPath = this.state.nowPlaying.track.path;
+    const incomingPath = track.path;
+
+    // Reset cover when the track changes so stale art from a prior song is not shown.
+    if (incomingPath && previousPath && incomingPath !== previousPath) {
+      this.state.nowPlaying.track.coverDataUrl = undefined;
+    }
+
     this.state.nowPlaying.track = {
       ...this.state.nowPlaying.track,
       ...track
@@ -406,6 +421,10 @@ export class MusicBeeRemoteService implements vscode.Disposable {
 
   private applyCover(payload: CoverPayload): void {
     if (!payload.cover) {
+      if (this.state.nowPlaying.track.coverDataUrl) {
+        this.log(`[cover] applyCover: empty payload ignored because cover is already set (status: ${payload.status})`);
+        return;
+      }
       this.log(`[cover] applyCover: no cover in payload (status: ${payload.status})`);
       this.state.nowPlaying.track.coverDataUrl = undefined;
       return;

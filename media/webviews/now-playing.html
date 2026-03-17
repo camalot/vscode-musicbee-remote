@@ -7,7 +7,7 @@
   <title>MusicBee Remote</title>
   <link rel="stylesheet" href="{{cssUri}}" />
 </head>
-<body data-mbr-theme="{{theme}}">
+<body data-mbr-theme="{{theme}}" data-icon-play-track="{{playTrackUri}}" data-icon-pause-track="{{pauseTrackUri}}" data-icon-next-track="{{nextTrackUri}}" data-icon-previous-track="{{previousTrackUri}}" data-icon-volume-0="{{volume0Uri}}" data-icon-volume-1="{{volume1Uri}}" data-icon-volume-2="{{volume2Uri}}" data-icon-volume-3="{{volume3Uri}}" data-icon-volume-4="{{volume4Uri}}">
   <div class="cover" id="cover" data-no-art="{{noArtUri}}">
     <button id="btnFavorite" class="secondary favorite" data-control="favorite">&#10084;</button>
     <div class="album-art" id="albumArt"></div>
@@ -28,9 +28,15 @@
   <div class="controls">
     <div class="control-row primary-controls">
       <div class="group center">
-        <button class="secondary big" data-control="previous">&#9664;&#9664;</button>
-        <button id="btnPlayPause" class="big primary" data-control="playPause">&#9654;</button>
-        <button class="secondary big" data-control="next">&#9654;&#9654;</button>
+        <button class="secondary big media-control" data-control="previous" aria-label="Previous track">
+          <span class="control-icon control-icon--previous" aria-hidden="true"></span>
+        </button>
+        <button id="btnPlayPause" class="big primary media-control" data-control="playPause" data-state="paused" aria-label="Play">
+          <span class="control-icon control-icon--playpause" aria-hidden="true"></span>
+        </button>
+        <button class="secondary big media-control" data-control="next" aria-label="Next track">
+          <span class="control-icon control-icon--next" aria-hidden="true"></span>
+        </button>
       </div>
 
       <div class="group right">
@@ -40,7 +46,7 @@
 
     <div class="control-row secondary-controls">
       <div class="group left">
-        <button id="btnMute" class="secondary" data-control="mute">&#128266;</button>
+        <button id="btnMute" class="secondary volume-control" data-control="mute" aria-label="Mute"></button>
         <input id="volume" type="range" min="0" max="100" value="75" />
       </div>
 

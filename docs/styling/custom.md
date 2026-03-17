@@ -22,3 +22,7 @@ parent: "🎨 Styling"
 
 {: .important }
 Creating custom temes is not currently supported, but is on the roadmap for a future release. If you have any ideas or suggestions for how custom themes should work, please open an issue or contribute to the discussion in the [GitHub repository](https://github.com/camalot/vscode-musicbee-remote).
+
+| Feature | Status |
+| ------- | ------ |
+| Custom Themes | Not currently supported |
