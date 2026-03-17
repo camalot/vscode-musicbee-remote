@@ -1,0 +1,18 @@
+import BaseCommand from '../common/baseCommand';
+import * as vscode from 'vscode';
+import { ExtensionConfigurationService } from '../services/extensionConfigurationService';
+
+export class BuyMeACoffeeCommand extends BaseCommand {
+  constructor(context: vscode.ExtensionContext) {
+    super('buyMeACoffee', context);
+  }
+
+  async run(): Promise<void> {
+    const url = ExtensionConfigurationService.getInstance().get('sponsor.buymeacoffee');
+    if (url) {
+      vscode.env.openExternal(vscode.Uri.parse(url));
+    } else {
+      this.logger.warn('Buy Me A Coffee URL is not configured.');
+    }
+  }
+}

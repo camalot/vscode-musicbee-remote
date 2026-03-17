@@ -89,8 +89,8 @@
     "views": {
       "explorer": [
         {
-          "id": "musicBeeRemote.explorer",
-          "name": "MusicBee Remote",
+          "id": "musicBeeRemote.nowPlaying",
+          "name": "%view.nowPlaying.name%",
           "type": "webview",
           "icon": "media/musicbee.svg"
         }
@@ -98,63 +98,95 @@
     },
     "commands": [
       {
-        "command": "musicBeeRemote.openPanel",
-        "title": "MusicBee Remote: Open Panel"
-      },
-      {
         "command": "musicBeeRemote.connect",
-        "title": "MusicBee Remote: Connect",
+        "title": "%command.connect%",
         "icon": "$(plug)"
       },
       {
         "command": "musicBeeRemote.disconnect",
-        "title": "MusicBee Remote: Disconnect",
+        "title": "%command.disconnect%",
         "icon": "$(debug-disconnect)"
       },
       {
         "command": "musicBeeRemote.refresh",
-        "title": "MusicBee Remote: Refresh",
+        "title": "%command.refresh%",
         "icon": "$(refresh)"
       },
       {
         "command": "musicBeeRemote.previous",
-        "title": "MusicBee Remote: Previous Track"
+        "title": "%command.previous%"
       },
       {
         "command": "musicBeeRemote.playPause",
-        "title": "MusicBee Remote: Play / Pause"
+        "title": "%command.playPause%"
       },
       {
         "command": "musicBeeRemote.next",
-        "title": "MusicBee Remote: Next Track"
+        "title": "%command.next%"
       },
       {
         "command": "musicBeeRemote.openSettings",
-        "title": "MusicBee Remote: Open Settings",
+        "title": "%command.openSettings%",
         "icon": "$(settings-gear)"
+      },
+      {
+        "command": "musicBeeRemote.buyMeACoffee",
+        "title": "%command.buyMeACoffee%",
+        "icon": {
+          "light": "media/assets/icons/light/coffee.svg",
+          "dark": "media/assets/icons/dark/coffee.svg"
+        }
+      },
+      {
+        "command": "musicBeeRemote.githubSponsor",
+        "title": "%command.githubSponsor%",
+        "icon": {
+          "light": "media/assets/icons/light/github-sponsors.svg",
+          "dark": "media/assets/icons/dark/github-sponsors.svg"
+        }
+      },
+      {
+        "command": "musicBeeRemote.githubIssues",
+        "title": "%command.githubIssues%",
+        "icon": "$(github-inverted)"
       }
     ],
     "menus": {
       "view/title": [
         {
+          "command": "musicBeeRemote.buyMeACoffee",
+          "when": "view == musicBeeRemote.nowPlaying",
+          "group": "navigation@1"
+        },
+        {
+          "command": "musicBeeRemote.githubSponsor",
+          "when": "view == musicBeeRemote.nowPlaying",
+          "group": "navigation@2"
+        },
+        {
+          "command": "musicBeeRemote.githubIssues",
+          "when": "view == musicBeeRemote.nowPlaying",
+          "group": "navigation@3"
+        },
+        {
           "command": "musicBeeRemote.connect",
-          "when": "view == musicBeeRemote.explorer && !musicBeeRemote.connected",
-          "group": "navigation"
+          "when": "view == musicBeeRemote.nowPlaying && !musicBeeRemote.connected",
+          "group": "navigation@4"
         },
         {
           "command": "musicBeeRemote.disconnect",
-          "when": "view == musicBeeRemote.explorer && musicBeeRemote.connected",
-          "group": "navigation"
+          "when": "view == musicBeeRemote.nowPlaying && musicBeeRemote.connected",
+          "group": "navigation@4"
         },
         {
           "command": "musicBeeRemote.refresh",
-          "when": "view == musicBeeRemote.explorer",
-          "group": "navigation"
+          "when": "view == musicBeeRemote.nowPlaying",
+          "group": "navigation@5"
         },
         {
           "command": "musicBeeRemote.openSettings",
-          "when": "view == musicBeeRemote.explorer",
-          "group": "navigation"
+          "when": "view == musicBeeRemote.nowPlaying",
+          "group": "navigation@6"
         }
       ]
     },
@@ -163,10 +195,17 @@
       "properties": {
         "musicBeeRemote.theme": {
           "type": "string",
-          "enum": ["default", "dracula", "hotdog", "grayscale", "cyberpunk2077", "tron", "matrix"],
+          "enum": [
+            "default",
+            "dracula",
+            "hotdog",
+            "grayscale",
+            "cyberpunk2077",
+            "tron",
+            "matrix"
+          ],
           "default": "default",
           "description": "Available themes for the MusicBee Remote extension."
-
         },
         "musicBeeRemote.host": {
           "type": "string",

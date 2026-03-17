@@ -1,0 +1,18 @@
+{
+  "view.nowPlaying.name": "MusicBee Remote - Now Playing",
+  "description": "Manage and control MusicBee remotely",
+  "displayName": "MusicBee Remote for VSCode",
+
+  "command.buyMeACoffee": "Buy Me a Coffee",
+  "command.githubSponsor": "Sponsor on GitHub",
+  "command.githubIssues": "Report an Issue",
+
+  "command.next": "MusicBee Remote: Next Track",
+  "command.playPause": "MusicBee Remote: Play / Pause",
+  "command.previous": "MusicBee Remote: Previous Track",
+
+  "command.openSettings": "MusicBee Remote: Open Settings",
+  "command.connect": "MusicBee Remote: Connect",
+  "command.disconnect": "MusicBee Remote: Disconnect",
+  "command.refresh": "MusicBee Remote: Refresh"
+}

@@ -13,8 +13,8 @@ type WebviewMessage =
 
 const RETRY_INTERVAL_SECONDS = 10;
 
-export class MusicBeeRemoteViewProvider implements vscode.WebviewViewProvider, vscode.Disposable {
-  public static readonly viewType = "musicBeeRemote.explorer";
+export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscode.Disposable {
+  public static readonly viewType = "musicBeeRemote.nowPlaying";
 
   private webviewView?: vscode.WebviewView;
 

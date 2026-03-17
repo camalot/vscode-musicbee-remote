@@ -1,17 +1,25 @@
 import * as vscode from "vscode";
 import { MusicBeeRemoteService } from "./musicbee/service";
-import { MusicBeeRemoteViewProvider } from "./views/musicBeeRemoteViewProvider";
+import { NowPlayingViewProvider } from "./views/nowPlayingViewProvider";
+import { LoggerService } from "./services/loggerService";
+import { loadCommands } from "./commands";
+import { ExtensionConfigurationService } from "./services/extensionConfigurationService";
 
 export function activate(context: vscode.ExtensionContext): void {
-  const outputChannel = vscode.window.createOutputChannel("MusicBee Remote");
+
+  const logger = LoggerService.getInstance();
+  logger.initialize(context);
+  const outputChannel = logger.getOutputChannel();
+  ExtensionConfigurationService.getInstance().initialize(context);
+
   const service = new MusicBeeRemoteService(context, outputChannel);
-  const viewProvider = new MusicBeeRemoteViewProvider(context.extensionUri, service);
+  const viewProvider = new NowPlayingViewProvider(context.extensionUri, service);
 
   context.subscriptions.push(
     outputChannel,
     service,
     viewProvider,
-    vscode.window.registerWebviewViewProvider(MusicBeeRemoteViewProvider.viewType, viewProvider),
+    vscode.window.registerWebviewViewProvider(NowPlayingViewProvider.viewType, viewProvider),
 
     registerCommand("musicBeeRemote.connect", async () => {
       await service.connect();
@@ -23,6 +31,8 @@ export function activate(context: vscode.ExtensionContext): void {
     registerCommand("musicBeeRemote.next", () => service.nextTrack()),
     registerCommand("musicBeeRemote.openSettings", () => service.openSettings())
   );
+
+  loadCommands(context);
 }
 
 export function deactivate(): void {}
