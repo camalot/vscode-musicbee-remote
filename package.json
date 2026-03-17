@@ -2,7 +2,7 @@
   "name": "musicbee-remote",
   "displayName": "MusicBee Remote",
   "description": "A VS Code explorer panel for remotely controlling MusicBee and browsing MusicBee Remote content.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "icon": "media/musicbee.png",
   "publisher": "darthminos",
   "author": {
