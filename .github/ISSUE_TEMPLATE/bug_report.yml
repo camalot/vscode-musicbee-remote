@@ -53,7 +53,6 @@ body:
     attributes:
       label: Component
       description: Which component is affected? (if applicable)
-      default: Other/General
       options:
         - Now Playing
         - UX/UI
