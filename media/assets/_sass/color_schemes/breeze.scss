@@ -1,0 +1,45 @@
+
+@use "sass:color";
+
+// Official KDE Breeze Dark palette
+$breeze-background: #202326 !default;
+$breeze-current-line: #292C30 !default;
+$breeze-red: #DA4453 !default;
+$breeze-green: #27AE60 !default;
+$breeze-yellow: #FDBC4B !default;
+$breeze-blue: #3DAEE9 !default;
+$breeze-purple: #9B59B6 !default;
+$breeze-cyan: #3DAEE9 !default;
+$breeze-foreground: #FCFCFC !default;
+$breeze-muted: #A1A9B1 !default;
+
+$breeze-accent: $breeze-blue !default;
+$breeze-border: $breeze-current-line !default;
+$breeze-favorite: $breeze-red !default;
+$breeze-progress: $breeze-blue !default;
+
+$mbrvsc-breeze-foreground: $breeze-foreground !default;
+$mbrvsc-breeze-muted: $breeze-muted !default;
+$mbrvsc-breeze-background: $breeze-background !default;
+$mbrvsc-breeze-accent: $breeze-accent !default;
+$mbrvsc-breeze-button-foreground: $breeze-foreground !default;
+$mbrvsc-breeze-button-secondary-foreground: $breeze-foreground !default;
+$mbrvsc-breeze-border: $breeze-border !default;
+$mbrvsc-breeze-favorite-selected: $breeze-favorite !default;
+$mbrvsc-breeze-progressBar: $breeze-progress !default;
+$mbrvsc-breeze-volumeBar: $mbrvsc-breeze-progressBar !default;
+$mbrvsc-breeze-volumeThumb: color.adjust($mbrvsc-breeze-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="breeze"] {
+	--mbrvsc-color-foreground: #{$mbrvsc-breeze-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-breeze-muted};
+	--mbrvsc-color-background: #{$mbrvsc-breeze-background};
+	--mbrvsc-color-accent: #{$mbrvsc-breeze-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-breeze-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-breeze-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-breeze-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-breeze-favorite-selected};
+	--mbrvsc-color-progressBar: #{$mbrvsc-breeze-progressBar};
+	--mbrvsc-color-volumeBar: #{$mbrvsc-breeze-volumeBar};
+	--mbrvsc-color-volumeThumb: #{$mbrvsc-breeze-volumeThumb};
+}

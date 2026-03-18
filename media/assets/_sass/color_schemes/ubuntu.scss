@@ -1,0 +1,43 @@
+@use "sass:color";
+
+$ubuntu-background: #300a24 !default;
+$ubuntu-surface: #2E3436 !default;
+$ubuntu-red: #EF2929 !default;
+$ubuntu-green: #8AE234 !default;
+$ubuntu-yellow: #FCE94F !default;
+$ubuntu-blue: #729FCF !default;
+$ubuntu-purple: #AD7FA8 !default;
+$ubuntu-cyan: #34E2E2 !default;
+$ubuntu-foreground: #EEEEEC !default;
+$ubuntu-muted: #555753 !default;
+
+$ubuntu-accent: #C4A000 !default;
+$ubuntu-border: color.adjust($ubuntu-surface, $lightness: 8%) !default;
+$ubuntu-favorite: $ubuntu-red !default;
+$ubuntu-progress: $ubuntu-cyan !default;
+
+$mbrvsc-ubuntu-foreground: $ubuntu-foreground !default;
+$mbrvsc-ubuntu-muted: $ubuntu-muted !default;
+$mbrvsc-ubuntu-background: $ubuntu-background !default;
+$mbrvsc-ubuntu-accent: $ubuntu-accent !default;
+$mbrvsc-ubuntu-button-foreground: $ubuntu-foreground !default;
+$mbrvsc-ubuntu-button-secondary-foreground: $ubuntu-foreground !default;
+$mbrvsc-ubuntu-border: $ubuntu-border !default;
+$mbrvsc-ubuntu-favorite-selected: $ubuntu-favorite !default;
+$mbrvsc-ubuntu-progressBar: $ubuntu-progress !default;
+$mbrvsc-ubuntu-volumeBar: $mbrvsc-ubuntu-progressBar !default;
+$mbrvsc-ubuntu-volumeThumb: color.adjust($mbrvsc-ubuntu-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="ubuntu"] {
+	--mbrvsc-color-foreground: #{$mbrvsc-ubuntu-foreground};
+	--mbrvsc-color-muted: #{$mbrvsc-ubuntu-muted};
+	--mbrvsc-color-background: #{$mbrvsc-ubuntu-background};
+	--mbrvsc-color-accent: #{$mbrvsc-ubuntu-accent};
+	--mbrvsc-color-button-foreground: #{$mbrvsc-ubuntu-button-foreground};
+	--mbrvsc-color-button-secondary-foreground: #{$mbrvsc-ubuntu-button-secondary-foreground};
+	--mbrvsc-color-border: #{$mbrvsc-ubuntu-border};
+	--mbrvsc-color-favorite-selected: #{$mbrvsc-ubuntu-favorite-selected};
+	--mbrvsc-color-progressBar: #{$mbrvsc-ubuntu-progressBar};
+	--mbrvsc-color-volumeBar: #{$mbrvsc-ubuntu-volumeBar};
+	--mbrvsc-color-volumeThumb: #{$mbrvsc-ubuntu-volumeThumb};
+}

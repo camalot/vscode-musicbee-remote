@@ -1,0 +1,46 @@
+@use "sass:color";
+
+$gogh-background: #292D3E !default;
+$gogh-red: #F07178 !default;
+$gogh-green: #62DE84 !default;
+$gogh-yellow: #FFCB6B !default;
+$gogh-blue: #75A1FF !default;
+$gogh-magenta: #F580FF !default;
+$gogh-cyan: #60BAEC !default;
+$gogh-white: #ABB2BF !default;
+$gogh-bright-black: #959DCB !default;
+$gogh-bright-white: #FFFEFE !default;
+$gogh-surface: #676E95 !default;
+
+$gogh-foreground: $gogh-bright-white !default;
+$gogh-muted: $gogh-bright-black !default;
+$gogh-accent: $gogh-yellow !default;
+$gogh-border: color.adjust($gogh-surface, $lightness: 6%) !default;
+$gogh-favorite: $gogh-red !default;
+$gogh-progress: $gogh-cyan !default;
+
+$mbrvsc-gogh-foreground: $gogh-foreground !default;
+$mbrvsc-gogh-muted: $gogh-muted !default;
+$mbrvsc-gogh-background: $gogh-background !default;
+$mbrvsc-gogh-accent: $gogh-accent !default;
+$mbrvsc-gogh-button-foreground: $gogh-foreground !default;
+$mbrvsc-gogh-button-secondary-foreground: $gogh-white !default;
+$mbrvsc-gogh-border: $gogh-border !default;
+$mbrvsc-gogh-favorite-selected: $gogh-favorite !default;
+$mbrvsc-gogh-progressBar: $gogh-progress !default;
+$mbrvsc-gogh-volumeBar: $mbrvsc-gogh-progressBar !default;
+$mbrvsc-gogh-volumeThumb: color.adjust($mbrvsc-gogh-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="gogh"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-gogh-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-gogh-muted};
+  --mbrvsc-color-background: #{$mbrvsc-gogh-background};
+  --mbrvsc-color-accent: #{$mbrvsc-gogh-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-gogh-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-gogh-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-gogh-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-gogh-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-gogh-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-gogh-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-gogh-volumeThumb};
+}

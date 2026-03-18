@@ -227,7 +227,7 @@ export class MusicBeeRemoteService implements vscode.Disposable {
   }
 
   public async openSettings(): Promise<void> {
-    await vscode.commands.executeCommand("workbench.action.openSettings", "musicBeeRemote");
+    await vscode.commands.executeCommand("workbench.action.openSettings", "@ext:darthminos.musicbee-remote");
   }
 
   private async handleBroadcast(message: SocketMessage): Promise<void> {

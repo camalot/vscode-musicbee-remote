@@ -198,11 +198,14 @@
           "enum": [
             "default",
             "dracula",
+            "breeze",
             "hotdog",
             "grayscale",
             "cyberpunk2077",
             "tron",
-            "matrix"
+            "matrix",
+            "ubuntu",
+            "gogh"
           ],
           "default": "default",
           "description": "Available themes for the MusicBee Remote extension."

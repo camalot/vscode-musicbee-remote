@@ -1,10 +1,13 @@
 @use '../_sass/color_schemes/default';
 @use '../_sass/color_schemes/dracula';
+@use '../_sass/color_schemes/breeze';
 @use '../_sass/color_schemes/hotdog';
 @use '../_sass/color_schemes/grayscale';
 @use '../_sass/color_schemes/cyberpunk2077';
 @use '../_sass/color_schemes/tron';
 @use '../_sass/color_schemes/matrix';
+@use '../_sass/color_schemes/ubuntu';
+@use '../_sass/color_schemes/gogh';
 
 :root {
   color-scheme: light dark;

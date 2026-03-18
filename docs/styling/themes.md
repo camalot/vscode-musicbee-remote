@@ -25,7 +25,16 @@ This theme will use the theme colors defined for your Visual Studio Code theme.
 ![Now Playing - Default Theme](../assets/images/themes/nowplaying-theme-default.png)
 ![Now Playing - Default Theme - Mini](../assets/images/themes/nowplaying-theme-default-mini.png)
 
+### Breeze
+
+Breeze is a dark theme with soft pastel colors and a clean, modern look.
+
+![Now Playing - Breeze Theme](../assets/images/themes/nowplaying-theme-breeze.png)
+![Now Playing - Breeze Theme - Mini](../assets/images/themes/nowplaying-theme-breeze-mini.png)
+
 ### Dracula
+
+Dracula is a dark theme with vibrant colors and a high contrast design, inspired by the popular Dracula color scheme.
 
 ![Now Playing - Dracula Theme](../assets/images/themes/nowplaying-theme-dracula.png)
 ![Now Playing - Dracula Theme - Mini](../assets/images/themes/nowplaying-theme-dracula-mini.png)
@@ -44,3 +53,17 @@ This theme will use the theme colors defined for your Visual Studio Code theme.
 
 ![Now Playing - Cyberpunk2077 Theme](../assets/images/themes/nowplaying-theme-cyberpunk2077.png)
 ![Now Playing - Cyberpunk2077 Theme - Mini](../assets/images/themes/nowplaying-theme-cyberpunk2077-mini.png)
+
+### Ubuntu
+
+Ubuntu is a dark terminal-inspired theme based on the classic Ubuntu 16-color palette.
+
+![Now Playing - Ubuntu Theme](../assets/images/themes/nowplaying-theme-ubuntu.png)
+![Now Playing - Ubuntu Theme - Mini](../assets/images/themes/nowplaying-theme-ubuntu-mini.png)
+
+### Gogh
+
+Gogh is a dark, high-contrast theme based on a curated terminal palette with cool blues and warm neon accents.
+
+![Now Playing - Gogh Theme](../assets/images/themes/nowplaying-theme-gogh.png)
+![Now Playing - Gogh Theme - Mini](../assets/images/themes/nowplaying-theme-gogh-mini.png)
