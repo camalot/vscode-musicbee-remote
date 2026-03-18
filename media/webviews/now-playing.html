@@ -20,6 +20,7 @@
       --mbrvsc-icon-shuffle-1: url("{{shuffle1Uri}}");
       --mbrvsc-icon-shuffle-2: url("{{shuffle2Uri}}");
       --mbrvsc-icon-shuffle: var(--mbrvsc-icon-shuffle-0);
+      --mbrvsc-icon-playlist: url("{{playlistUri}}");
       --mbrvsc-icon-volume-0: url("{{volume0Uri}}");
       --mbrvsc-icon-volume-1: url("{{volume1Uri}}");
       --mbrvsc-icon-volume-2: url("{{volume2Uri}}");
@@ -29,7 +30,8 @@
     }
 
     #btnRepeat,
-    #btnShuffle {
+    #btnShuffle,
+    #btnPlaylist {
       min-width: 24px;
       min-height: 24px;
       padding: 2px;
@@ -37,7 +39,8 @@
     }
 
     #btnRepeat .control-icon,
-    #btnShuffle .control-icon {
+    #btnShuffle .control-icon,
+    #btnPlaylist .control-icon {
       display: inline-block;
       width: 1rem;
       height: 1rem;
@@ -60,11 +63,38 @@
       mask-image: var(--mbrvsc-icon-shuffle);
       -webkit-mask-image: var(--mbrvsc-icon-shuffle);
     }
+
+    #btnPlaylist .control-icon {
+      mask-image: var(--mbrvsc-icon-playlist);
+      -webkit-mask-image: var(--mbrvsc-icon-playlist);
+    }
   </style>
 </head>
-<body data-mbr-theme="{{theme}}" data-icon-play-track="{{playTrackUri}}" data-icon-pause-track="{{pauseTrackUri}}" data-icon-next-track="{{nextTrackUri}}" data-icon-previous-track="{{previousTrackUri}}" data-icon-repeat-0="{{repeat0Uri}}" data-icon-repeat-1="{{repeat1Uri}}" data-icon-repeat-2="{{repeat2Uri}}" data-icon-shuffle-0="{{shuffle0Uri}}" data-icon-shuffle-1="{{shuffle1Uri}}" data-icon-shuffle-2="{{shuffle2Uri}}" data-icon-volume-0="{{volume0Uri}}" data-icon-volume-1="{{volume1Uri}}" data-icon-volume-2="{{volume2Uri}}" data-icon-volume-3="{{volume3Uri}}" data-icon-volume-4="{{volume4Uri}}">
+<body data-mbr-theme="{{theme}}" data-icon-play-track="{{playTrackUri}}" data-icon-pause-track="{{pauseTrackUri}}" data-icon-next-track="{{nextTrackUri}}" data-icon-previous-track="{{previousTrackUri}}" data-icon-repeat-0="{{repeat0Uri}}" data-icon-repeat-1="{{repeat1Uri}}" data-icon-repeat-2="{{repeat2Uri}}" data-icon-shuffle-0="{{shuffle0Uri}}" data-icon-shuffle-1="{{shuffle1Uri}}" data-icon-shuffle-2="{{shuffle2Uri}}" data-icon-playlist="{{playlistUri}}" data-icon-volume-0="{{volume0Uri}}" data-icon-volume-1="{{volume1Uri}}" data-icon-volume-2="{{volume2Uri}}" data-icon-volume-3="{{volume3Uri}}" data-icon-volume-4="{{volume4Uri}}">
   <div class="cover" id="cover" data-no-art="{{noArtUri}}">
     <button id="btnFavorite" class="secondary favorite" data-control="favorite">&#10084;</button>
+    <div class="rating" id="rating">
+      <span class="star" data-index="0">
+        <span class="star-bg">★</span>
+        <span class="star-fill">★</span>
+      </span>
+      <span class="star" data-index="1">
+        <span class="star-bg">★</span>
+        <span class="star-fill">★</span>
+      </span>
+      <span class="star" data-index="2">
+        <span class="star-bg">★</span>
+        <span class="star-fill">★</span>
+      </span>
+      <span class="star" data-index="3">
+        <span class="star-bg">★</span>
+        <span class="star-fill">★</span>
+      </span>
+      <span class="star" data-index="4">
+        <span class="star-bg">★</span>
+        <span class="star-fill">★</span>
+      </span>
+    </div>
     <div class="album-art" id="albumArt"></div>
   </div>
   <div class="track-meta">
@@ -93,10 +123,6 @@
           <span class="control-icon control-icon--next" aria-hidden="true"></span>
         </button>
       </div>
-
-      <div class="group right">
-
-      </div>
     </div>
 
     <div class="control-row secondary-controls">
@@ -105,8 +131,8 @@
         <input id="volume" type="range" min="0" max="100" value="50" />
       </div>
 
-      <div class="group right">
-        <div class="rating" id="rating">
+      <div class="group right" id="miniActionsGroup">
+        <div class="rating rating-mini" id="ratingMini" aria-label="Track rating" role="group">
           <span class="star" data-index="0">
             <span class="star-bg">★</span>
             <span class="star-fill">★</span>
@@ -128,15 +154,20 @@
             <span class="star-fill">★</span>
           </span>
         </div>
-      </div>
-
-      <div class="group right">
-        <button id="btnRepeat" class="secondary toggle-control" data-control="repeat" data-state="off" aria-label="Repeat off">
-          <span class="control-icon control-icon--repeat" aria-hidden="true"></span>
-        </button>
-        <button id="btnShuffle" class="secondary toggle-control" data-control="shuffle" data-state="off" aria-label="Shuffle off">
-          <span class="control-icon control-icon--shuffle" aria-hidden="true"></span>
-        </button>
+        <div class="mini-toggle-actions" id="miniToggleActions">
+          <button id="btnFavoriteMini" class="secondary toggle-control" data-control="favorite" aria-label="Favorite">
+            &#10084;
+          </button>
+          <button id="btnRepeat" class="secondary toggle-control" data-control="repeat" data-state="off" aria-label="Repeat off">
+            <span class="control-icon control-icon--repeat" aria-hidden="true"></span>
+          </button>
+          <button id="btnShuffle" class="secondary toggle-control" data-control="shuffle" data-state="off" aria-label="Shuffle off">
+            <span class="control-icon control-icon--shuffle" aria-hidden="true"></span>
+          </button>
+          <button id="btnPlaylist" class="secondary toggle-control" data-control="playlist" data-state="off" aria-label="Playlist off">
+            <span class="control-icon control-icon--playlist" aria-hidden="true"></span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -147,6 +178,7 @@
     <img src="{{shuffle0Uri}}" alt="" />
     <img src="{{shuffle1Uri}}" alt="" />
     <img src="{{shuffle2Uri}}" alt="" />
+    <img src="{{playlistUri}}" alt="" />
     <img src="{{volume0Uri}}" alt="" />
     <img src="{{volume1Uri}}" alt="" />
     <img src="{{volume2Uri}}" alt="" />

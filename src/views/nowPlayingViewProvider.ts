@@ -261,6 +261,9 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
     const shuffle2Uri = webview.asWebviewUri(
       vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "shuffle-2.svg")
     );
+    const playlistUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "playlist.svg")
+    );
     const noArtUri = webview.asWebviewUri(
       vscode.Uri.joinPath(mediaUri, "assets", "images", "no-art.png")
     );
@@ -297,6 +300,7 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
       .replace(/\{\{shuffle0Uri\}\}/g, shuffle0Uri.toString())
       .replace(/\{\{shuffle1Uri\}\}/g, shuffle1Uri.toString())
       .replace(/\{\{shuffle2Uri\}\}/g, shuffle2Uri.toString())
+      .replace(/\{\{playlistUri\}\}/g, playlistUri.toString())
       .replace(/\{\{volume0Uri\}\}/g, volume0Uri.toString())
       .replace(/\{\{volume1Uri\}\}/g, volume1Uri.toString())
       .replace(/\{\{volume2Uri\}\}/g, volume2Uri.toString())

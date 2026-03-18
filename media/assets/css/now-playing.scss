@@ -81,7 +81,8 @@ body {
     display: block;
   }
 
-  &:hover .favorite {
+  &:hover .favorite,
+  &:hover .rating {
     opacity: 0.5;
   }
 }
@@ -121,6 +122,28 @@ body {
     &:hover {
       color: var(--mbrvsc-color-accent);
     }
+  }
+}
+
+.cover .rating {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  opacity: 0.1;
+  transition: opacity 160ms ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  .star-bg {
+    color: var(--mbrvsc-color-muted);
+    opacity: 0.4;
+  }
+
+  .star-fill {
+    color: var(--mbrvsc-color-accent);
   }
 }
 
@@ -272,6 +295,11 @@ body {
   -webkit-mask-image: var(--mbrvsc-icon-shuffle);
 }
 
+.control-icon--playlist {
+  mask-image: var(--mbrvsc-icon-playlist);
+  -webkit-mask-image: var(--mbrvsc-icon-playlist);
+}
+
 #btnRepeat[data-state='off'] {
   --mbrvsc-icon-repeat: var(--mbrvsc-icon-repeat-0);
 }
@@ -297,6 +325,10 @@ body {
 
 #btnShuffle[data-state='autodj'] {
   --mbrvsc-icon-shuffle: var(--mbrvsc-icon-shuffle-2);
+  color: var(--mbrvsc-color-accent);
+}
+
+#btnPlaylist[data-state='on'] {
   color: var(--mbrvsc-color-accent);
 }
 
@@ -349,10 +381,98 @@ body {
   }
 }
 
+#miniActionsGroup {
+  --mbrvsc-mini-rating-collapsed-width: 18px;
+  --mbrvsc-mini-rating-expanded-width: 98px;
+  --mbrvsc-mini-rating-gap: 6px;
+  --mbrvsc-mini-actions-width: 108px;
+
+  position: static;
+  gap: 6px;
+
+  .mini-toggle-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: static;
+    width: auto;
+    max-width: none;
+    opacity: 1;
+    overflow: hidden;
+    transform: translateX(0);
+    transition:
+      opacity 180ms ease,
+      transform 220ms ease;
+    will-change: opacity, transform;
+  }
+
+  &.rating-expanded {
+    .mini-toggle-actions {
+      opacity: 0;
+      transform: translateY(-50%) translateX(8px);
+      pointer-events: none;
+    }
+  }
+}
+
 #btnMute,
 #btnRepeat,
-#btnShuffle {
+#btnShuffle,
+#btnPlaylist {
   line-height: 1;
+}
+
+#btnFavoriteMini {
+  display: none;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 2px;
+  line-height: 1;
+  color: var(--mbrvsc-color-muted);
+  opacity: 0.75;
+
+  &:hover {
+    opacity: 1;
+    color: var(--mbrvsc-color-accent);
+  }
+
+  &.selected {
+    opacity: 1;
+    color: var(--mbrvsc-color-favorite-selected);
+
+    &:hover {
+      color: var(--mbrvsc-color-accent);
+    }
+  }
+}
+
+#ratingMini {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  position: static;
+  transform: none;
+  z-index: 1;
+  overflow: hidden;
+  max-width: var(--mbrvsc-mini-rating-collapsed-width);
+  opacity: 0.75;
+  transition:
+    max-width 220ms ease,
+    opacity 180ms ease;
+  will-change: max-width, opacity;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &.is-expanded {
+    max-width: var(--mbrvsc-mini-rating-expanded-width);
+    opacity: 1;
+  }
+
+  .star {
+    flex: 0 0 18px;
+  }
 }
 
 #btnMute,
@@ -569,5 +689,50 @@ button {
     margin-top: 0;
     gap: 4px;
     order: 1;
+  }
+
+  #btnFavoriteMini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #ratingMini {
+    display: inline-flex;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #miniActionsGroup {
+    position: relative;
+    justify-content: flex-start;
+    width: calc(
+      var(--mbrvsc-mini-rating-collapsed-width) +
+        var(--mbrvsc-mini-rating-gap) +
+        var(--mbrvsc-mini-actions-width)
+    );
+    min-width: calc(
+      var(--mbrvsc-mini-rating-collapsed-width) +
+        var(--mbrvsc-mini-rating-gap) +
+        var(--mbrvsc-mini-actions-width)
+    );
+    min-height: 24px;
+
+    .mini-toggle-actions {
+      position: absolute;
+      left: calc(var(--mbrvsc-mini-rating-collapsed-width) + var(--mbrvsc-mini-rating-gap));
+      top: 50%;
+      width: var(--mbrvsc-mini-actions-width);
+      max-width: var(--mbrvsc-mini-actions-width);
+      transform: translateY(-50%) translateX(0);
+    }
+
+    &.rating-expanded {
+      .mini-toggle-actions {
+        transform: translateY(-50%) translateX(8px);
+      }
+    }
   }
 }

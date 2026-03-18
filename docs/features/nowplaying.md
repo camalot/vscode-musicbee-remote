@@ -50,9 +50,11 @@ Access playback controls directly from the Now Playing View:
 - ⏭️ **Next** - Skip to the next track
 - 🔁 **Repeat** - Toggle repeat mode
 - 🔀 **Shuffle** - Cycle shuffle mode (off, on, Auto DJ)
+- 📋 **Playlist Toggle** - Toggle the playlist control state indicator
 - 🔊 **Volume** - Quick access to volume control
-- ⭐ **Rating** - View and adjust track rating
-- ❤️ **Favorite** - Mark track as favorite
+- ⭐ **Rating** - View and adjust track rating from the album-art overlay
+- ❤️ **Favorite** - Mark track as favorite from the album-art overlay
+- ⭐ **Mini View Rating** - Hover the mini rating star to expand to 5 stars; mini action buttons hide while rating and return when you mouse out or click a rating
 
 ---
 

@@ -18,6 +18,7 @@
     var shuffle0 = body.getAttribute("data-icon-shuffle-0");
     var shuffle1 = body.getAttribute("data-icon-shuffle-1");
     var shuffle2 = body.getAttribute("data-icon-shuffle-2");
+    var playlist = body.getAttribute("data-icon-playlist");
     var volume0 = body.getAttribute("data-icon-volume-0");
     var volume1 = body.getAttribute("data-icon-volume-1");
     var volume2 = body.getAttribute("data-icon-volume-2");
@@ -53,6 +54,9 @@
     }
     if (shuffle2) {
       root.style.setProperty("--mbrvsc-icon-shuffle-2", "url(\"" + shuffle2 + "\")");
+    }
+    if (playlist) {
+      root.style.setProperty("--mbrvsc-icon-playlist", "url(\"" + playlist + "\")");
     }
     if (volume0) {
       root.style.setProperty("--mbrvsc-icon-volume-0", "url(\"" + volume0 + "\")");
@@ -182,6 +186,8 @@
   var isVolumeSyncDeferred = false;
   var deferredVolumeState = null;
   var volumeSyncTimer = null;
+  var miniRatingContainer = /** @type {HTMLElement | null} */ (document.getElementById("ratingMini"));
+  var miniActionsGroup = /** @type {HTMLElement | null} */ (document.getElementById("miniActionsGroup"));
 
   function applyServerVolumeState(volumeEl, volume, isMuted) {
     volumeEl.value = String(volume || 0);
@@ -235,9 +241,93 @@
     });
   }
 
+  /**
+   * @param {Element} star
+   * @param {number} clientX
+   * @returns {number}
+   */
+  function getStarValueFromPointer(star, clientX) {
+    var index = Number(star.getAttribute("data-index") || 0);
+    var rect = star.getBoundingClientRect();
+    var x = clientX - rect.left;
+    var half = x < rect.width / 2;
+    return index + (half ? 0.5 : 1);
+  }
+
+  /**
+   * @param {boolean} expanded
+   */
+  function setMiniRatingExpanded(expanded) {
+    if (!miniRatingContainer || !miniActionsGroup) {
+      return;
+    }
+
+    miniRatingContainer.classList.toggle("is-expanded", expanded);
+    miniActionsGroup.classList.toggle("rating-expanded", expanded);
+  }
+
+  /**
+   * @param {HTMLElement | null} container
+   * @param {{
+   *   collapseOnMouseLeave?: boolean,
+   *   collapseOnSelect?: boolean,
+   *   expandOnHover?: boolean
+   * }} options
+   */
+  function setupRatingInteractions(container, options) {
+    if (!container) {
+      return;
+    }
+
+    var stars = container.querySelectorAll(".star");
+    stars.forEach(function (star) {
+      star.addEventListener("mousemove", function (evt) {
+        var preview = getStarValueFromPointer(star, evt.clientX);
+        applyFillsForRating(preview);
+      });
+
+      star.addEventListener("click", function (evt) {
+        var value = getStarValueFromPointer(star, evt.clientX);
+        committedRating = value;
+        applyFillsForRating(committedRating);
+        vscode.postMessage({ type: "control", action: "rating", value: value });
+
+        if (options.collapseOnSelect) {
+          setMiniRatingExpanded(false);
+        }
+      });
+    });
+
+    container.addEventListener("mouseleave", function () {
+      applyFillsForRating(committedRating);
+
+      if (options.collapseOnMouseLeave) {
+        setMiniRatingExpanded(false);
+      }
+    });
+
+    if (options.expandOnHover) {
+      container.addEventListener("mouseenter", function () {
+        setMiniRatingExpanded(true);
+      });
+    }
+  }
+
   function updateRatingDisplay(ratingRaw) {
     committedRating = normalizeRating(ratingRaw);
     applyFillsForRating(committedRating);
+  }
+
+  function setFavoriteSelected(isSelected) {
+    var favoriteBtn = document.getElementById("btnFavorite");
+    if (favoriteBtn) {
+      favoriteBtn.classList.toggle("selected", isSelected);
+    }
+
+    var favoriteMiniBtn = document.getElementById("btnFavoriteMini");
+    if (favoriteMiniBtn) {
+      favoriteMiniBtn.classList.toggle("selected", isSelected);
+    }
   }
 
   /**
@@ -348,10 +438,7 @@
     updateRatingDisplay(currentRating);
 
     var lfmRating = (state.nowPlaying && state.nowPlaying.lfmRating) || "";
-    var favoriteBtn = document.getElementById("btnFavorite");
-    if (favoriteBtn) {
-      favoriteBtn.classList.toggle("selected", lfmRating.toLowerCase() === "love");
-    }
+    setFavoriteSelected(lfmRating.toLowerCase() === "love");
   }
 
   document.body.addEventListener("click", function (e) {
@@ -368,9 +455,7 @@
     if (control === "favorite") {
       var favoriteBtn = document.getElementById("btnFavorite");
       var isSelected = favoriteBtn ? favoriteBtn.classList.contains("selected") : false;
-      if (favoriteBtn) {
-        favoriteBtn.classList.toggle("selected", !isSelected);
-      }
+      setFavoriteSelected(!isSelected);
       vscode.postMessage({ type: "control", action: "favorite" });
       return;
     }
@@ -383,6 +468,13 @@
       var value = Number(star.getAttribute("data-star") || 0);
       updateRatingDisplay(value);
       vscode.postMessage({ type: "control", action: "rating", value: value });
+      return;
+    }
+
+    if (control === "playlist") {
+      var nextState = btn.getAttribute("data-state") === "on" ? "off" : "on";
+      btn.setAttribute("data-state", nextState);
+      btn.setAttribute("aria-label", nextState === "on" ? "Playlist on" : "Playlist off");
       return;
     }
 
@@ -419,35 +511,18 @@
     });
   }
 
-  var ratingStars = document.querySelectorAll(".rating .star");
-  ratingStars.forEach(function (star) {
-    star.addEventListener("mousemove", function (evt) {
-      var index = Number(star.getAttribute("data-index") || 0);
-      var rect = star.getBoundingClientRect();
-      var x = evt.clientX - rect.left;
-      var half = x < rect.width / 2;
-      var preview = index + (half ? 0.5 : 1);
-      applyFillsForRating(preview);
-    });
-
-    star.addEventListener("click", function (evt) {
-      var index = Number(star.getAttribute("data-index") || 0);
-      var rect = star.getBoundingClientRect();
-      var x = evt.clientX - rect.left;
-      var half = x < rect.width / 2;
-      var value = index + (half ? 0.5 : 1);
-      committedRating = value;
-      applyFillsForRating(committedRating);
-      vscode.postMessage({ type: "control", action: "rating", value: value });
-    });
+  var ratingContainer = document.getElementById("rating");
+  setupRatingInteractions(ratingContainer, {
+    collapseOnMouseLeave: false,
+    collapseOnSelect: false,
+    expandOnHover: false
   });
 
-  var ratingContainer = document.getElementById("rating");
-  if (ratingContainer) {
-    ratingContainer.addEventListener("mouseleave", function () {
-      applyFillsForRating(committedRating);
-    });
-  }
+  setupRatingInteractions(miniRatingContainer, {
+    collapseOnMouseLeave: true,
+    collapseOnSelect: true,
+    expandOnHover: true
+  });
 
   window.addEventListener("message", function (e) {
     if (e.data && e.data.type === "state") {
