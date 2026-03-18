@@ -48,6 +48,8 @@ Access playback controls directly from the Now Playing View:
 - ⏮️ **Previous** - Skip to the previous track
 - ⏯️ **Play/Pause** - Toggle playback
 - ⏭️ **Next** - Skip to the next track
+- 🔁 **Repeat** - Toggle repeat mode
+- 🔀 **Shuffle** - Cycle shuffle mode (off, on, Auto DJ)
 - 🔊 **Volume** - Quick access to volume control
 - ⭐ **Rating** - View and adjust track rating
 - ❤️ **Favorite** - Mark track as favorite

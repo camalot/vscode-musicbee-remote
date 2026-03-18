@@ -8,7 +8,7 @@ type WebviewMessage =
   | { type: "connect" }
   | { type: "disconnect" }
   | { type: "refresh" }
-  | { type: "control"; action: "previous" | "playPause" | "next" | "mute" | "favorite" | "volume" | "rating"; value?: number }
+  | { type: "control"; action: "previous" | "playPause" | "next" | "mute" | "favorite" | "repeat" | "shuffle" | "volume" | "rating"; value?: number }
   | { type: "openSettings" };
 
 const RETRY_INTERVAL_SECONDS = 10;
@@ -139,6 +139,16 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
             await this.service.toggleFavorite();
             return;
           }
+          if (message.action === "repeat") {
+            this.service.log?.(`[ui] toggle repeat`);
+            await this.service.toggleRepeat();
+            return;
+          }
+          if (message.action === "shuffle") {
+            this.service.log?.(`[ui] toggle shuffle`);
+            await this.service.toggleShuffle();
+            return;
+          }
           return;
       }
     } catch (error) {
@@ -233,6 +243,24 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
     const previousTrackUri = webview.asWebviewUri(
       vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "previous-track.svg")
     );
+    const repeat0Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "repeat-0.svg")
+    );
+    const repeat1Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "repeat-1.svg")
+    );
+    const repeat2Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "repeat-2.svg")
+    );
+    const shuffle0Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "shuffle-0.svg")
+    );
+    const shuffle1Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "shuffle-1.svg")
+    );
+    const shuffle2Uri = webview.asWebviewUri(
+      vscode.Uri.joinPath(mediaUri, "assets", "images", "controls", "shuffle-2.svg")
+    );
     const noArtUri = webview.asWebviewUri(
       vscode.Uri.joinPath(mediaUri, "assets", "images", "no-art.png")
     );
@@ -263,11 +291,17 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
       .replace(/\{\{nextTrackUri\}\}/g, nextTrackUri.toString())
       .replace(/\{\{previousTrackUri\}\}/g, previousTrackUri.toString())
       .replace(/\{\{theme\}\}/g, theme)
-        .replace(/\{\{volume0Uri\}\}/g, volume0Uri.toString())
-        .replace(/\{\{volume1Uri\}\}/g, volume1Uri.toString())
-        .replace(/\{\{volume2Uri\}\}/g, volume2Uri.toString())
-        .replace(/\{\{volume3Uri\}\}/g, volume3Uri.toString())
-        .replace(/\{\{volume4Uri\}\}/g, volume4Uri.toString())
+      .replace(/\{\{repeat0Uri\}\}/g, repeat0Uri.toString())
+      .replace(/\{\{repeat1Uri\}\}/g, repeat1Uri.toString())
+      .replace(/\{\{repeat2Uri\}\}/g, repeat2Uri.toString())
+      .replace(/\{\{shuffle0Uri\}\}/g, shuffle0Uri.toString())
+      .replace(/\{\{shuffle1Uri\}\}/g, shuffle1Uri.toString())
+      .replace(/\{\{shuffle2Uri\}\}/g, shuffle2Uri.toString())
+      .replace(/\{\{volume0Uri\}\}/g, volume0Uri.toString())
+      .replace(/\{\{volume1Uri\}\}/g, volume1Uri.toString())
+      .replace(/\{\{volume2Uri\}\}/g, volume2Uri.toString())
+      .replace(/\{\{volume3Uri\}\}/g, volume3Uri.toString())
+      .replace(/\{\{volume4Uri\}\}/g, volume4Uri.toString())
       .replace(/\{\{noArtUri\}\}/g, noArtUri.toString());
   }
 }

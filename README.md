@@ -81,6 +81,8 @@ windsurf --install-extension darthminos.musicbee-remote
 
 - View the currently playing track
 - Control playback (play, pause, next, previous)
+- Toggle repeat mode
+- Toggle shuffle mode (off, on, Auto DJ)
 - Mute and unmute audio
 - Adjust volume
 - View and set track rating

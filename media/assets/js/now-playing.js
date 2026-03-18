@@ -12,6 +12,12 @@
     var pauseTrack = body.getAttribute("data-icon-pause-track");
     var nextTrack = body.getAttribute("data-icon-next-track");
     var previousTrack = body.getAttribute("data-icon-previous-track");
+    var repeat0 = body.getAttribute("data-icon-repeat-0");
+    var repeat1 = body.getAttribute("data-icon-repeat-1");
+    var repeat2 = body.getAttribute("data-icon-repeat-2");
+    var shuffle0 = body.getAttribute("data-icon-shuffle-0");
+    var shuffle1 = body.getAttribute("data-icon-shuffle-1");
+    var shuffle2 = body.getAttribute("data-icon-shuffle-2");
     var volume0 = body.getAttribute("data-icon-volume-0");
     var volume1 = body.getAttribute("data-icon-volume-1");
     var volume2 = body.getAttribute("data-icon-volume-2");
@@ -30,6 +36,24 @@
     if (previousTrack) {
       root.style.setProperty("--mbrvsc-icon-previous-track", "url(\"" + previousTrack + "\")");
     }
+    if (repeat0) {
+      root.style.setProperty("--mbrvsc-icon-repeat-0", "url(\"" + repeat0 + "\")");
+    }
+    if (repeat1) {
+      root.style.setProperty("--mbrvsc-icon-repeat-1", "url(\"" + repeat1 + "\")");
+    }
+    if (repeat2) {
+      root.style.setProperty("--mbrvsc-icon-repeat-2", "url(\"" + repeat2 + "\")");
+    }
+    if (shuffle0) {
+      root.style.setProperty("--mbrvsc-icon-shuffle-0", "url(\"" + shuffle0 + "\")");
+    }
+    if (shuffle1) {
+      root.style.setProperty("--mbrvsc-icon-shuffle-1", "url(\"" + shuffle1 + "\")");
+    }
+    if (shuffle2) {
+      root.style.setProperty("--mbrvsc-icon-shuffle-2", "url(\"" + shuffle2 + "\")");
+    }
     if (volume0) {
       root.style.setProperty("--mbrvsc-icon-volume-0", "url(\"" + volume0 + "\")");
     }
@@ -45,6 +69,54 @@
     if (volume4) {
       root.style.setProperty("--mbrvsc-icon-volume-4", "url(\"" + volume4 + "\")");
     }
+  }
+
+  function normalizeRepeatState(value) {
+    var normalized = String(value || "").trim().toLowerCase();
+    if (!normalized || normalized === "0" || normalized === "off" || normalized === "false" || normalized === "none") {
+      return "off";
+    }
+
+    if (
+      normalized === "2"
+      || normalized === "one"
+      || normalized === "single"
+      || normalized === "track"
+      || normalized === "repeat1"
+      || normalized === "repeat-1"
+      || normalized.indexOf("track") >= 0
+      || normalized.indexOf("single") >= 0
+      || normalized.indexOf("repeat one") >= 0
+    ) {
+      return "one";
+    }
+
+    if (normalized === "1" || normalized === "on" || normalized === "true" || normalized === "all") {
+      return "on";
+    }
+
+    if (normalized.indexOf("off") >= 0 || normalized.indexOf("none") >= 0 || normalized.indexOf("false") >= 0) {
+      return "off";
+    }
+
+    return "on";
+  }
+
+  function normalizeShuffleState(value) {
+    var normalized = String(value || "").trim().toLowerCase();
+    if (!normalized || normalized === "0" || normalized === "off" || normalized === "false" || normalized === "none") {
+      return "off";
+    }
+
+    if (normalized === "2" || normalized.indexOf("auto") >= 0 || normalized.indexOf("dj") >= 0) {
+      return "autodj";
+    }
+
+    if (normalized === "1" || normalized === "on" || normalized === "true" || normalized.indexOf("shuffle") >= 0 || normalized.indexOf("random") >= 0) {
+      return "on";
+    }
+
+    return "off";
   }
 
   function fmt(ms) {
@@ -241,6 +313,20 @@
     if (playBtn) {
       playBtn.setAttribute("data-state", isPlaying ? "playing" : "paused");
       playBtn.setAttribute("aria-label", isPlaying ? "Pause" : "Play");
+    }
+
+    var repeatBtn = document.getElementById("btnRepeat");
+    if (repeatBtn) {
+      var repeatState = normalizeRepeatState(status.repeat);
+      repeatBtn.setAttribute("data-state", repeatState);
+      repeatBtn.setAttribute("aria-label", repeatState === "one" ? "Repeat one" : (repeatState === "on" ? "Repeat on" : "Repeat off"));
+    }
+
+    var shuffleBtn = document.getElementById("btnShuffle");
+    if (shuffleBtn) {
+      var shuffleState = normalizeShuffleState(status.shuffle);
+      shuffleBtn.setAttribute("data-state", shuffleState);
+      shuffleBtn.setAttribute("aria-label", shuffleState === "autodj" ? "Shuffle Auto DJ" : (shuffleState === "on" ? "Shuffle on" : "Shuffle off"));
     }
 
     var isMuted = status.mute === true;

@@ -5,5 +5,14 @@
     "Grayscale",
     "mbrvsc",
     "musicbee"
-  ]
+  ],
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/.vscode-test": true,
+    "**/_site": true,
+    "**/dist": true,
+    "**/.cache": true,
+    "**/out": true
+  }
+
 }

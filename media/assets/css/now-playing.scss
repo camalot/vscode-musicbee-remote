@@ -248,6 +248,58 @@ body {
   -webkit-mask-image: var(--mbrvsc-icon-next-track);
 }
 
+.toggle-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 2px;
+
+  .control-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.control-icon--repeat {
+  mask-image: var(--mbrvsc-icon-repeat);
+  -webkit-mask-image: var(--mbrvsc-icon-repeat);
+}
+
+.control-icon--shuffle {
+  mask-image: var(--mbrvsc-icon-shuffle);
+  -webkit-mask-image: var(--mbrvsc-icon-shuffle);
+}
+
+#btnRepeat[data-state='off'] {
+  --mbrvsc-icon-repeat: var(--mbrvsc-icon-repeat-0);
+}
+
+#btnRepeat[data-state='on'] {
+  --mbrvsc-icon-repeat: var(--mbrvsc-icon-repeat-1);
+  color: var(--mbrvsc-color-accent);
+}
+
+#btnRepeat[data-state='one'] {
+  --mbrvsc-icon-repeat: var(--mbrvsc-icon-repeat-2);
+  color: var(--mbrvsc-color-accent);
+}
+
+#btnShuffle[data-state='off'] {
+  --mbrvsc-icon-shuffle: var(--mbrvsc-icon-shuffle-0);
+}
+
+#btnShuffle[data-state='on'] {
+  --mbrvsc-icon-shuffle: var(--mbrvsc-icon-shuffle-1);
+  color: var(--mbrvsc-color-accent);
+}
+
+#btnShuffle[data-state='autodj'] {
+  --mbrvsc-icon-shuffle: var(--mbrvsc-icon-shuffle-2);
+  color: var(--mbrvsc-color-accent);
+}
+
 #btnPlayPause[data-state='paused'] .control-icon--playpause {
   mask-image: var(--mbrvsc-icon-play-track);
   -webkit-mask-image: var(--mbrvsc-icon-play-track);
@@ -259,12 +311,14 @@ body {
 }
 
 .secondary-controls {
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 4px;
 
   .group {
     display: flex;
     align-items: center;
     gap: 6px;
+    min-height: 24px;
 
     &.center {
       justify-content: center;
@@ -279,6 +333,31 @@ body {
       justify-content: flex-end;
     }
   }
+
+  > .group.left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  > .group.left + .group.right {
+    margin-left: auto;
+  }
+
+  > .group.right + .group.right {
+    margin-left: 2px;
+    gap: 4px;
+  }
+}
+
+#btnMute,
+#btnRepeat,
+#btnShuffle {
+  line-height: 1;
+}
+
+#btnMute,
+#volume {
+  transform: translateY(2px);
 }
 
 #volume {

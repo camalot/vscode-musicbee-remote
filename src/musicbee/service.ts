@@ -204,6 +204,18 @@ export class MusicBeeRemoteService implements vscode.Disposable {
     this.emitState();
   }
 
+  public async toggleRepeat(): Promise<void> {
+    const client = this.requireClient();
+    await client.sendBroadcastCommand(PROTOCOL.playerRepeat, PROTOCOL.toggle);
+    await this.refresh();
+  }
+
+  public async toggleShuffle(): Promise<void> {
+    const client = this.requireClient();
+    await client.sendBroadcastCommand(PROTOCOL.playerShuffle, PROTOCOL.toggle);
+    await this.refresh();
+  }
+
   public async toggleMute(): Promise<void> {
     this.log(`[mute] toggleMute called, client present: ${!!this.client}, current mute state: ${this.state.nowPlaying.status.mute}`);
     const client = this.requireClient();
@@ -252,6 +264,14 @@ export class MusicBeeRemoteService implements vscode.Disposable {
 
       case PROTOCOL.playerState:
         this.state.nowPlaying.status.playState = String(message.data ?? "");
+        break;
+
+      case PROTOCOL.playerRepeat:
+        this.state.nowPlaying.status.repeat = String(message.data ?? "off");
+        break;
+
+      case PROTOCOL.playerShuffle:
+        this.state.nowPlaying.status.shuffle = String(message.data ?? "off");
         break;
 
       case PROTOCOL.nowPlayingTrack:
@@ -401,8 +421,8 @@ export class MusicBeeRemoteService implements vscode.Disposable {
     this.state.nowPlaying.status = {
       mute: status.playermute,
       playState: status.playerstate,
-      repeat: status.playerrepeat,
-      shuffle: status.playershuffle,
+      repeat: String(status.playerrepeat ?? "off"),
+      shuffle: String(status.playershuffle ?? "off"),
       scrobbling: status.scrobbler,
       volume: status.playervolume
     };
@@ -605,8 +625,8 @@ export class MusicBeeRemoteService implements vscode.Disposable {
         track: {},
         status: {
           mute: false,
-          repeat: "",
-          shuffle: "",
+          repeat: "off",
+          shuffle: "off",
           scrobbling: false,
           volume: 0,
           playState: ""
