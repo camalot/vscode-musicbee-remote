@@ -1,0 +1,47 @@
+@use "sass:color";
+
+$material-background: #002b36 !default;
+$material-red: #eb606b !default;
+$material-green: #c3e88d !default;
+$material-yellow: #f7eb95 !default;
+$material-blue: #80cbc3 !default;
+$material-magenta: #ff2490 !default;
+$material-purple: #6c71c3 !default;
+$material-cyan: #80cbc3 !default;
+$material-white: #ffffff !default;
+$material-bright-black: #34434d !default;
+$material-bright-white: #ffffff !default;
+$material-surface: #073641 !default;
+
+$material-foreground: $material-bright-white !default;
+$material-muted: color.mix($material-foreground, $material-background, 60%) !default;
+$material-accent: $material-red !default;
+$material-border: color.adjust($material-surface, $lightness: 6%) !default;
+$material-favorite: $material-red !default;
+$material-progress: $material-blue !default;
+
+$mbrvsc-material-foreground: $material-foreground !default;
+$mbrvsc-material-muted: $material-muted !default;
+$mbrvsc-material-background: $material-background !default;
+$mbrvsc-material-accent: $material-accent !default;
+$mbrvsc-material-button-foreground: $material-foreground !default;
+$mbrvsc-material-button-secondary-foreground: $material-white !default;
+$mbrvsc-material-border: $material-border !default;
+$mbrvsc-material-favorite-selected: $material-favorite !default;
+$mbrvsc-material-progressBar: $material-progress !default;
+$mbrvsc-material-volumeBar: $mbrvsc-material-progressBar !default;
+$mbrvsc-material-volumeThumb: color.adjust($mbrvsc-material-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="material"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-material-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-material-muted};
+  --mbrvsc-color-background: #{$mbrvsc-material-background};
+  --mbrvsc-color-accent: #{$mbrvsc-material-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-material-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-material-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-material-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-material-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-material-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-material-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-material-volumeThumb};
+}

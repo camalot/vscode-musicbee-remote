@@ -1,0 +1,47 @@
+@use "sass:color";
+
+$horizon-dark-background: #16161c !default;
+$horizon-dark-red: #e95678 !default;
+$horizon-dark-green: #29d398 !default;
+$horizon-dark-yellow: #fadad1 !default;
+$horizon-dark-blue: #26bbd9 !default;
+$horizon-dark-magenta: #ee64ae !default;
+$horizon-dark-purple: #f075b7 !default;
+$horizon-dark-cyan: #26bbd9 !default;
+$horizon-dark-white: #fdf0ed !default;
+$horizon-dark-bright-black: #232530 !default;
+$horizon-dark-bright-white: #fdf0ed !default;
+$horizon-dark-surface: #232530 !default;
+
+$horizon-dark-foreground: $horizon-dark-white !default;
+$horizon-dark-muted: color.mix($horizon-dark-foreground, $horizon-dark-background, 60%) !default;
+$horizon-dark-accent: $horizon-dark-red !default;
+$horizon-dark-border: color.adjust($horizon-dark-surface, $lightness: 6%) !default;
+$horizon-dark-favorite: $horizon-dark-red !default;
+$horizon-dark-progress: $horizon-dark-blue !default;
+
+$mbrvsc-horizon-dark-foreground: $horizon-dark-foreground !default;
+$mbrvsc-horizon-dark-muted: $horizon-dark-muted !default;
+$mbrvsc-horizon-dark-background: $horizon-dark-background !default;
+$mbrvsc-horizon-dark-accent: $horizon-dark-accent !default;
+$mbrvsc-horizon-dark-button-foreground: $horizon-dark-foreground !default;
+$mbrvsc-horizon-dark-button-secondary-foreground: $horizon-dark-white !default;
+$mbrvsc-horizon-dark-border: $horizon-dark-border !default;
+$mbrvsc-horizon-dark-favorite-selected: $horizon-dark-favorite !default;
+$mbrvsc-horizon-dark-progressBar: $horizon-dark-progress !default;
+$mbrvsc-horizon-dark-volumeBar: $mbrvsc-horizon-dark-progressBar !default;
+$mbrvsc-horizon-dark-volumeThumb: color.adjust($mbrvsc-horizon-dark-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="horizon-dark"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-horizon-dark-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-horizon-dark-muted};
+  --mbrvsc-color-background: #{$mbrvsc-horizon-dark-background};
+  --mbrvsc-color-accent: #{$mbrvsc-horizon-dark-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-horizon-dark-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-horizon-dark-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-horizon-dark-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-horizon-dark-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-horizon-dark-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-horizon-dark-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-horizon-dark-volumeThumb};
+}

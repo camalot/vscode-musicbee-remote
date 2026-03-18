@@ -5,7 +5,7 @@ $ubuntu-background: #300a24;
 $ubuntu-current-line: #2E3436;
 $ubuntu-selection: #3465A4;
 $ubuntu-foreground: #EEEEEC;
-$ubuntu-comment: #555753;
+$ubuntu-comment:       color.mix($ubuntu-foreground, $ubuntu-background, 60%);
 $ubuntu-cyan: #34E2E2;
 $ubuntu-green: #8AE234;
 $ubuntu-orange: #C4A000;

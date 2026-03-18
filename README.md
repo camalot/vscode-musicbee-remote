@@ -87,7 +87,7 @@ windsurf --install-extension darthminos.musicbee-remote
 - Mark tracks as favorite
 - Display album art and track information
 - Independent theme support
-- Built-in themes including Ubuntu, Gogh, Dracula, Breeze, Hotdog, Grayscale, Cyberpunk2077, Tron, and Matrix
+- Built-in themes including Ubuntu, Gogh, Dracula, Breeze, Hotdog, Grayscale, Cyberpunk2077, Tron, Matrix, Fairy Floss Dark, Grass, Harper, Horizon Bright, Horizon Dark, and Material
 
 ---
 

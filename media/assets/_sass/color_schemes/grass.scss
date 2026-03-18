@@ -1,0 +1,46 @@
+@use "sass:color";
+
+$grass-background: #13773d !default;
+$grass-red: #bb0000 !default;
+$grass-green: #00bb00 !default;
+$grass-yellow: #e7b000 !default;
+$grass-blue: #00bbbb !default;
+$grass-magenta: #ff55ff !default;
+$grass-cyan: #00bbbb !default;
+$grass-white: #ffffff !default;
+$grass-bright-black: #555555 !default;
+$grass-bright-white: #ffffff !default;
+$grass-surface: #000000 !default;
+
+$grass-foreground: $grass-bright-white !default;
+$grass-muted: color.mix($grass-foreground, $grass-background, 60%) !default;
+$grass-accent: $grass-green !default;
+$grass-border: color.adjust($grass-surface, $lightness: 6%) !default;
+$grass-favorite: $grass-red !default;
+$grass-progress: $grass-blue !default;
+
+$mbrvsc-grass-foreground: $grass-foreground !default;
+$mbrvsc-grass-muted: $grass-muted !default;
+$mbrvsc-grass-background: $grass-background !default;
+$mbrvsc-grass-accent: $grass-accent !default;
+$mbrvsc-grass-button-foreground: $grass-foreground !default;
+$mbrvsc-grass-button-secondary-foreground: $grass-white !default;
+$mbrvsc-grass-border: $grass-border !default;
+$mbrvsc-grass-favorite-selected: $grass-favorite !default;
+$mbrvsc-grass-progressBar: $grass-progress !default;
+$mbrvsc-grass-volumeBar: $mbrvsc-grass-progressBar !default;
+$mbrvsc-grass-volumeThumb: color.adjust($mbrvsc-grass-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="grass"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-grass-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-grass-muted};
+  --mbrvsc-color-background: #{$mbrvsc-grass-background};
+  --mbrvsc-color-accent: #{$mbrvsc-grass-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-grass-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-grass-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-grass-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-grass-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-grass-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-grass-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-grass-volumeThumb};
+}

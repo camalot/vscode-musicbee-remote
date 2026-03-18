@@ -1,0 +1,47 @@
+@use "sass:color";
+
+$harper-background: #010101 !default;
+$harper-red: #f8b63f !default;
+$harper-green: #489e48 !default;
+$harper-yellow: #d6da25 !default;
+$harper-blue: #7fb5e1 !default;
+$harper-magenta: #f5bfd7 !default;
+$harper-purple: #b296c6 !default;
+$harper-cyan: #7fb5e1 !default;
+$harper-white: #fefbea !default;
+$harper-bright-black: #726e6a !default;
+$harper-bright-white: #fefbea !default;
+$harper-surface: #a8a49d !default;
+
+$harper-foreground: $harper-bright-white !default;
+$harper-muted: $harper-bright-black !default;
+$harper-accent: $harper-red !default;
+$harper-border: color.adjust($harper-surface, $lightness: 6%) !default;
+$harper-favorite: $harper-magenta !default;
+$harper-progress: $harper-blue !default;
+
+$mbrvsc-harper-foreground: $harper-foreground !default;
+$mbrvsc-harper-muted: $harper-muted !default;
+$mbrvsc-harper-background: $harper-background !default;
+$mbrvsc-harper-accent: $harper-accent !default;
+$mbrvsc-harper-button-foreground: $harper-foreground !default;
+$mbrvsc-harper-button-secondary-foreground: $harper-white !default;
+$mbrvsc-harper-border: $harper-border !default;
+$mbrvsc-harper-favorite-selected: $harper-favorite !default;
+$mbrvsc-harper-progressBar: $harper-progress !default;
+$mbrvsc-harper-volumeBar: $mbrvsc-harper-progressBar !default;
+$mbrvsc-harper-volumeThumb: color.adjust($mbrvsc-harper-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="harper"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-harper-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-harper-muted};
+  --mbrvsc-color-background: #{$mbrvsc-harper-background};
+  --mbrvsc-color-accent: #{$mbrvsc-harper-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-harper-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-harper-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-harper-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-harper-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-harper-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-harper-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-harper-volumeThumb};
+}

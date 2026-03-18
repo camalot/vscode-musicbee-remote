@@ -1,0 +1,54 @@
+@use "sass:color";
+@use "sass:map";
+
+$mono-themes: (
+  "amber": (
+    "background": #402500,
+    "foreground": #FF9400
+  ),
+  "cyan": (
+    "background": #003340,
+    "foreground": #00CCFF
+  ),
+  "green": (
+    "background": #034000,
+    "foreground": #0BFF00
+  ),
+  "red": (
+    "background": #401200,
+    "foreground": #FF3600
+  ),
+  "white": (
+    "background": #3B3B3B,
+    "foreground": #FAFAFA
+  ),
+  "yellow": (
+    "background": #403500,
+    "foreground": #FFD300
+  )
+);
+
+@each $color-name, $colors in $mono-themes {
+  $bg: map.get($colors, "background");
+  $fg: map.get($colors, "foreground");
+
+  $muted: color.mix($fg, $bg, 60%);
+  $accent: color.adjust($fg, $lightness: 10%);
+  $button-secondary: color.mix($fg, $bg, 70%);
+  $border: color.mix($fg, $bg, 35%);
+  $volume-thumb: color.adjust($fg, $lightness: -10%);
+
+  body[data-mbr-theme="mono-#{$color-name}"] {
+    --mbrvsc-color-foreground: #{$fg};
+    --mbrvsc-color-muted: #{$muted};
+    --mbrvsc-color-background: #{$bg};
+    --mbrvsc-color-accent: #{$accent};
+    --mbrvsc-color-button-foreground: #{$fg};
+    --mbrvsc-color-button-secondary-foreground: #{$button-secondary};
+    --mbrvsc-color-border: #{$border};
+    --mbrvsc-color-favorite-selected: #{$fg};
+    --mbrvsc-color-progressBar: #{$fg};
+    --mbrvsc-color-volumeBar: #{$fg};
+    --mbrvsc-color-volumeThumb: #{$volume-thumb};
+  }
+}

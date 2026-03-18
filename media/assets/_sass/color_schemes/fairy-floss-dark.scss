@@ -1,0 +1,46 @@
+@use "sass:color";
+
+$fairy-floss-dark-background:    #42395D !default;
+$fairy-floss-dark-red:           #F1568E !default;
+$fairy-floss-dark-green:         #C2FFFF !default;
+$fairy-floss-dark-yellow:        #E6C000 !default;
+$fairy-floss-dark-blue:          #C2FFDF !default;
+$fairy-floss-dark-magenta:       #FFB8D1 !default;
+$fairy-floss-dark-cyan:          #C2FFDF !default;
+$fairy-floss-dark-white:         #F8F8F2 !default;
+$fairy-floss-dark-bright-black:  #A8757B !default;
+$fairy-floss-dark-bright-white:  #F8F8F0 !default;
+$fairy-floss-dark-surface:       #716799 !default;
+
+$fairy-floss-dark-foreground: $fairy-floss-dark-bright-white !default;
+$fairy-floss-dark-muted:      $fairy-floss-dark-bright-black !default;
+$fairy-floss-dark-accent:     #AE81FF !default;
+$fairy-floss-dark-border:     color.adjust($fairy-floss-dark-surface, $lightness: 6%) !default;
+$fairy-floss-dark-favorite:   $fairy-floss-dark-red !default;
+$fairy-floss-dark-progress:   $fairy-floss-dark-blue !default;
+
+$mbrvsc-fairy-floss-dark-foreground: $fairy-floss-dark-foreground !default;
+$mbrvsc-fairy-floss-dark-muted: $fairy-floss-dark-muted !default;
+$mbrvsc-fairy-floss-dark-background: $fairy-floss-dark-background !default;
+$mbrvsc-fairy-floss-dark-accent: $fairy-floss-dark-accent !default;
+$mbrvsc-fairy-floss-dark-button-foreground: $fairy-floss-dark-foreground !default;
+$mbrvsc-fairy-floss-dark-button-secondary-foreground: $fairy-floss-dark-white !default;
+$mbrvsc-fairy-floss-dark-border: $fairy-floss-dark-border !default;
+$mbrvsc-fairy-floss-dark-favorite-selected: $fairy-floss-dark-favorite !default;
+$mbrvsc-fairy-floss-dark-progressBar: $fairy-floss-dark-progress !default;
+$mbrvsc-fairy-floss-dark-volumeBar: $mbrvsc-fairy-floss-dark-progressBar !default;
+$mbrvsc-fairy-floss-dark-volumeThumb: color.adjust($mbrvsc-fairy-floss-dark-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="fairy-floss-dark"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-fairy-floss-dark-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-fairy-floss-dark-muted};
+  --mbrvsc-color-background: #{$mbrvsc-fairy-floss-dark-background};
+  --mbrvsc-color-accent: #{$mbrvsc-fairy-floss-dark-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-fairy-floss-dark-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-fairy-floss-dark-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-fairy-floss-dark-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-fairy-floss-dark-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-fairy-floss-dark-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-fairy-floss-dark-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-fairy-floss-dark-volumeThumb};
+}

@@ -139,7 +139,15 @@
     var pos = (state.nowPlaying && state.nowPlaying.position) || {};
     var status = (state.nowPlaying && state.nowPlaying.status) || {};
 
-    vscode.setState(state);
+    try {
+      var stateCopy = JSON.parse(JSON.stringify(state));
+      if (stateCopy && stateCopy.nowPlaying && stateCopy.nowPlaying.track) {
+        delete stateCopy.nowPlaying.track.coverDataUrl;
+      }
+      vscode.setState(stateCopy);
+    } catch (e) {
+      // ignore
+    }
 
     var coverEl = document.getElementById("cover");
     if (coverEl) {

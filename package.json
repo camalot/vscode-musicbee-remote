@@ -205,7 +205,19 @@
             "tron",
             "matrix",
             "ubuntu",
-            "gogh"
+            "gogh",
+            "fairy-floss-dark",
+            "grass",
+            "harper",
+            "horizon-bright",
+            "horizon-dark",
+            "material",
+            "mono-white",
+            "mono-amber",
+            "mono-green",
+            "mono-cyan",
+            "mono-red",
+            "mono-yellow"
           ],
           "default": "default",
           "description": "Available themes for the MusicBee Remote extension."

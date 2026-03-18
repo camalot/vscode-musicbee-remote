@@ -1,0 +1,47 @@
+@use "sass:color";
+
+$horizon-bright-background: #fdf0ed !default;
+$horizon-bright-red: #da103f !default;
+$horizon-bright-green: #1eb980 !default;
+$horizon-bright-yellow: #fadad1 !default;
+$horizon-bright-blue: #26bbd9 !default;
+$horizon-bright-magenta: #ee64ae !default;
+$horizon-bright-purple: #1d8991 !default;
+$horizon-bright-cyan: #26bbd9 !default;
+$horizon-bright-white: #16161c !default;
+$horizon-bright-bright-black: #1a1c23 !default;
+$horizon-bright-bright-white: #fdf0ed !default;
+$horizon-bright-surface: #1a1c23 !default;
+
+$horizon-bright-foreground: $horizon-bright-white !default;
+$horizon-bright-muted: $horizon-bright-bright-black !default;
+$horizon-bright-accent: $horizon-bright-red !default;
+$horizon-bright-border: color.adjust($horizon-bright-surface, $lightness: 6%) !default;
+$horizon-bright-favorite: $horizon-bright-red !default;
+$horizon-bright-progress: $horizon-bright-blue !default;
+
+$mbrvsc-horizon-bright-foreground: $horizon-bright-foreground !default;
+$mbrvsc-horizon-bright-muted: $horizon-bright-muted !default;
+$mbrvsc-horizon-bright-background: $horizon-bright-background !default;
+$mbrvsc-horizon-bright-accent: $horizon-bright-accent !default;
+$mbrvsc-horizon-bright-button-foreground: $horizon-bright-foreground !default;
+$mbrvsc-horizon-bright-button-secondary-foreground: $horizon-bright-white !default;
+$mbrvsc-horizon-bright-border: $horizon-bright-border !default;
+$mbrvsc-horizon-bright-favorite-selected: $horizon-bright-favorite !default;
+$mbrvsc-horizon-bright-progressBar: $horizon-bright-progress !default;
+$mbrvsc-horizon-bright-volumeBar: $mbrvsc-horizon-bright-progressBar !default;
+$mbrvsc-horizon-bright-volumeThumb: color.adjust($mbrvsc-horizon-bright-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="horizon-bright"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-horizon-bright-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-horizon-bright-muted};
+  --mbrvsc-color-background: #{$mbrvsc-horizon-bright-background};
+  --mbrvsc-color-accent: #{$mbrvsc-horizon-bright-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-horizon-bright-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-horizon-bright-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-horizon-bright-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-horizon-bright-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-horizon-bright-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-horizon-bright-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-horizon-bright-volumeThumb};
+}

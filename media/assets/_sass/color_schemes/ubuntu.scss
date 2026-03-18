@@ -9,7 +9,7 @@ $ubuntu-blue: #729FCF !default;
 $ubuntu-purple: #AD7FA8 !default;
 $ubuntu-cyan: #34E2E2 !default;
 $ubuntu-foreground: #EEEEEC !default;
-$ubuntu-muted: #555753 !default;
+$ubuntu-muted: color.mix($ubuntu-foreground, $ubuntu-background, 60%) !default;
 
 $ubuntu-accent: #C4A000 !default;
 $ubuntu-border: color.adjust($ubuntu-surface, $lightness: 8%) !default;
