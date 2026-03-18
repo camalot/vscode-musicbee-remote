@@ -106,6 +106,49 @@
   }
 
   var committedRating = 0;
+  var isVolumeDragging = false;
+  var isVolumeSyncDeferred = false;
+  var deferredVolumeState = null;
+  var volumeSyncTimer = null;
+
+  function applyServerVolumeState(volumeEl, volume, isMuted) {
+    volumeEl.value = String(volume || 0);
+    updateVolumeFill(volumeEl);
+    updateVolumeIcon(Number(volume || 0), isMuted);
+  }
+
+  function flushDeferredVolumeState() {
+    if (volumeSyncTimer) {
+      clearTimeout(volumeSyncTimer);
+      volumeSyncTimer = null;
+    }
+
+    isVolumeSyncDeferred = false;
+
+    if (!deferredVolumeState) {
+      return;
+    }
+
+    var volumeEl = /** @type {HTMLInputElement | null} */ (document.getElementById("volume"));
+    if (!volumeEl) {
+      deferredVolumeState = null;
+      return;
+    }
+
+    applyServerVolumeState(volumeEl, deferredVolumeState.volume, deferredVolumeState.isMuted);
+    deferredVolumeState = null;
+  }
+
+  function deferVolumeSync() {
+    if (volumeSyncTimer) {
+      clearTimeout(volumeSyncTimer);
+    }
+
+    isVolumeSyncDeferred = true;
+    volumeSyncTimer = setTimeout(function () {
+      flushDeferredVolumeState();
+    }, 120);
+  }
 
   function applyFillsForRating(rating) {
     var stars = document.querySelectorAll(".rating .star");
@@ -205,9 +248,14 @@
 
     var volumeEl = /** @type {HTMLInputElement | null} */ (document.getElementById("volume"));
     if (volumeEl) {
-      volumeEl.value = String(status.volume || 0);
-      updateVolumeFill(volumeEl);
-      updateVolumeIcon(Number(status.volume || 0), isMuted);
+      if (isVolumeDragging || isVolumeSyncDeferred) {
+        deferredVolumeState = {
+          volume: Number(status.volume || 0),
+          isMuted: isMuted
+        };
+      } else {
+        applyServerVolumeState(volumeEl, Number(status.volume || 0), isMuted);
+      }
     }
 
     var currentRating = (state.nowPlaying && state.nowPlaying.trackRating) || "0";
@@ -258,8 +306,25 @@
   var volumeEl = /** @type {HTMLInputElement | null} */ (document.getElementById("volume"));
   if (volumeEl) {
     var activeVolumeEl = volumeEl;
+    var endVolumeDrag = function () {
+      isVolumeDragging = false;
+      deferVolumeSync();
+    };
     updateVolumeFill(activeVolumeEl);
     updateVolumeIcon(Number(activeVolumeEl.value), document.body.classList.contains("is-muted"));
+    activeVolumeEl.addEventListener("pointerdown", function () {
+      isVolumeDragging = true;
+      isVolumeSyncDeferred = false;
+      deferredVolumeState = null;
+      if (volumeSyncTimer) {
+        clearTimeout(volumeSyncTimer);
+        volumeSyncTimer = null;
+      }
+    });
+    activeVolumeEl.addEventListener("pointerup", endVolumeDrag);
+    activeVolumeEl.addEventListener("pointercancel", endVolumeDrag);
+    activeVolumeEl.addEventListener("change", endVolumeDrag);
+    activeVolumeEl.addEventListener("blur", endVolumeDrag);
     activeVolumeEl.addEventListener("input", function () {
       var value = Number(activeVolumeEl.value);
       updateVolumeFill(activeVolumeEl);

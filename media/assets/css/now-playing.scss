@@ -27,6 +27,22 @@
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: contain;
 }
+
+.asset-preload {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  img {
+    display: block;
+    width: 1px;
+    height: 1px;
+  }
+}
+
 body {
   font-family: var(--vscode-font-family);
   font-size: var(--vscode-font-size);

@@ -2,10 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src {{cspSource}} data:; style-src {{cspSource}}; script-src 'nonce-{{nonce}}';"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src {{cspSource}} data:; style-src {{cspSource}} 'nonce-{{nonce}}'; script-src 'nonce-{{nonce}}';"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MusicBee Remote</title>
   <link rel="stylesheet" href="{{cssUri}}" />
+  <style nonce="{{nonce}}">
+    :root {
+      --mbrvsc-icon-play-track: url("{{playTrackUri}}");
+      --mbrvsc-icon-pause-track: url("{{pauseTrackUri}}");
+      --mbrvsc-icon-next-track: url("{{nextTrackUri}}");
+      --mbrvsc-icon-previous-track: url("{{previousTrackUri}}");
+      --mbrvsc-icon-volume-0: url("{{volume0Uri}}");
+      --mbrvsc-icon-volume-1: url("{{volume1Uri}}");
+      --mbrvsc-icon-volume-2: url("{{volume2Uri}}");
+      --mbrvsc-icon-volume-3: url("{{volume3Uri}}");
+      --mbrvsc-icon-volume-4: url("{{volume4Uri}}");
+      --mbrvsc-icon-volume: var(--mbrvsc-icon-volume-3);
+    }
+  </style>
 </head>
 <body data-mbr-theme="{{theme}}" data-icon-play-track="{{playTrackUri}}" data-icon-pause-track="{{pauseTrackUri}}" data-icon-next-track="{{nextTrackUri}}" data-icon-previous-track="{{previousTrackUri}}" data-icon-volume-0="{{volume0Uri}}" data-icon-volume-1="{{volume1Uri}}" data-icon-volume-2="{{volume2Uri}}" data-icon-volume-3="{{volume3Uri}}" data-icon-volume-4="{{volume4Uri}}">
   <div class="cover" id="cover" data-no-art="{{noArtUri}}">
@@ -80,6 +94,13 @@
         <button id="btnShuffle" class="secondary" data-control="shuffle">&#128256;</button>
       </div-->
     </div>
+  </div>
+  <div class="asset-preload" aria-hidden="true">
+    <img src="{{volume0Uri}}" alt="" />
+    <img src="{{volume1Uri}}" alt="" />
+    <img src="{{volume2Uri}}" alt="" />
+    <img src="{{volume3Uri}}" alt="" />
+    <img src="{{volume4Uri}}" alt="" />
   </div>
   <script nonce="{{nonce}}" src="{{scriptUri}}"></script>
 </body>
