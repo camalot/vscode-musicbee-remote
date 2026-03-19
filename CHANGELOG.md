@@ -1,3 +1,13 @@
+## [1.1.1] - 2026-03-19
+
+### ⚙️ Miscellaneous Tasks
+
+- Update readme image references and changelog
+
+
+
+**Full Changelog**: https://github.com/camalot/vscode-musicbee-remote/compare/v1.1.0...v1.1.1
+
 ## [1.1.0] - 2026-03-19
 
 ### 🚀 Features
