@@ -222,6 +222,11 @@
           "default": "default",
           "description": "Available themes for the MusicBee Remote extension."
         },
+        "musicBeeRemote.syncHostInfo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to synchronize host connection information across multiple instances of the MusicBee Remote extension."
+        },
         "musicBeeRemote.host": {
           "type": "string",
           "default": "127.0.0.1",

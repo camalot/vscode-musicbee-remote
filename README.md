@@ -99,6 +99,7 @@ windsurf --install-extension darthminos.musicbee-remote
 
 If you do not use the default host and port, you can configure them in your VS Code settings:
 
+- `musicBeeRemote.syncHostInfo`: When `false`, the extension adds `musicBeeRemote.host` and `musicBeeRemote.port` to `settingsSync.ignoredSettings` so they stay local to the current machine.
 - `musicBeeRemote.host`: The host address of the MusicBee Remote API.
 - `musicBeeRemote.port`: The port of the MusicBee Remote API.
 - `musicBeeRemote.clientName`: The name of the client connecting to the MusicBee Remote API.
