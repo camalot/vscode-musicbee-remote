@@ -64,74 +64,77 @@
     <div class="track-sub" id="album"></div>
   </div>
 
-  <div class="progress-track">
-    <div class="progress-fill" id="progress"></div>
-  </div>
-  <div class="progress-labels">
-    <span id="posCurrent">0:00</span>
-    <span id="posTotal">0:00</span>
-  </div>
-  <div class="controls">
-    <div class="control-row primary-controls">
-      <div class="group center">
-        <button class="secondary big media-control" data-control="previous" aria-label="Previous track">
-          <span class="control-icon control-icon--previous" aria-hidden="true"></span>
-        </button>
-        <button id="btnPlayPause" class="big primary media-control" data-control="playPause" data-state="paused" aria-label="Play">
-          <span class="control-icon control-icon--playpause" aria-hidden="true"></span>
-        </button>
-        <button class="secondary big media-control" data-control="next" aria-label="Next track">
-          <span class="control-icon control-icon--next" aria-hidden="true"></span>
-        </button>
-      </div>
+  <div class="controls-container">
+    <div class="progress-track">
+      <div class="progress-fill" id="progress"></div>
     </div>
-
-    <div class="control-row secondary-controls">
-      <div class="group left">
-        <button id="btnMute" class="secondary volume-control" data-control="mute" aria-label="Mute"></button>
-        <input id="volume" type="range" min="0" max="100" value="50" />
-      </div>
-
-      <div class="group right" id="miniActionsGroup">
-        <div class="rating rating-mini" id="ratingMini" aria-label="Track rating" role="group">
-          <span class="star" data-index="0">
-            <span class="star-bg">★</span>
-            <span class="star-fill">★</span>
-          </span>
-          <span class="star" data-index="1">
-            <span class="star-bg">★</span>
-            <span class="star-fill">★</span>
-          </span>
-          <span class="star" data-index="2">
-            <span class="star-bg">★</span>
-            <span class="star-fill">★</span>
-          </span>
-          <span class="star" data-index="3">
-            <span class="star-bg">★</span>
-            <span class="star-fill">★</span>
-          </span>
-          <span class="star" data-index="4">
-            <span class="star-bg">★</span>
-            <span class="star-fill">★</span>
-          </span>
-        </div>
-        <div class="mini-toggle-actions" id="miniToggleActions">
-          <button id="btnFavoriteMini" class="secondary toggle-control" data-control="favorite" aria-label="Favorite">
-            &#10084;
+    <div class="progress-labels">
+      <span id="posCurrent">0:00</span>
+      <span id="posTotal">0:00</span>
+    </div>
+    <div class="controls">
+      <div class="control-row primary-controls">
+        <div class="group center">
+          <button class="secondary big media-control" data-control="previous" aria-label="Previous track">
+            <span class="control-icon control-icon--previous" aria-hidden="true"></span>
           </button>
-          <button id="btnRepeat" class="secondary toggle-control" data-control="repeat" data-state="off" aria-label="Repeat off">
-            <span class="control-icon control-icon--repeat" aria-hidden="true"></span>
+          <button id="btnPlayPause" class="big primary media-control" data-control="playPause" data-state="paused" aria-label="Play">
+            <span class="control-icon control-icon--playpause" aria-hidden="true"></span>
           </button>
-          <button id="btnShuffle" class="secondary toggle-control" data-control="shuffle" data-state="off" aria-label="Shuffle off">
-            <span class="control-icon control-icon--shuffle" aria-hidden="true"></span>
-          </button>
-          <button id="btnPlaylist" class="secondary toggle-control" data-control="playlist" data-state="off" aria-label="Playlist off">
-            <span class="control-icon control-icon--playlist" aria-hidden="true"></span>
+          <button class="secondary big media-control" data-control="next" aria-label="Next track">
+            <span class="control-icon control-icon--next" aria-hidden="true"></span>
           </button>
         </div>
       </div>
+
+      <div class="control-row secondary-controls">
+        <div class="group left">
+          <button id="btnMute" class="secondary volume-control" data-control="mute" aria-label="Mute"></button>
+          <input id="volume" type="range" min="0" max="100" value="50" />
+        </div>
+
+        <div class="group right" id="miniActionsGroup">
+          <div class="rating rating-mini" id="ratingMini" aria-label="Track rating" role="group">
+            <span class="star" data-index="0">
+              <span class="star-bg">★</span>
+              <span class="star-fill">★</span>
+            </span>
+            <span class="star" data-index="1">
+              <span class="star-bg">★</span>
+              <span class="star-fill">★</span>
+            </span>
+            <span class="star" data-index="2">
+              <span class="star-bg">★</span>
+              <span class="star-fill">★</span>
+            </span>
+            <span class="star" data-index="3">
+              <span class="star-bg">★</span>
+              <span class="star-fill">★</span>
+            </span>
+            <span class="star" data-index="4">
+              <span class="star-bg">★</span>
+              <span class="star-fill">★</span>
+            </span>
+          </div>
+          <div class="mini-toggle-actions" id="miniToggleActions">
+            <button id="btnFavoriteMini" class="secondary toggle-control" data-control="favorite" aria-label="Favorite">
+              &#10084;
+            </button>
+            <button id="btnRepeat" class="secondary toggle-control" data-control="repeat" data-state="off" aria-label="Repeat off">
+              <span class="control-icon control-icon--repeat" aria-hidden="true"></span>
+            </button>
+            <button id="btnShuffle" class="secondary toggle-control" data-control="shuffle" data-state="off" aria-label="Shuffle off">
+              <span class="control-icon control-icon--shuffle" aria-hidden="true"></span>
+            </button>
+            <button id="btnPlaylist" class="secondary toggle-control" data-control="playlist" data-state="off" aria-label="Playlist off">
+              <span class="control-icon control-icon--playlist" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
   <div class="nowplaying-list-panel" id="nowPlayingListPanel" aria-label="Now Playing list">
     <div class="nowplaying-list-header">
       <span>Now Playing</span>
