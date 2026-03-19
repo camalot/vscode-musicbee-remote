@@ -249,7 +249,72 @@ export class MusicBeeSocketClient {
   }
 
   public async getNowPlayingList(): Promise<NowPlayingDto[]> {
-    return this.getAllPages<NowPlayingDto>(PROTOCOL.nowPlayingList);
+    const connection = await this.openConnection(true);
+    const tracksByPosition = new Map<number, NowPlayingDto>();
+
+    const fetchPage = async (offset: number): Promise<NowPlayingDto[]> => {
+      const range: PageRange = {
+        offset,
+        limit: PAGE_LIMIT
+      };
+
+      await connection.send(PROTOCOL.nowPlayingList, range);
+      const message = await connection.readMessage<Page<NowPlayingDto>>();
+      this.throwIfProtocolError(message);
+      return message.data.data;
+    };
+
+    const addPage = (items: NowPlayingDto[]): number => {
+      let added = 0;
+
+      for (const item of items) {
+        if (!tracksByPosition.has(item.position)) {
+          tracksByPosition.set(item.position, item);
+          added += 1;
+        }
+      }
+
+      return added;
+    };
+
+    try {
+      // Initial page returns the current track and following tracks.
+      const initialItems = await fetchPage(0);
+      if (initialItems.length === 0) {
+        return [];
+      }
+      addPage(initialItems);
+
+      // Walk backwards to include tracks before the current track.
+      for (let pageIndex = 1; pageIndex < Number.MAX_SAFE_INTEGER; pageIndex += 1) {
+        const items = await fetchPage(-pageIndex * PAGE_LIMIT);
+        if (items.length === 0) {
+          break;
+        }
+
+        const added = addPage(items);
+        if (added === 0) {
+          break;
+        }
+      }
+
+      // Walk forwards in case the initial page was clipped by PAGE_LIMIT.
+      for (let pageIndex = 1; pageIndex < Number.MAX_SAFE_INTEGER; pageIndex += 1) {
+        const items = await fetchPage(pageIndex * PAGE_LIMIT);
+        if (items.length === 0) {
+          break;
+        }
+
+        const added = addPage(items);
+        if (added === 0 || items.length < PAGE_LIMIT) {
+          break;
+        }
+      }
+
+      return Array.from(tracksByPosition.values()).sort((a, b) => a.position - b.position);
+    } finally {
+      connection.close();
+    }
   }
 
   public async getPlaylists(): Promise<PlaylistDto[]> {
@@ -280,8 +345,8 @@ export class MusicBeeSocketClient {
     await this.sendBroadcastCommand(PROTOCOL.playlistPlay, url);
   }
 
-  public async playNowPlayingTrack(path: string): Promise<void> {
-    await this.sendBroadcastCommand(PROTOCOL.nowPlayingListPlay, path);
+  public async playNowPlayingTrack(position: number): Promise<void> {
+    await this.sendBroadcastCommand(PROTOCOL.nowPlayingListPlay, position);
   }
 
   private async requestItem<T>(context: ProtocolContext, payload: unknown = ""): Promise<T> {

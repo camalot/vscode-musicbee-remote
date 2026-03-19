@@ -32,6 +32,8 @@ export class MusicBeeRemoteService implements vscode.Disposable {
 
   private coverRetryCount = 0;
 
+  private lastKnownTrackPathForRating = "";
+
   public readonly onDidChangeState = this.onDidChangeStateEmitter.event;
 
   public constructor(
@@ -43,8 +45,17 @@ export class MusicBeeRemoteService implements vscode.Disposable {
     this.context.subscriptions.push(
       vscode.workspace.onDidChangeConfiguration((event) => {
         if (event.affectsConfiguration("musicBeeRemote")) {
+          const oldSettings = this.state.settings;
           this.state.settings = this.readSettings();
-          this.emitState();
+          const connectionSettingsChanged =
+            this.client &&
+            (oldSettings.host !== this.state.settings.host ||
+              oldSettings.port !== this.state.settings.port);
+          if (connectionSettingsChanged) {
+            void this.connect();
+          } else {
+            this.emitState();
+          }
         }
       }),
       this.onDidChangeStateEmitter
@@ -128,7 +139,9 @@ export class MusicBeeRemoteService implements vscode.Disposable {
       this.safeApply(() => client.getPosition(), (value) => this.applyPosition(value)),
       this.safeApply(() => client.getCover(), (value) => this.applyCover(value)),
       this.safeApply(() => client.getTrackDetails(), (value) => this.applyTrackDetails(value)),
-      this.safeApply(() => client.getRating(), (value) => { this.state.nowPlaying.trackRating = String(value ?? ""); }),
+      this.safeApply(() => client.getRating(), (value) => {
+        this.applyIncomingTrackRating(value);
+      }),
       this.safeApply(() => client.getLfmRating(), (value) => { this.state.nowPlaying.lfmRating = String(value ?? ""); }),
       this.safeApply(() => client.getNowPlayingList(), (value) => {
         this.state.nowPlaying.queue = value;
@@ -230,9 +243,9 @@ export class MusicBeeRemoteService implements vscode.Disposable {
     await this.refresh();
   }
 
-  public async playNowPlayingTrack(path: string): Promise<void> {
+  public async playNowPlayingTrack(position: number): Promise<void> {
     const client = this.requireClient();
-    await client.playNowPlayingTrack(path);
+    await client.playNowPlayingTrack(position);
   }
 
   public async activateOutput(deviceName: string): Promise<void> {
@@ -300,7 +313,7 @@ export class MusicBeeRemoteService implements vscode.Disposable {
         break;
 
       case PROTOCOL.nowPlayingRating:
-        this.state.nowPlaying.trackRating = String(message.data ?? "");
+        this.applyIncomingTrackRating(message.data);
         break;
 
       case PROTOCOL.nowPlayingLfmRating:
@@ -414,12 +427,33 @@ export class MusicBeeRemoteService implements vscode.Disposable {
     // Reset cover when the track changes so stale art from a prior song is not shown.
     if (incomingPath && previousPath && incomingPath !== previousPath) {
       this.state.nowPlaying.track.coverDataUrl = undefined;
+      this.state.nowPlaying.trackRating = "";
     }
+
+    this.lastKnownTrackPathForRating = String(incomingPath ?? "");
 
     this.state.nowPlaying.track = {
       ...this.state.nowPlaying.track,
       ...track
     };
+  }
+
+  private applyIncomingTrackRating(value: unknown): void {
+    const normalized = String(value ?? "").trim();
+
+    // MusicBee may transiently return empty/none for rating when toggling play state.
+    // Ignore those transient values for the same track so the UI does not clear a valid rating.
+    if (!normalized || normalized.toLowerCase() === "none") {
+      const currentPath = String(this.state.nowPlaying.track.path ?? "");
+      const isSameTrack = currentPath && currentPath === this.lastKnownTrackPathForRating;
+      if (isSameTrack && this.state.nowPlaying.trackRating) {
+        return;
+      }
+      this.state.nowPlaying.trackRating = "";
+      return;
+    }
+
+    this.state.nowPlaying.trackRating = normalized;
   }
 
   private applyPlayerStatus(status: PlayerStatus): void {

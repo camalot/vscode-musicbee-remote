@@ -5,7 +5,6 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src {{cspSource}} data:; style-src {{cspSource}} 'nonce-{{nonce}}'; script-src 'nonce-{{nonce}}';"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MusicBee Remote</title>
-  <link rel="stylesheet" href="{{cssUri}}" />
   <style nonce="{{nonce}}">
     :root {
       --mbrvsc-icon-play-track: url("{{playTrackUri}}");
@@ -29,46 +28,8 @@
       --mbrvsc-icon-volume: var(--mbrvsc-icon-volume-3);
     }
 
-    #btnRepeat,
-    #btnShuffle,
-    #btnPlaylist {
-      min-width: 24px;
-      min-height: 24px;
-      padding: 2px;
-      line-height: 1;
-    }
-
-    #btnRepeat .control-icon,
-    #btnShuffle .control-icon,
-    #btnPlaylist .control-icon {
-      display: inline-block;
-      width: 1rem;
-      height: 1rem;
-      vertical-align: middle;
-      background-color: currentColor;
-      mask-position: center;
-      mask-repeat: no-repeat;
-      mask-size: contain;
-      -webkit-mask-position: center;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-size: contain;
-    }
-
-    #btnRepeat .control-icon {
-      mask-image: var(--mbrvsc-icon-repeat);
-      -webkit-mask-image: var(--mbrvsc-icon-repeat);
-    }
-
-    #btnShuffle .control-icon {
-      mask-image: var(--mbrvsc-icon-shuffle);
-      -webkit-mask-image: var(--mbrvsc-icon-shuffle);
-    }
-
-    #btnPlaylist .control-icon {
-      mask-image: var(--mbrvsc-icon-playlist);
-      -webkit-mask-image: var(--mbrvsc-icon-playlist);
-    }
   </style>
+  <link rel="stylesheet" href="{{cssUri}}" />
 </head>
 <body data-mbr-theme="{{theme}}" data-icon-play-track="{{playTrackUri}}" data-icon-pause-track="{{pauseTrackUri}}" data-icon-next-track="{{nextTrackUri}}" data-icon-previous-track="{{previousTrackUri}}" data-icon-repeat-0="{{repeat0Uri}}" data-icon-repeat-1="{{repeat1Uri}}" data-icon-repeat-2="{{repeat2Uri}}" data-icon-shuffle-0="{{shuffle0Uri}}" data-icon-shuffle-1="{{shuffle1Uri}}" data-icon-shuffle-2="{{shuffle2Uri}}" data-icon-playlist="{{playlistUri}}" data-icon-volume-0="{{volume0Uri}}" data-icon-volume-1="{{volume1Uri}}" data-icon-volume-2="{{volume2Uri}}" data-icon-volume-3="{{volume3Uri}}" data-icon-volume-4="{{volume4Uri}}">
   <div class="cover" id="cover" data-no-art="{{noArtUri}}">

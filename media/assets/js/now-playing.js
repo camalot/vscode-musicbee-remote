@@ -231,6 +231,7 @@
       row.className = "nowplaying-list-track" + (isPlaying ? " playing" : "");
       row.setAttribute("role", "listitem");
       row.setAttribute("data-track-path", track.path || "");
+      row.setAttribute("data-track-position", String(Number(track.position || 0)));
       row.setAttribute("data-track-index", String(i));
       row.tabIndex = 0;
 
@@ -341,9 +342,10 @@
     if (!row) {
       return;
     }
-    var path = row.getAttribute("data-track-path");
-    if (path) {
-      vscode.postMessage({ type: "playNowPlayingTrack", path: path });
+    var positionRaw = row.getAttribute("data-track-position");
+    var position = Number(positionRaw);
+    if (Number.isFinite(position)) {
+      vscode.postMessage({ type: "playNowPlayingTrack", position: position });
     }
   });
 
@@ -474,17 +476,30 @@
   function updateRatingDisplay(ratingRaw) {
     committedRating = normalizeRating(ratingRaw);
     applyFillsForRating(committedRating);
+
+    var ratingTitle = committedRating > 0 ? String(committedRating) : "";
+    var ratingEl = document.getElementById("rating");
+    if (ratingEl) {
+      ratingEl.setAttribute("title", ratingTitle);
+    }
+
+    var ratingMiniEl = document.getElementById("ratingMini");
+    if (ratingMiniEl) {
+      ratingMiniEl.setAttribute("title", ratingTitle);
+    }
   }
 
   function setFavoriteSelected(isSelected) {
     var favoriteBtn = document.getElementById("btnFavorite");
     if (favoriteBtn) {
       favoriteBtn.classList.toggle("selected", isSelected);
+      favoriteBtn.setAttribute("title", isSelected ? "unfavorite" : "favorite");
     }
 
     var favoriteMiniBtn = document.getElementById("btnFavoriteMini");
     if (favoriteMiniBtn) {
       favoriteMiniBtn.classList.toggle("selected", isSelected);
+      favoriteMiniBtn.setAttribute("title", isSelected ? "unfavorite" : "favorite");
     }
   }
 
@@ -568,6 +583,7 @@
       var repeatState = normalizeRepeatState(status.repeat);
       repeatBtn.setAttribute("data-state", repeatState);
       repeatBtn.setAttribute("aria-label", repeatState === "one" ? "Repeat one" : (repeatState === "on" ? "Repeat on" : "Repeat off"));
+      repeatBtn.setAttribute("title", repeatState === "one" ? "Repeat One" : (repeatState === "on" ? "Repeat On" : "Repeat Off"));
     }
 
     var shuffleBtn = document.getElementById("btnShuffle");
@@ -575,6 +591,7 @@
       var shuffleState = normalizeShuffleState(status.shuffle);
       shuffleBtn.setAttribute("data-state", shuffleState);
       shuffleBtn.setAttribute("aria-label", shuffleState === "autodj" ? "Shuffle Auto DJ" : (shuffleState === "on" ? "Shuffle on" : "Shuffle off"));
+      shuffleBtn.setAttribute("title", shuffleState === "autodj" ? "Auto DJ" : (shuffleState === "on" ? "Shuffle On" : "Shuffle Off"));
     }
 
     var isMuted = status.mute === true;
@@ -590,6 +607,12 @@
       } else {
         applyServerVolumeState(volumeEl, Number(status.volume || 0), isMuted);
       }
+      volumeEl.setAttribute("title", String(Number(status.volume || 0)));
+    }
+
+    var muteBtn = document.getElementById("btnMute");
+    if (muteBtn) {
+      muteBtn.setAttribute("title", isMuted ? "Unmute" : "Mute");
     }
 
     var currentRating = (state.nowPlaying && state.nowPlaying.trackRating) || "0";
@@ -651,6 +674,7 @@
       var nextState = btn.getAttribute("data-state") === "on" ? "off" : "on";
       btn.setAttribute("data-state", nextState);
       btn.setAttribute("aria-label", nextState === "on" ? "Playlist on" : "Playlist off");
+      btn.setAttribute("title", nextState === "on" ? "Hide Playlist" : "Show Playlist");
       if (nextState === "on") {
         openNowPlayingPanel();
       } else {
@@ -671,6 +695,7 @@
     };
     updateVolumeFill(activeVolumeEl);
     updateVolumeIcon(Number(activeVolumeEl.value), document.body.classList.contains("is-muted"));
+    activeVolumeEl.setAttribute("title", String(Number(activeVolumeEl.value || 0)));
     activeVolumeEl.addEventListener("pointerdown", function () {
       isVolumeDragging = true;
       isVolumeSyncDeferred = false;
@@ -688,6 +713,7 @@
       var value = Number(activeVolumeEl.value);
       updateVolumeFill(activeVolumeEl);
       updateVolumeIcon(value, document.body.classList.contains("is-muted"));
+      activeVolumeEl.setAttribute("title", String(value));
       vscode.postMessage({ type: "control", action: "volume", value: value });
     });
   }
@@ -704,6 +730,11 @@
     collapseOnSelect: true,
     expandOnHover: true
   });
+
+  var playlistBtn = document.getElementById("btnPlaylist");
+  if (playlistBtn) {
+    playlistBtn.setAttribute("title", "Show Playlist");
+  }
 
   window.addEventListener("message", function (e) {
     if (e.data && e.data.type === "state") {

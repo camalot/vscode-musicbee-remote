@@ -9,7 +9,7 @@ type WebviewMessage =
   | { type: "disconnect" }
   | { type: "refresh" }
   | { type: "control"; action: "previous" | "playPause" | "next" | "mute" | "favorite" | "repeat" | "shuffle" | "volume" | "rating"; value?: number }
-  | { type: "playNowPlayingTrack"; path: string }
+  | { type: "playNowPlayingTrack"; position: number }
   | { type: "openSettings" };
 
 const RETRY_INTERVAL_SECONDS = 10;
@@ -107,8 +107,8 @@ export class NowPlayingViewProvider implements vscode.WebviewViewProvider, vscod
           await this.service.openSettings();
           return;
         case "playNowPlayingTrack":
-          void this.service.log?.(`[ui] play now playing track: ${message.path}`);
-          await this.service.playNowPlayingTrack(message.path);
+          void this.service.log?.(`[ui] play now playing track at position: ${message.position}`);
+          await this.service.playNowPlayingTrack(message.position);
           return;
         case "control":
           // log will appear in MusicBee Remote output channel
