@@ -189,6 +189,164 @@
   var miniRatingContainer = /** @type {HTMLElement | null} */ (document.getElementById("ratingMini"));
   var miniActionsGroup = /** @type {HTMLElement | null} */ (document.getElementById("miniActionsGroup"));
 
+  // ── Now Playing list panel state ─────────────────────────────────────────
+  var nowPlayingQueue = /** @type {Array<{title:string,artist:string,path:string,position:number,duration?:string}>} */ ([]);
+  var nowPlayingCurrentPath = "";
+  var nowPlayingPageSize = 25;
+  var nowPlayingRenderedCount = 0;
+  var nowPlayingObserver = /** @type {IntersectionObserver | null} */ (null);
+
+  /**
+   * Sanitize a string for use as text content (not innerHTML).
+   * @param {string} str
+   * @returns {string}
+   */
+  function sanitizeText(str) {
+    return String(str || "");
+  }
+
+  /**
+   * Render a batch of tracks into the list.
+   * @param {boolean} append - if true, append; if false, replace all
+   */
+  function renderNowPlayingTracks(append) {
+    var container = document.getElementById("nowPlayingListTracks");
+    if (!container) {
+      return;
+    }
+
+    if (!append) {
+      container.innerHTML = "";
+      nowPlayingRenderedCount = 0;
+    }
+
+    var start = nowPlayingRenderedCount;
+    var end = Math.min(start + nowPlayingPageSize, nowPlayingQueue.length);
+
+    for (var i = start; i < end; i++) {
+      var track = nowPlayingQueue[i];
+      var isPlaying = track.path && track.path === nowPlayingCurrentPath;
+
+      var row = document.createElement("div");
+      row.className = "nowplaying-list-track" + (isPlaying ? " playing" : "");
+      row.setAttribute("role", "listitem");
+      row.setAttribute("data-track-path", track.path || "");
+      row.setAttribute("data-track-index", String(i));
+      row.tabIndex = 0;
+
+      var icon = document.createElement("div");
+      icon.className = "nowplaying-list-track-icon";
+      icon.setAttribute("aria-hidden", "true");
+
+      var content = document.createElement("div");
+      content.className = "nowplaying-list-track-content";
+
+      var titleEl = document.createElement("div");
+      titleEl.className = "nowplaying-list-track-title";
+      titleEl.textContent = sanitizeText(track.title || "Unknown");
+
+      var metaEl = document.createElement("div");
+      metaEl.className = "nowplaying-list-track-meta";
+
+      var artistEl = document.createElement("span");
+      artistEl.className = "nowplaying-list-track-artist";
+      artistEl.textContent = sanitizeText(track.artist || "");
+
+      var durationEl = document.createElement("span");
+      durationEl.className = "nowplaying-list-track-duration";
+      durationEl.textContent = sanitizeText(track.duration || "");
+
+      metaEl.appendChild(artistEl);
+      if (track.duration) {
+        metaEl.appendChild(durationEl);
+      }
+
+      content.appendChild(titleEl);
+      content.appendChild(metaEl);
+
+      row.appendChild(icon);
+      row.appendChild(content);
+      container.appendChild(row);
+    }
+
+    nowPlayingRenderedCount = end;
+  }
+
+  /**
+   * Update the "playing" highlight when the current track changes.
+   */
+  function updateNowPlayingListHighlight() {
+    var container = document.getElementById("nowPlayingListTracks");
+    if (!container) {
+      return;
+    }
+    var rows = container.querySelectorAll(".nowplaying-list-track");
+    rows.forEach(function (row) {
+      var path = row.getAttribute("data-track-path") || "";
+      var isPlaying = path && path === nowPlayingCurrentPath;
+      row.classList.toggle("playing", !!isPlaying);
+    });
+  }
+
+  function setupNowPlayingListObserver() {
+    if (nowPlayingObserver) {
+      nowPlayingObserver.disconnect();
+      nowPlayingObserver = null;
+    }
+
+    var sentinel = document.getElementById("nowPlayingListSentinel");
+    if (!sentinel) {
+      return;
+    }
+
+    nowPlayingObserver = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && nowPlayingRenderedCount < nowPlayingQueue.length) {
+        renderNowPlayingTracks(true);
+      }
+    }, { threshold: 0.1 });
+
+    nowPlayingObserver.observe(sentinel);
+  }
+
+  function openNowPlayingPanel() {
+    var panel = document.getElementById("nowPlayingListPanel");
+    if (!panel) {
+      return;
+    }
+    panel.classList.add("active");
+    renderNowPlayingTracks(false);
+    setupNowPlayingListObserver();
+  }
+
+  function closeNowPlayingPanel() {
+    var panel = document.getElementById("nowPlayingListPanel");
+    if (!panel) {
+      return;
+    }
+    panel.classList.remove("active");
+    if (nowPlayingObserver) {
+      nowPlayingObserver.disconnect();
+      nowPlayingObserver = null;
+    }
+  }
+
+  function isNowPlayingPanelOpen() {
+    var panel = document.getElementById("nowPlayingListPanel");
+    return panel ? panel.classList.contains("active") : false;
+  }
+
+  // Double-click on a track row to play it
+  document.addEventListener("dblclick", function (e) {
+    var row = e.target instanceof Element ? e.target.closest(".nowplaying-list-track") : null;
+    if (!row) {
+      return;
+    }
+    var path = row.getAttribute("data-track-path");
+    if (path) {
+      vscode.postMessage({ type: "playNowPlayingTrack", path: path });
+    }
+  });
+
   function applyServerVolumeState(volumeEl, volume, isMuted) {
     volumeEl.value = String(volume || 0);
     updateVolumeFill(volumeEl);
@@ -439,6 +597,24 @@
 
     var lfmRating = (state.nowPlaying && state.nowPlaying.lfmRating) || "";
     setFavoriteSelected(lfmRating.toLowerCase() === "love");
+
+    // Update now playing list data
+    var newQueue = (state.nowPlaying && state.nowPlaying.queue) || [];
+    var newPath = (state.nowPlaying && state.nowPlaying.track && state.nowPlaying.track.path) || "";
+    var queueChanged = JSON.stringify(newQueue) !== JSON.stringify(nowPlayingQueue);
+    var pathChanged = newPath !== nowPlayingCurrentPath;
+
+    nowPlayingQueue = newQueue;
+    nowPlayingCurrentPath = newPath;
+
+    if (isNowPlayingPanelOpen()) {
+      if (queueChanged) {
+        renderNowPlayingTracks(false);
+        setupNowPlayingListObserver();
+      } else if (pathChanged) {
+        updateNowPlayingListHighlight();
+      }
+    }
   }
 
   document.body.addEventListener("click", function (e) {
@@ -475,6 +651,11 @@
       var nextState = btn.getAttribute("data-state") === "on" ? "off" : "on";
       btn.setAttribute("data-state", nextState);
       btn.setAttribute("aria-label", nextState === "on" ? "Playlist on" : "Playlist off");
+      if (nextState === "on") {
+        openNowPlayingPanel();
+      } else {
+        closeNowPlayingPanel();
+      }
       return;
     }
 

@@ -230,6 +230,11 @@ export class MusicBeeRemoteService implements vscode.Disposable {
     await this.refresh();
   }
 
+  public async playNowPlayingTrack(path: string): Promise<void> {
+    const client = this.requireClient();
+    await client.playNowPlayingTrack(path);
+  }
+
   public async activateOutput(deviceName: string): Promise<void> {
     const client = this.requireClient();
     const outputs = await client.activateOutput(deviceName);

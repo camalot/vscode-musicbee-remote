@@ -54,6 +54,7 @@ export interface NowPlayingDto {
   artist: string;
   path: string;
   position: number;
+  duration?: string;
 }
 
 export interface PlaylistDto {

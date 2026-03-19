@@ -280,6 +280,10 @@ export class MusicBeeSocketClient {
     await this.sendBroadcastCommand(PROTOCOL.playlistPlay, url);
   }
 
+  public async playNowPlayingTrack(path: string): Promise<void> {
+    await this.sendBroadcastCommand(PROTOCOL.nowPlayingListPlay, path);
+  }
+
   private async requestItem<T>(context: ProtocolContext, payload: unknown = ""): Promise<T> {
     const connection = await this.openConnection(true);
 
