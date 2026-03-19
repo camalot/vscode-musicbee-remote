@@ -34,6 +34,10 @@
 
 - Ui changes when scrolling playlist by @camalot
 
+- Update changelog by @camalot
+
+- Update readme image references by @camalot
+
 
 
 **Full Changelog**: https://github.com/camalot/vscode-musicbee-remote/compare/v1.0.0...v1.1.0
