@@ -186,6 +186,9 @@
   var isVolumeSyncDeferred = false;
   var deferredVolumeState = null;
   var volumeSyncTimer = null;
+  var miniModeMediaQuery = typeof window.matchMedia === "function"
+    ? window.matchMedia("(max-height: 180px)")
+    : null;
   var miniRatingContainer = /** @type {HTMLElement | null} */ (document.getElementById("ratingMini"));
   var miniActionsGroup = /** @type {HTMLElement | null} */ (document.getElementById("miniActionsGroup"));
 
@@ -309,7 +312,41 @@
     nowPlayingObserver.observe(sentinel);
   }
 
+  function isMiniMode() {
+    return !!(miniModeMediaQuery && miniModeMediaQuery.matches);
+  }
+
+  function syncPlaylistButtonState() {
+    var playlistBtn = document.getElementById("btnPlaylist");
+    if (!playlistBtn) {
+      return;
+    }
+
+    var isOpen = isNowPlayingPanelOpen();
+    playlistBtn.setAttribute("data-state", isOpen ? "on" : "off");
+    playlistBtn.setAttribute("aria-label", isOpen ? "Playlist on" : "Playlist off");
+    playlistBtn.setAttribute("title", isOpen ? "Hide Playlist" : "Show Playlist");
+  }
+
+  function syncMiniModeState() {
+    var miniMode = isMiniMode();
+    document.body.classList.toggle("is-mini-mode", miniMode);
+
+    if (miniMode) {
+      closeNowPlayingPanel();
+      setMiniRatingExpanded(false);
+    }
+
+    syncPlaylistButtonState();
+  }
+
   function openNowPlayingPanel() {
+    if (isMiniMode()) {
+      closeNowPlayingPanel();
+      syncPlaylistButtonState();
+      return;
+    }
+
     var panel = document.getElementById("nowPlayingListPanel");
     if (!panel) {
       return;
@@ -317,6 +354,7 @@
     panel.classList.add("active");
     renderNowPlayingTracks(false);
     setupNowPlayingListObserver();
+    syncPlaylistButtonState();
   }
 
   function closeNowPlayingPanel() {
@@ -329,6 +367,8 @@
       nowPlayingObserver.disconnect();
       nowPlayingObserver = null;
     }
+
+    syncPlaylistButtonState();
   }
 
   function isNowPlayingPanelOpen() {
@@ -671,14 +711,15 @@
     }
 
     if (control === "playlist") {
-      var nextState = btn.getAttribute("data-state") === "on" ? "off" : "on";
-      btn.setAttribute("data-state", nextState);
-      btn.setAttribute("aria-label", nextState === "on" ? "Playlist on" : "Playlist off");
-      btn.setAttribute("title", nextState === "on" ? "Hide Playlist" : "Show Playlist");
-      if (nextState === "on") {
-        openNowPlayingPanel();
-      } else {
+      if (isMiniMode()) {
         closeNowPlayingPanel();
+        return;
+      }
+
+      if (isNowPlayingPanelOpen()) {
+        closeNowPlayingPanel();
+      } else {
+        openNowPlayingPanel();
       }
       return;
     }
@@ -736,6 +777,14 @@
     playlistBtn.setAttribute("title", "Show Playlist");
   }
 
+  if (miniModeMediaQuery) {
+    if (typeof miniModeMediaQuery.addEventListener === "function") {
+      miniModeMediaQuery.addEventListener("change", syncMiniModeState);
+    } else if (typeof miniModeMediaQuery.addListener === "function") {
+      miniModeMediaQuery.addListener(syncMiniModeState);
+    }
+  }
+
   window.addEventListener("message", function (e) {
     if (e.data && e.data.type === "state") {
       render(e.data.state);
@@ -743,6 +792,7 @@
   });
 
   setControlIconVariables();
+  syncMiniModeState();
 
   var saved = vscode.getState();
   if (saved) {

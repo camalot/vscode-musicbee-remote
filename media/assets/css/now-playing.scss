@@ -747,6 +747,8 @@ button {
   }
 
   #miniActionsGroup {
+    --mbrvsc-mini-actions-width: 80px;
+
     position: relative;
     justify-content: flex-start;
     width: calc(
@@ -775,6 +777,15 @@ button {
         transform: translateY(-50%) translateX(8px);
       }
     }
+  }
+
+  #btnPlaylist {
+    display: none;
+  }
+
+  .nowplaying-list-panel,
+  .nowplaying-list-panel.active {
+    display: none;
   }
 }
 
