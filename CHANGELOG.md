@@ -1,3 +1,43 @@
+## [1.1.0] - 2026-03-19
+
+### 🚀 Features
+
+- Breeze, gogh, ubuntu themes added. by @camalot
+
+- Added repeat/shuffle controls by @camalot
+
+- More accessible controls when in mini mode by @camalot
+
+- Nowplaying playlist loading by @camalot
+
+- Load nowplaying playlist and double click to play by @camalot
+
+
+### 🐛 Bug Fixes
+
+- Added new icons for the controls: prev/next/play/pause/volume by @camalot
+
+- Adjust volume slider to not jump around by @camalot
+
+- Hide playlist toggle when in mini mode as not usable. by @camalot
+
+
+### ⚙️ Miscellaneous Tasks
+
+- Generate v1.0.0 changelog by @camalot
+
+- Remove jekyll from readme by @camalot
+
+- Bug fixes and more themes. by @camalot
+
+- Docs added for features by @camalot
+
+- Ui changes when scrolling playlist by @camalot
+
+
+
+**Full Changelog**: https://github.com/camalot/vscode-musicbee-remote/compare/v1.0.0...v1.1.0
+
 ## [1.0.0] - 2026-03-17
 
 ### 🚀 Features
