@@ -140,6 +140,12 @@ Material is a deep, oceanic theme built around a classic material design palette
 
 ---
 
+### Tokyo Night
+
+Tokyo Night is a deep blue-black theme inspired by the official Tokyo Night VS Code palette.
+
+---
+
 ### Mono (Amber)
 
 Mono (Amber) is a dark, monochromatic theme with warm amber accents for a cozy, focused vibe.

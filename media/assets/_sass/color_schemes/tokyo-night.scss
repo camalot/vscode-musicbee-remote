@@ -1,0 +1,46 @@
+@use "sass:color";
+
+$tokyo-night-background: #1a1b26 !default;
+$tokyo-night-surface: #16161e !default;
+$tokyo-night-red: #f7768e !default;
+$tokyo-night-green: #73daca !default;
+$tokyo-night-yellow: #e0af68 !default;
+$tokyo-night-blue: #7aa2f7 !default;
+$tokyo-night-magenta: #bb9af7 !default;
+$tokyo-night-cyan: #7dcfff !default;
+$tokyo-night-white: #acb0d0 !default;
+$tokyo-night-bright-black: #363b54 !default;
+$tokyo-night-bright-white: #c0caf5 !default;
+
+$tokyo-night-foreground: #a9b1d6 !default;
+$tokyo-night-muted: #787c99 !default;
+$tokyo-night-accent: $tokyo-night-blue !default;
+$tokyo-night-border: $tokyo-night-bright-black !default;
+$tokyo-night-favorite: $tokyo-night-red !default;
+$tokyo-night-progress: $tokyo-night-green !default;
+
+$mbrvsc-tokyo-night-foreground: $tokyo-night-foreground !default;
+$mbrvsc-tokyo-night-muted: $tokyo-night-muted !default;
+$mbrvsc-tokyo-night-background: $tokyo-night-background !default;
+$mbrvsc-tokyo-night-accent: $tokyo-night-accent !default;
+$mbrvsc-tokyo-night-button-foreground: $tokyo-night-bright-white !default;
+$mbrvsc-tokyo-night-button-secondary-foreground: $tokyo-night-white !default;
+$mbrvsc-tokyo-night-border: $tokyo-night-border !default;
+$mbrvsc-tokyo-night-favorite-selected: $tokyo-night-favorite !default;
+$mbrvsc-tokyo-night-progressBar: $tokyo-night-progress !default;
+$mbrvsc-tokyo-night-volumeBar: $mbrvsc-tokyo-night-progressBar !default;
+$mbrvsc-tokyo-night-volumeThumb: color.adjust($mbrvsc-tokyo-night-volumeBar, $lightness: -8%) !default;
+
+body[data-mbr-theme="tokyo-night"] {
+  --mbrvsc-color-foreground: #{$mbrvsc-tokyo-night-foreground};
+  --mbrvsc-color-muted: #{$mbrvsc-tokyo-night-muted};
+  --mbrvsc-color-background: #{$mbrvsc-tokyo-night-background};
+  --mbrvsc-color-accent: #{$mbrvsc-tokyo-night-accent};
+  --mbrvsc-color-button-foreground: #{$mbrvsc-tokyo-night-button-foreground};
+  --mbrvsc-color-button-secondary-foreground: #{$mbrvsc-tokyo-night-button-secondary-foreground};
+  --mbrvsc-color-border: #{$mbrvsc-tokyo-night-border};
+  --mbrvsc-color-favorite-selected: #{$mbrvsc-tokyo-night-favorite-selected};
+  --mbrvsc-color-progressBar: #{$mbrvsc-tokyo-night-progressBar};
+  --mbrvsc-color-volumeBar: #{$mbrvsc-tokyo-night-volumeBar};
+  --mbrvsc-color-volumeThumb: #{$mbrvsc-tokyo-night-volumeThumb};
+}

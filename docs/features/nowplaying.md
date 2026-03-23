@@ -64,6 +64,7 @@ The Now Playing View supports multiple themes to match your preferences. See [Th
 
 **Popular Themes:**
 - Material
+- Tokyo Night
 - Dracula
 - Cyberpunk 2077
 - Matrix

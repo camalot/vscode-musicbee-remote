@@ -91,7 +91,7 @@ windsurf --install-extension darthminos.musicbee-remote
 - In mini view, hover the rating star to expand all 5 stars; mini action buttons slide out while rating and return on mouse-out or rating click
 - Display album art and track information
 - Independent theme support
-- Built-in themes including Ubuntu, Gogh, Dracula, Breeze, Hotdog, Grayscale, Cyberpunk2077, Tron, Matrix, Fairy Floss Dark, Grass, Harper, Horizon Bright, Horizon Dark, and Material
+- Built-in themes including Ubuntu, Gogh, Dracula, Breeze, Hotdog, Grayscale, Cyberpunk2077, Tron, Matrix, Fairy Floss Dark, Grass, Harper, Horizon Bright, Horizon Dark, Material, and Tokyo Night
 
 ---
 

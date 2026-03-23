@@ -15,6 +15,9 @@
 #   <!-- markdownlint-restore -->
 #
 
+ignores:
+  - docs/**
+
 ###############
 # Rules by id #
 ###############
