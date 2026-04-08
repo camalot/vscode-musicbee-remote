@@ -38,7 +38,7 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.8.9)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     arel (7.1.4)
     base64 (0.3.0)
@@ -283,7 +283,7 @@ CHECKSUMS
   activemodel (5.0.7.2) sha256=146a0461524227bf60553ee1273aef694481ec78621f018543f1de38fabff076
   activerecord (5.0.7.2) sha256=c3f019b91df7f47b29c4bfae47b11d8920f8d411bc1a523c4c4d77616155c2cb
   activesupport (5.0.7.2) sha256=f75cc67fb08421bdf4c2a383a47d9b3b02ce5eec4749704b1286fb0c12c98bad
-  addressable (2.8.9) sha256=cc154fcbe689711808a43601dee7b980238ce54368d23e127421753e46895485
+  addressable (2.9.0) sha256=7fdf6ac3660f7f4e867a0838be3f6cf722ace541dd97767fa42bc6cfa980c7af
   arel (7.1.4) sha256=ddb37e20809b431e615592c51c734b2ae1efaf4c8722330676657635673be550
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bigdecimal (4.0.1) sha256=8b07d3d065a9f921c80ceaea7c9d4ae596697295b584c296fe599dd0ad01c4a7
