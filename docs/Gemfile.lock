@@ -150,7 +150,7 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.27.0)
-    net-imap (0.6.3)
+    net-imap (0.6.4.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -274,7 +274,6 @@ DEPENDENCIES
   just-the-docs (~> 0.10)
   rogue
 
-CHECKSUMS
   actioncable (5.0.7.2) sha256=7ee45c66750cfe2e9363f85c103ea3d2cdda6560c00b9e19a46564fdbc3a1e93
   actionmailer (5.0.7.2) sha256=19b16d650b0eff0a8b72b549505291058184ee5475d64bc24303ac291968909f
   actionpack (5.0.7.2) sha256=cbcdeacc26e8c760b33d0454bff535d993add252e9dd276a51ff014b0290def3
@@ -334,7 +333,7 @@ CHECKSUMS
   method_source (1.1.0) sha256=181301c9c45b731b4769bc81e8860e72f9161ad7d66dd99103c9ab84f560f5c5
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   minitest (5.27.0) sha256=2d3b17f8a36fe7801c1adcffdbc38233b938eb0b4966e97a6739055a45fa77d5
-  net-imap (0.6.3) sha256=9bab75f876596d09ee7bf911a291da478e0cd6badc54dfb82874855ccc82f2ad
+  net-imap (0.6.4.1) sha256=29f0360d75a7efd3539f16ac1957dea5c0a51ddeceb348db4553c3120914ea0d
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
   net-smtp (0.5.1) sha256=ed96a0af63c524fceb4b29b0d352195c30d82dd916a42f03c62a3a70e5b70736
